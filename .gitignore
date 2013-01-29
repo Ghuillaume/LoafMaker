@@ -2,3 +2,9 @@
 /build/
 
 *~
+*.aux
+*.toc
+*.log
+*.out
+
+Rapport/Rapport.pdf
