@@ -58,4 +58,5 @@ string Model::debug() {
     for(ListOfList::iterator it = lists.begin() ; it != lists.end() ; it++) {
         (*it)->debug("");
     }
+
 }

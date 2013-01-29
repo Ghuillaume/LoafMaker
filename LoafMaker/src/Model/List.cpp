@@ -1,7 +1,6 @@
 #include "List.hpp"
 
 
-
 List::List(string name, Time* creationDate, bool ordered)
     : name(name), creationDate(creationDate), parent(NULL), ordered(ordered) {
 }
@@ -52,7 +51,7 @@ void List::addTask(Task* task) {
 }
 
 string List::toString() {
-    return this->name + "  (" + this->creationDate->getReadableDate() + ")";
+    return this->name + " (" + this->creationDate->getReadableDate() + ")";
 }
 
 
@@ -72,4 +71,5 @@ void List::debug(string indent) {
     for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
         (*it)->debug(indent);
     }
+
 }

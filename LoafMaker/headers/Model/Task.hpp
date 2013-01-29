@@ -5,7 +5,7 @@
 
 class Task {
 
-	public:
+public:
         Task(string name, Time* deadline);
         ~Task();
 
@@ -15,8 +15,8 @@ class Task {
 
 
         void debug(string indent);
-		
-	private:
+
+private:
         string name;
         Time* deadline;
         bool finished;

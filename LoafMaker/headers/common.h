@@ -7,8 +7,6 @@
 
 #include "Time.hpp"
 
-class Task;
-class List;
 
 using namespace std;
 
