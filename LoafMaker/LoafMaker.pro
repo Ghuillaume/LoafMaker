@@ -12,28 +12,29 @@ TEMPLATE = app
 DEPENDPATH += . \
               headers/Controller \
               headers/Model \
-              headers/Parser \
               headers/View \
               src/Controller \
               src/Model \
-              src/Parser \
               src/View
+
 INCLUDEPATH += . headers/Model headers/Controller headers/View headers/Parser headers
 
 SOURCES += main.cpp \
     src/View/Window.cpp \
+    src/View/ListOfTasks.cpp \
+    src/View/ListsAndTemplates.cpp
     src/Controller/Controller.cpp \
     src/Model/List.cpp \
     src/Model/Task.cpp \
     src/Model/Model.cpp \
     src/Model/Time.cpp
 
-HEADERS  += Window.hpp \
-    headers/Model/List.hpp \
-    headers/View/Window.hpp \
-    Controller.hpp \
+HEADERS  += headers/View/Window.hpp \
+    headers/View/ListOfTasks.hpp \
+    headers/View/ListsAndTemplates.hpp \
     headers/Controller/Controller.hpp \
     headers/common.h \
+    headers/Model/List.hpp \
     headers/Model/Task.hpp \
     headers/Model/Model.hpp \
     headers/Model/Time.hpp

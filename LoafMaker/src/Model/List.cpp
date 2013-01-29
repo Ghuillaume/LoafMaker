@@ -1,6 +1,7 @@
 #include "List.hpp"
 
 
+
 List::List(string name, Time* creationDate, bool ordered)
     : name(name), creationDate(creationDate), parent(NULL), ordered(ordered) {
 }
@@ -71,5 +72,4 @@ void List::debug(string indent) {
     for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
         (*it)->debug(indent);
     }
-
 }

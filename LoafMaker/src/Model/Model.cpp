@@ -58,8 +58,4 @@ string Model::debug() {
     for(ListOfList::iterator it = lists.begin() ; it != lists.end() ; it++) {
         (*it)->debug("");
     }
-
-    /*for(ListOfList::iterator it = lists.begin() ; it != lists.end() ; it++) {
-        cout << (*it)->toString() << endl;
-    }*/
 }
