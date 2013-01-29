@@ -1,23 +1,30 @@
-#include <string>
-#include <vector>
+#ifndef LIST_HPP
+#define LIST_HPP
+
 
 #include "Task.hpp"
-#include "../common.h"
+#include "common.h"
 
-
-typedef vector<Task*> ListOfTask;
 
 class List {
 
 	public:
-		List();
+        List(string name, Time* creationDate, bool ordered);
+        List(string name, Time* creationDate, bool ordered, List* parent);
 		~List();
+
+        string getName();
+        void setName(string name);
+
+        string toString();
 		
 		
 	private:
         string name;
         List* parent;
-        string creationDate;
+        Time* creationDate;
 		
         bool ordered;
 };
+
+#endif

@@ -1,6 +1,7 @@
-#include <string>
+#ifndef TASK_HPP
+#define TASK_HPP
 
-using namespace std;
+#include "common.h"
 
 class Task {
 
@@ -14,3 +15,5 @@ class Task {
         string deadline;
 
 };
+
+#endif
