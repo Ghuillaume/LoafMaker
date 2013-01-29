@@ -7,12 +7,10 @@
 
 #include "Time.hpp"
 
-#include "Task.hpp"
-#include "List.hpp"
+class Task;
+class List;
 
 using namespace std;
 
-typedef vector<Task*> ListOfTask;
-typedef vector<List*> ListOfList;
 
 #endif // COMMON_H

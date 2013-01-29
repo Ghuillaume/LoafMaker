@@ -1,10 +1,13 @@
 /LoafMaker-build-desktop-Qt_4_8_1_dans_le_PATH__Syst_me__Release/
 /build/
+/LoafMaker/LoafMaker
+LoafMaker/LoafMaker.pro.user
 
 *~
 *.aux
 *.toc
 *.log
 *.out
-
+*.o
+moc_*
 Rapport/Rapport.pdf

@@ -6,13 +6,20 @@
 class Task {
 
 	public:
-		Task();
-		~Task();
-		
+        Task(string name, Time* deadline);
+        ~Task();
+
+        void setFinished();
+        void setUnfinished();
+        bool isFinished();
+
+
+        void debug(string indent);
 		
 	private:
         string name;
-        string deadline;
+        Time* deadline;
+        bool finished;
 
 };
 
