@@ -2,11 +2,9 @@
 #include "Window.hpp"
 #include "Model.hpp"
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    Window w;
-    w.show();
+
+void testing() {
+
 
     Model* m = new Model();
 
@@ -25,7 +23,18 @@ int main(int argc, char *argv[])
     m->createTask(m->getList(0)->getList(1), "task2", 5, 6, 6666);
     m->createTask(m->getList(0)->getList(1), "task3", 4, 6, 6666);
 
+    m->deleteList(1);
+
     m->debug();
+}
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    Window w;
+    w.show();
+
+    //testing();
     
     return a.exec();
 }

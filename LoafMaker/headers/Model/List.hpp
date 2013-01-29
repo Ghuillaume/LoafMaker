@@ -10,7 +10,7 @@ class List {
 public:
         List(string name, Time* creationDate, bool ordered);
         List(string name, Time* creationDate, bool ordered, List* parent);
-~List();
+        ~List();
 
         string getName();
         void setName(string name);

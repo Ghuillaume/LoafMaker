@@ -9,6 +9,15 @@ List::List(string name, Time* creationDate, bool ordered, List* parent)
     : name(name), creationDate(creationDate), parent(parent), ordered(ordered) {
 }
 
+List::~List() {
+    /*for(vector<List*>::iterator it = subLists.begin() ; it != subLists.end() ; it++) {
+        delete (*it);
+    }
+    for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
+        delete (*it);
+    }*/
+}
+
 
 string List::getName() {
     return this->name;
@@ -60,7 +69,7 @@ void List::debug(string indent) {
     indent += "\t";
 
     // Affichage de la liste courante
-    cout << indent << this->toString() << endl;
+    cout << indent << this->toString() << " ### " << this << endl;
 
     // Recherche de sous listes
     for(vector<List*>::iterator it = subLists.begin() ; it != subLists.end() ; it++) {

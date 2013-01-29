@@ -15,10 +15,10 @@ class Model
 
         void createBaseList(string name, int day, int month, int year);
         void createSubList(List* parent, string name, int day, int month, int year);
-        void deleteList(string name);
+        void deleteList(int row);
 
         void createTask(List* parent, string name, int day, int month, int year);
-        void deleteTask(List* list, string name);
+        void deleteTask(List* list, int row);
 
         ListOfList getBaseLists();
         List* getList(int row);

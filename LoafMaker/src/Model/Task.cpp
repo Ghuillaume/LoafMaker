@@ -26,5 +26,5 @@ bool Task::isFinished() {
 
 void Task::debug(string indent) {
     indent += "\t";
-    cout << indent << this->name << " - " << this->deadline->getReadableDate() << " -> " << (finished ? "finished" : "not finished") << endl;
+    cout << indent << this->name << " - " << this->deadline->getReadableDate() << " -> " << (finished ? "finished" : "not finished") << " ### " << this << endl;
 }

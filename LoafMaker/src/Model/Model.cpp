@@ -23,8 +23,9 @@ void Model::createSubList(List* parent, string name, int day, int month, int yea
 
 }
 
-void Model::deleteList(string name) {
-
+void Model::deleteList(int row) {
+    //delete this->lists.at(row);
+    //this->lists.erase(this->lists.begin()+row);
 }
 
 void Model::createTask(List* parent, string name, int day, int month, int year) {
@@ -33,7 +34,7 @@ void Model::createTask(List* parent, string name, int day, int month, int year) 
 
 }
 
-void Model::deleteTask(List* list, string name) {
+void Model::deleteTask(List* list, int row) {
 
 }
 
