@@ -22,7 +22,6 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
 
 
 ListsAndTemplates::~ListsAndTemplates() {
-    delete gridLayout;
     delete listLabel;
     delete listsTree;
     delete templateLabel;
