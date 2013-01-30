@@ -45,6 +45,10 @@ List* List::getList(int row) {
     }
 }
 
+vector<Task*> List::getAllTasks() {
+    return this->tasks;
+}
+
 Task* List::getTask(int row) {
 
     if(row > this->tasks.size()-1) {

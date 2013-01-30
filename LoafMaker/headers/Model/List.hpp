@@ -17,6 +17,7 @@ public:
         Time* getDate();
         vector<List*> getAllLists();
         List* getList(int row);
+        vector<Task*> getAllTasks();
         Task* getTask(int row);
 
         void addSubList(List *subList);

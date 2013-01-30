@@ -169,18 +169,18 @@ string Time::getXmlDate() const {
 }
 
 string Time::getReadableDate() const {
-    int minute = this -> getMinute ();
-    int hour = this -> getHour ();
+    //int minute = this -> getMinute ();
+    //int hour = this -> getHour ();
     int day = this -> getDay ();
     int month = this -> getMonth ();
     int year = this -> getYear ();
 
     stringstream s;
-    s << hour
+    s /*<< hour
       << "h"
       << ( ( minute < 10 ) ? "0":"" )
       << minute
-      << " : "
+      << " : "*/
       << ( ( day < 10 ) ? "0":"" )
       << day
       << "/"

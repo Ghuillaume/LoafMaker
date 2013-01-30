@@ -9,6 +9,10 @@ public:
         Task(string name, Time* deadline);
         ~Task();
 
+        string getName();
+        string getDate();
+        string getState();
+
         void setFinished();
         void setUnfinished();
         bool isFinished();

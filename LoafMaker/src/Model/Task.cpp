@@ -12,6 +12,19 @@ Task::~Task() {
 }
 
 
+string Task::getName() {
+    return this->name;
+}
+
+string Task::getDate() {
+    return this->deadline->getReadableDate();
+}
+
+string Task::getState() {
+    return (this->finished ? "OK" : "");
+}
+
+
 void Task::setFinished() {
     this->finished = true;
 }

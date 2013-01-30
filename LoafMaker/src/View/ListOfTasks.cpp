@@ -10,7 +10,7 @@ ListOfTasks::ListOfTasks(int width, QWidget *parent) : QWidget(parent) {
     /* List presentation */
     QFont font;
     font.setBold(true);
-    listNameLabel = new QLabel("Liste", this);
+    listNameLabel = new QLabel("", this);
     listNameLabel->setFont(font);
     gridLayout->addWidget(listNameLabel, 0, 0, 1, 2);
 
@@ -21,24 +21,26 @@ ListOfTasks::ListOfTasks(int width, QWidget *parent) : QWidget(parent) {
 
     mainProgressbar = new QProgressBar(this);
     mainProgressbar->setValue(0);
+    mainProgressbar->setVisible(false);
     gridLayout->addWidget(mainProgressbar, 0, 2, 1, 1);
 
-    dateLabel = new QLabel("01/01/1970", this);
+    dateLabel = new QLabel("", this);
     dateLabel->setStyleSheet("QLabel { color : green; }");
     gridLayout->addWidget(dateLabel, 1, 0, 1, 3);
 
-    tasksTable = new QTableWidget(0, 3, this);
-    tasksTable->setGeometry(0, 0, width, 400);
-    taskColumn1 = new QTableWidgetItem(QString::fromUtf8("Nom"));
-    tasksTable->setHorizontalHeaderItem(0, taskColumn1);
-    tasksTable->setColumnWidth(0,300);
-    taskColumn2 = new QTableWidgetItem(QString::fromUtf8("Échéance"));
-    tasksTable->setHorizontalHeaderItem(1, taskColumn2);
-    tasksTable->setColumnWidth(1,105);
-    taskColumn3 = new QTableWidgetItem(QString::fromUtf8("État"));
-    tasksTable->setHorizontalHeaderItem(2, taskColumn3);
-    tasksTable->setColumnWidth(2,103);
-    gridLayout->addWidget(tasksTable, 2, 0, 5, 3);
+
+    tasksTree = new QTreeWidget(this);
+    tasksTree->setGeometry(0, 0, width, 400);
+    gridLayout->addWidget(tasksTree, 2, 0, 5, 3);
+    QTreeWidgetItem* treeHeader1;
+    treeHeader1 = tasksTree->headerItem();
+    treeHeader1->setText(0, QString::fromUtf8("Intitulé"));
+    QTreeWidgetItem* treeHeader2;
+    treeHeader2 = tasksTree->headerItem();
+    treeHeader2->setText(1, QString::fromUtf8("Échéance"));
+    QTreeWidgetItem* treeHeader3;
+    treeHeader3 = tasksTree->headerItem();
+    treeHeader3->setText(2, QString::fromUtf8("État"));
 
     QIcon iconAdd;
     iconAdd.addFile(QString::fromUtf8("resources/edit-paste.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -69,10 +71,10 @@ ListOfTasks::~ListOfTasks(){
     delete dateLabel;
     delete spacerList;
 
-    delete tasksTable;
-    delete taskColumn1;
-    delete taskColumn2;
-    delete taskColumn3;
+    delete tasksTree;
+    delete treeHeader1;
+    delete treeHeader2;
+    delete treeHeader3;
 
     delete buttonAddTask;
     delete buttonEditTask;
@@ -84,7 +86,38 @@ ListOfTasks::~ListOfTasks(){
 
 void ListOfTasks::displayTasks() {
 
-    cout << selectedList->getName() << endl;
+    listNameLabel->setText(QString(selectedList->getName().c_str()));
+    mainProgressbar->setVisible(true);
+    tasksTree->clear();
+
+    dateLabel->setText(selectedList->getDate()->getReadableDate().c_str());
+
+    vector<Task*> tasks = selectedList->getAllTasks();
+
+    QTreeWidgetItem* taskItem;
+    int level = 0;
+    int finishedTasks = 0;
+    for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
+        taskItem = new QTreeWidgetItem(tasksTree);
+        taskItem = tasksTree->topLevelItem(level);
+        taskItem->setText(0, tr((*it)->getName().c_str()));
+        taskItem->setText(1, tr((*it)->getDate().c_str()));
+        taskItem->setText(2, tr((*it)->getState().c_str()));
+
+        if((*it)->isFinished())
+            finishedTasks++;
+
+        level++;
+    }
+
+    int progression;
+
+    if(finishedTasks == 0)
+        progression = 0;
+    else
+        progression = (finishedTasks * 100) / tasks.size();
+
+    mainProgressbar->setValue(progression);
 }
 
 

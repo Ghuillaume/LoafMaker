@@ -28,6 +28,8 @@ void testing(Model* m) {
     m->createTask(m->getList(0)->getList(1), "task2", 5, 6, 6666);
     m->createTask(m->getList(0)->getList(1), "task3", 4, 6, 6666);
 
+    m->getList(0)->getList(1)->getTask(1)->setFinished();
+
     //m->deleteList(1);
 
     m->debug();

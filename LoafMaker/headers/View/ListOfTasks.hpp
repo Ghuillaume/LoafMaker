@@ -8,9 +8,9 @@
 #include <QLabel>
 #include <QProgressBar>
 #include <QSpacerItem>
-#include <QTableWidget>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 #include <QPushButton>
-#include <QTableWidgetItem>
 
 #include "List.hpp"
 
@@ -37,10 +37,10 @@ class ListOfTasks : public QWidget
         QSpacerItem* spacerList;
         QLabel* dateLabel;
 
-        QTableWidget* tasksTable;
-        QTableWidgetItem* taskColumn1;
-        QTableWidgetItem* taskColumn2;
-        QTableWidgetItem* taskColumn3;
+        QTreeWidget* tasksTree;
+        QTreeWidgetItem* treeHeader1;
+        QTreeWidgetItem* treeHeader2;
+        QTreeWidgetItem* treeHeader3;
 
         QPushButton* buttonAddTask;
         QPushButton* buttonEditTask;

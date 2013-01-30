@@ -60,7 +60,7 @@ ListsAndTemplates::~ListsAndTemplates() {
 void ListsAndTemplates::displayList(vector<List *> lists, QTreeWidgetItem *parent) {
 
     // Ajout du header
-    QTreeWidgetItem* treewidgetitem;// = new QTreeWidgetItem(listsTree);
+    QTreeWidgetItem* treewidgetitem;
     treewidgetitem = listsTree->headerItem();
     treewidgetitem->setText(0, QString::fromUtf8("Mes Listes de tâches"));
 
