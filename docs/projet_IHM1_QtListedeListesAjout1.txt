@@ -1,0 +1,35 @@
+Pré-conditions à une tâche:
+	- pour autoriser l'U à cocher cette tâche il faut avoir coché les {tâcheA,tâcheB,...}
+	- ou, on se limite à - ajout de liste ordonnées de tâches
+						 - ajout d'ensemble de tâches(non ordonnées)
+						 (l'U se débrouille pour spécifier dans ce canevas 
+						 même si cela engendre des regroupements sans signification précise)
+				 		 1- réserver le bateau
+				 		 2- préparation
+				 		 		-sécurité	
+				 		 		-sac perso
+				 		 		...
+				 		 		
+Ce que j'appelle un template de liste hiérarchique de tâches correspond 
+à une liste hiérarchique spécifique (préparation de module) qui va être être
+instantiée par le nom du module et des dates adaptées.				 		 		
+
+Qt designer est autorisé
+Les classes spécifiques a certain widget Qt sont autorisées
+Les dates sont indicatives (pas de vérification d'entériorité)
+		(on pourra prévenir l'U qu'un tache dont la date est dépassée n'est pas cochée)
+Lors d'une tentative de validation d'une tâche, 
+	on vérifie que les tâches entérieures sont effectuées, 
+	si ce n'est pas le cas, on avise l'U. 
+	Vous n'etes pas obligé de proposer des corrections intelligentes 
+	du genre :"voulez vous valider les tâches précédentes?".
+	
+Pour l'édition des dates relatives: on pourra se limiter à des choix multiples (1,2..6 jours, 1,2,3 semaines, 1..3,6 mois)
+
+
+L'application est prévue pour être mono-utilisateur. Au lancement de l'appli, on retrouve l'état de l'appli quand on l'a quittée (mais pas obligatoirement pour les menus, et fenêtres )
+	Donc dans le fichier XML, on trouvera 
+			les templates déja enregistrés et 
+			les listes hiérarchiques de tâches courantes
+			
+			

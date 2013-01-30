@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     Window w;
     w.show();
 
-    //testing();
+    testing();
     
     return a.exec();
 }
