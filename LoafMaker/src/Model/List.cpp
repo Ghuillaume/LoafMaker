@@ -10,12 +10,12 @@ List::List(string name, Time* creationDate, bool ordered, List* parent)
 }
 
 List::~List() {
-    /*for(vector<List*>::iterator it = subLists.begin() ; it != subLists.end() ; it++) {
+    for(vector<List*>::iterator it = subLists.begin() ; it != subLists.end() ; it++) {
         delete (*it);
     }
     for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
         delete (*it);
-    }*/
+    }
 }
 
 
@@ -29,6 +29,10 @@ void List::setName(string name) {
 
 Time* List::getDate() {
     return this->creationDate;
+}
+
+vector<List*> List::getAllLists() {
+    return this->subLists;
 }
 
 List* List::getList(int row) {

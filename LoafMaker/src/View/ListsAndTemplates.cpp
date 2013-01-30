@@ -24,9 +24,6 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
     gridLayout->addWidget(buttonDelList,0, 2, 1, 1);
 
     listsTree = new QTreeWidget(this);
-    treewidgetitem = new QTreeWidgetItem();
-    listsTree->setHeaderItem(treewidgetitem);
-    listsTree->header()->setVisible(false);
     listsTree->setGeometry(QRect(10, 60, 300, 290));
     gridLayout->addWidget(listsTree,1, 0, 1, 3);
 
@@ -52,12 +49,50 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
     gridLayout->addWidget(templatesList,4, 0, 1, 3);
 }
 
-
 ListsAndTemplates::~ListsAndTemplates() {
     delete listLabel;
     delete listsTree;
     delete templateLabel;
     delete templatesList;
-    delete treewidgetitem;
     delete gridLayout;
+}
+
+void ListsAndTemplates::displayList(vector<List *> lists, QTreeWidgetItem *parent) {
+
+     // Exemple pour ajouter un header
+    QTreeWidgetItem* treewidgetitem;// = new QTreeWidgetItem(listsTree);
+    treewidgetitem = listsTree->headerItem();
+    treewidgetitem->setText(0, QString::fromUtf8("Mes Listes de tâches"));
+
+    cout << "Trying to insert list" << endl;
+
+    int level = 0;
+
+    for(vector<List*>::iterator it = lists.begin() ; it != lists.end() ; it++) {
+
+        QTreeWidgetItem* listItem;
+
+        // Si pas de parent, alors ce sont des listes de niveau 0
+        if(parent == NULL) {
+            listItem = new QTreeWidgetItem(listsTree);
+            listItem = listsTree->topLevelItem(level);
+        }
+
+        // Sinon, ce sont des enfants de QTreeWidget
+        else {
+            listItem = new QTreeWidgetItem(parent);
+            listItem = parent->child(level);
+        }
+
+        listItem->setText(0, tr((*it)->getName().c_str()));
+
+        // Recherche de sous listes sur la liste courante
+        this->displayList((*it)->getAllLists(), listItem);
+
+        level++;
+    }
+}
+
+void ListsAndTemplates::clearList() {
+    this->listsTree->clear();
 }

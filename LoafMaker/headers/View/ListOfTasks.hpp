@@ -17,30 +17,31 @@ using namespace std;
 class ListOfTasks : public QWidget
 {
     Q_OBJECT
-public:
-    explicit ListOfTasks(int width, QWidget *parent = 0);
-    ~ListOfTasks();
 
-private:
-    QGridLayout* gridLayout;
+    public:
+        explicit ListOfTasks(int width, QWidget *parent = 0);
+        ~ListOfTasks();
 
-    QLabel* listNameLabel;
-    QProgressBar* mainProgressbar;
-    QSpacerItem* spacerList;
-    QLabel* dateLabel;
+    private:
+        QGridLayout* gridLayout;
 
-    QTableWidget* tasksTable;
-    QTableWidgetItem* taskColumn1;
-    QTableWidgetItem* taskColumn2;
-    QTableWidgetItem* taskColumn3;
+        QLabel* listNameLabel;
+        QProgressBar* mainProgressbar;
+        QSpacerItem* spacerList;
+        QLabel* dateLabel;
 
-    QPushButton* buttonAddTask;
-    QPushButton* buttonEditTask;
-    QPushButton* buttonDelTask;
+        QTableWidget* tasksTable;
+        QTableWidgetItem* taskColumn1;
+        QTableWidgetItem* taskColumn2;
+        QTableWidgetItem* taskColumn3;
 
-signals:
-    
-public slots:
+        QPushButton* buttonAddTask;
+        QPushButton* buttonEditTask;
+        QPushButton* buttonDelTask;
+
+    signals:
+
+    public slots:
     
 };
 

@@ -101,3 +101,11 @@ Window::~Window()
     delete listsAndTemplates;
     delete centralwidget;
 }
+
+ListsAndTemplates* Window::getListsView() {
+    return this->listsAndTemplates;
+}
+
+ListOfTasks* Window::getTasksView() {
+    return this->listOfTasks;
+}

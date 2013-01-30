@@ -1,6 +1,7 @@
 #ifndef LISTOFTEMPLATES_HPP
 #define LISTOFTEMPLATES_HPP
 
+#include <QApplication>
 #include <QWidget>
 #include <QFrame>
 #include <QGridLayout>
@@ -13,28 +14,34 @@
 #include <QIcon>
 #include <QPushButton>
 
+#include "List.hpp"
+
 class ListsAndTemplates : public QWidget {
+
     Q_OBJECT
-public:
-    explicit ListsAndTemplates(QWidget *parent = 0);
-    ~ListsAndTemplates();
 
-private:
-    QGridLayout* gridLayout;
-    QFrame* horizontalLine;
-    QLabel* listLabel;
-    QTreeWidget* listsTree;
-    QLabel* templateLabel;
-    QListWidget* templatesList;
-    QTreeWidgetItem* treewidgetitem;
-    QPushButton* buttonAddList;
-    QPushButton* buttonDelList;
-    QPushButton* buttonAddTemplate;
-    QPushButton* buttonDelTemplate;
+    public:
+        explicit ListsAndTemplates(QWidget *parent = 0);
+        ~ListsAndTemplates();
 
-signals:
+        void displayList(vector<List*> lists, QTreeWidgetItem* parent);
+        void clearList();
 
-public slots:
+    private:
+        QGridLayout* gridLayout;
+        QFrame* horizontalLine;
+        QLabel* listLabel;
+        QTreeWidget* listsTree;
+        QLabel* templateLabel;
+        QListWidget* templatesList;
+        QPushButton* buttonAddList;
+        QPushButton* buttonDelList;
+        QPushButton* buttonAddTemplate;
+        QPushButton* buttonDelTemplate;
+
+    signals:
+
+    public slots:
 
 };
 

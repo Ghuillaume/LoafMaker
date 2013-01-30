@@ -15,6 +15,7 @@ public:
         string getName();
         void setName(string name);
         Time* getDate();
+        vector<List*> getAllLists();
         List* getList(int row);
         Task* getTask(int row);
 

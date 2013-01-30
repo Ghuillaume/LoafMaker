@@ -22,6 +22,9 @@ class Window : public QMainWindow
 public:
     explicit Window(QWidget *parent = 0);
     ~Window();
+
+    ListsAndTemplates* getListsView();
+    ListOfTasks* getTasksView();
     
 private:
     QMenuBar* menubar;
