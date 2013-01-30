@@ -1,5 +1,6 @@
 #include <QtGui/QApplication>
 #include "Window.hpp"
+#include "TaskDialog.hpp"
 #include "Model.hpp"
 #include "Controller.hpp"
 
@@ -43,6 +44,11 @@ int main(int argc, char *argv[])
     Window w;
     Controller c(m, &w);
     c.displayLists();
+
+    /*
+    TaskDialog taskDialog;
+    taskDialog.exec();
+    */
     w.show();
 
     

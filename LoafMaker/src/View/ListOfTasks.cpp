@@ -2,16 +2,21 @@
 
 ListOfTasks::ListOfTasks(int width, QWidget *parent) : QWidget(parent) {
     gridLayout = new QGridLayout(this);
+    gridLayout->setColumnMinimumWidth(0, width/3);
+    gridLayout->setColumnMinimumWidth(1, width/3);
+    gridLayout->setColumnMinimumWidth(2, width/3);
 
     /* List presentation */
     QFont font;
     font.setBold(true);
     listNameLabel = new QLabel("Liste", this);
     listNameLabel->setFont(font);
-    gridLayout->addWidget(listNameLabel, 0, 0, 1, 1);
+    gridLayout->addWidget(listNameLabel, 0, 0, 1, 2);
 
-    spacerList = new QSpacerItem(40, 5, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    /*
+    spacerList = new QSpacerItem(width/3, 5);
     gridLayout->addItem(spacerList, 0, 1, 1, 1);
+    */
 
     mainProgressbar = new QProgressBar(this);
     mainProgressbar->setValue(0);
@@ -22,7 +27,7 @@ ListOfTasks::ListOfTasks(int width, QWidget *parent) : QWidget(parent) {
     gridLayout->addWidget(dateLabel, 1, 0, 1, 3);
 
     tasksTable = new QTableWidget(0, 3, this);
-    tasksTable->setGeometry(0, 0, width, 1000);
+    tasksTable->setGeometry(0, 0, width, 400);
     taskColumn1 = new QTableWidgetItem(QString::fromUtf8("Nom"));
     tasksTable->setHorizontalHeaderItem(0, taskColumn1);
     tasksTable->setColumnWidth(0,300);
@@ -43,14 +48,17 @@ ListOfTasks::ListOfTasks(int width, QWidget *parent) : QWidget(parent) {
 
     buttonAddTask = new QPushButton(iconAdd, QString::fromUtf8("Ajouter"), this);
     buttonAddTask->setIcon(iconAdd);
+    buttonAddTask->setGeometry(1, 1, width/3, 20);
     gridLayout->addWidget(buttonAddTask, 8, 0, 1, 1);
 
     buttonEditTask = new QPushButton(iconAdd, QString::fromUtf8("Éditer"), this);
     buttonEditTask->setIcon(iconEdit);
+    buttonEditTask->setGeometry(1, 1, width/3, 20);
     gridLayout->addWidget(buttonEditTask, 8, 1, 1, 1);
 
     buttonDelTask = new QPushButton(iconDelete, QString::fromUtf8("Enlever"), this);
     buttonDelTask->setIcon(iconDelete);
+    buttonDelTask->setGeometry(1, 1, width/3, 20);
     gridLayout->addWidget(buttonDelTask, 8, 2, 1, 1);
 }
 
