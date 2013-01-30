@@ -5,6 +5,8 @@
 #include <QtGui>
 #include <QObject>
 
+#include <stack>
+
 #include "Model.hpp"
 #include "Window.hpp"
 
@@ -27,6 +29,7 @@ class Controller : public QObject
     public slots:
         void displayLists();
         void displayTemplates();
+        void setCurrentList();
 
 };
 

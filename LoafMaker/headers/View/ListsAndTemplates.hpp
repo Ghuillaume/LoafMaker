@@ -27,6 +27,11 @@ class ListsAndTemplates : public QWidget {
         void displayList(vector<List*> lists, QTreeWidgetItem* parent);
         void clearList();
 
+        QTreeWidget* getTree();
+        void setCurrentList(List* list);
+
+        List* currentList;
+
     private:
         QGridLayout* gridLayout;
         QFrame* horizontalLine;

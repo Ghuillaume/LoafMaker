@@ -12,6 +12,8 @@
 #include <QPushButton>
 #include <QTableWidgetItem>
 
+#include "List.hpp"
+
 using namespace std;
 
 class ListOfTasks : public QWidget
@@ -22,7 +24,12 @@ class ListOfTasks : public QWidget
         explicit ListOfTasks(int width, QWidget *parent = 0);
         ~ListOfTasks();
 
+        void displayTasks();
+        void setSelectedList(List* list);
+
     private:
+        List* selectedList;
+
         QGridLayout* gridLayout;
 
         QLabel* listNameLabel;
@@ -40,6 +47,7 @@ class ListOfTasks : public QWidget
         QPushButton* buttonDelTask;
 
     signals:
+
 
     public slots:
     

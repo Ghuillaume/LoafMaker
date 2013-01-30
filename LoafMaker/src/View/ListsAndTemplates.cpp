@@ -59,12 +59,10 @@ ListsAndTemplates::~ListsAndTemplates() {
 
 void ListsAndTemplates::displayList(vector<List *> lists, QTreeWidgetItem *parent) {
 
-     // Exemple pour ajouter un header
+    // Ajout du header
     QTreeWidgetItem* treewidgetitem;// = new QTreeWidgetItem(listsTree);
     treewidgetitem = listsTree->headerItem();
     treewidgetitem->setText(0, QString::fromUtf8("Mes Listes de tâches"));
-
-    cout << "Trying to insert list" << endl;
 
     int level = 0;
 
@@ -95,4 +93,12 @@ void ListsAndTemplates::displayList(vector<List *> lists, QTreeWidgetItem *paren
 
 void ListsAndTemplates::clearList() {
     this->listsTree->clear();
+}
+
+QTreeWidget* ListsAndTemplates::getTree() {
+    return this->listsTree;
+}
+
+void ListsAndTemplates::setCurrentList(List* list) {
+    this->currentList = list;
 }

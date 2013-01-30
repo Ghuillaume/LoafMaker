@@ -1,6 +1,7 @@
 #include "../../headers/View/ListOfTasks.hpp"
 
 ListOfTasks::ListOfTasks(int width, QWidget *parent) : QWidget(parent) {
+
     gridLayout = new QGridLayout(this);
     gridLayout->setColumnMinimumWidth(0, width/3);
     gridLayout->setColumnMinimumWidth(1, width/3);
@@ -78,4 +79,15 @@ ListOfTasks::~ListOfTasks(){
     delete buttonDelTask;
 
     delete gridLayout;
+}
+
+
+void ListOfTasks::displayTasks() {
+
+    cout << selectedList->getName() << endl;
+}
+
+
+void ListOfTasks::setSelectedList(List *list) {
+    this->selectedList = list;
 }
