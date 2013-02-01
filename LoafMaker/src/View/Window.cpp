@@ -82,24 +82,31 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     */
 
     /* Central widget */
-    centralwidget = new QWidget(this);
-    centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-    this->setCentralWidget(centralwidget);
+    centralWidget = new QWidget(this);
+    centralWidget->setObjectName(QString::fromUtf8("centralwidget"));
+    centralWidget->setMinimumSize(APP_WIDTH, APP_HEIGHT);
+    this->setCentralWidget(centralWidget);
+
+    splitter = new QSplitter(centralWidget);
+    splitter->setMinimumSize(centralWidget->size());
 
     /* Left part of the screen */
-    listsAndTemplates = new ListsAndTemplates(centralwidget);
-    listsAndTemplates->setGeometry(10, 20, LIST_PANEL_WIDTH, 550);
+    listsAndTemplates = new ListsAndTemplates(splitter);
+    listsAndTemplates->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT);
+    splitter->addWidget(listsAndTemplates);
 
     /* Right part of the screen */
-    listOfTasks = new ListOfTasks(TASK_PANEL_WIDTH, centralwidget);
-    listOfTasks->setGeometry(LIST_PANEL_WIDTH + PANELS_SEPARATOR_SIZE, 20, TASK_PANEL_WIDTH, 550);
+    listOfTasks = new ListOfTasks(splitter);
+    listOfTasks->setMinimumSize(480, APP_HEIGHT);
+    splitter->addWidget(listOfTasks);
 }
 
 Window::~Window()
 {
     delete listOfTasks;
     delete listsAndTemplates;
-    delete centralwidget;
+    delete splitter;
+    delete centralWidget;
 }
 
 ListsAndTemplates* Window::getListsView() {

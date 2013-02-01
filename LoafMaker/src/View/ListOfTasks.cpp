@@ -1,37 +1,35 @@
 #include "../../headers/View/ListOfTasks.hpp"
 
-ListOfTasks::ListOfTasks(int width, QWidget *parent) : QWidget(parent) {
+ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
 
+    int parent_width = parent->width();
+    int parent_height = parent->height();
     gridLayout = new QGridLayout(this);
-    gridLayout->setColumnMinimumWidth(0, width/3);
-    gridLayout->setColumnMinimumWidth(1, width/3);
-    gridLayout->setColumnMinimumWidth(2, width/3);
 
     /* List presentation */
     QFont font;
     font.setBold(true);
     listNameLabel = new QLabel("", this);
     listNameLabel->setFont(font);
+    listNameLabel->setMinimumSize(parent_width/3, 20);
     gridLayout->addWidget(listNameLabel, 0, 0, 1, 2);
-
-    /*
-    spacerList = new QSpacerItem(width/3, 5);
-    gridLayout->addItem(spacerList, 0, 1, 1, 1);
-    */
 
     mainProgressbar = new QProgressBar(this);
     mainProgressbar->setValue(0);
     mainProgressbar->setVisible(false);
+    listNameLabel->setMinimumSize(parent_width/3, 20);
     gridLayout->addWidget(mainProgressbar, 0, 2, 1, 1);
 
     dateLabel = new QLabel("", this);
     dateLabel->setStyleSheet("QLabel { color : green; }");
+    listNameLabel->setMinimumSize(parent_width/3, 20);
     gridLayout->addWidget(dateLabel, 1, 0, 1, 3);
 
 
     tasksTree = new QTreeWidget(this);
-    tasksTree->setGeometry(0, 0, width, 400);
-    gridLayout->addWidget(tasksTree, 2, 0, 5, 3);
+    tasksTree->setMinimumSize(parent_width/2, parent_height/2);
+
+    gridLayout->addWidget(tasksTree, 2, 0, 1, 3);
     QTreeWidgetItem* treeHeader1;
     treeHeader1 = tasksTree->headerItem();
     treeHeader1->setText(0, QString::fromUtf8("Intitulé"));
@@ -51,18 +49,18 @@ ListOfTasks::ListOfTasks(int width, QWidget *parent) : QWidget(parent) {
 
     buttonAddTask = new QPushButton(iconAdd, QString::fromUtf8("Ajouter"), this);
     buttonAddTask->setIcon(iconAdd);
-    buttonAddTask->setGeometry(1, 1, width/3, 20);
-    gridLayout->addWidget(buttonAddTask, 8, 0, 1, 1);
+    buttonAddTask->setMinimumWidth(parent_width/6);
+    gridLayout->addWidget(buttonAddTask, 4, 0, 1, 1);
 
     buttonEditTask = new QPushButton(iconAdd, QString::fromUtf8("Éditer"), this);
     buttonEditTask->setIcon(iconEdit);
-    buttonEditTask->setGeometry(1, 1, width/3, 20);
-    gridLayout->addWidget(buttonEditTask, 8, 1, 1, 1);
+    buttonAddTask->setMinimumWidth(parent_width/6);
+    gridLayout->addWidget(buttonEditTask, 4, 1, 1, 1);
 
     buttonDelTask = new QPushButton(iconDelete, QString::fromUtf8("Enlever"), this);
     buttonDelTask->setIcon(iconDelete);
-    buttonDelTask->setGeometry(1, 1, width/3, 20);
-    gridLayout->addWidget(buttonDelTask, 8, 2, 1, 1);
+    buttonAddTask->setMinimumWidth(parent_width/6);
+    gridLayout->addWidget(buttonDelTask, 4, 2, 1, 1);
 }
 
 ListOfTasks::~ListOfTasks(){

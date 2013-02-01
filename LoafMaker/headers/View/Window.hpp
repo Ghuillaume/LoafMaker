@@ -5,6 +5,9 @@
 #include <QHBoxLayout>
 #include <QMenuBar>
 #include <QMenu>
+#include <QSplitter>
+
+#include <iostream>
 
 #include "ListOfTasks.hpp"
 #include "ListsAndTemplates.hpp"
@@ -14,6 +17,8 @@
 #define LIST_PANEL_WIDTH 350
 #define TASK_PANEL_WIDTH (APP_WIDTH - LIST_PANEL_WIDTH - PANELS_SEPARATOR_SIZE)
 #define PANELS_SEPARATOR_SIZE 20
+
+using namespace std;
 
 class Window : public QMainWindow
 {
@@ -37,7 +42,8 @@ private:
     QMenu* editMenu;
     QMenu* settingsMenu;
 
-    QWidget *centralwidget;
+    QWidget *centralWidget;
+    QSplitter *splitter;
     ListOfTasks* listOfTasks;
     ListsAndTemplates* listsAndTemplates;
 };

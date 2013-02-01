@@ -24,6 +24,9 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
     gridLayout->addWidget(buttonDelList,0, 2, 1, 1);
 
     listsTree = new QTreeWidget(this);
+    QTreeWidgetItem* treeHeader1;
+    treeHeader1 = listsTree->headerItem();
+    treeHeader1->setHidden(true);
     listsTree->setGeometry(QRect(10, 60, 300, 290));
     gridLayout->addWidget(listsTree,1, 0, 1, 3);
 

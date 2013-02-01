@@ -39,13 +39,13 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    Model* m = new Model();
+    //Model* m = new Model();
 
-    testing(m);
+    //testing(m);
 
     Window w;
-    Controller c(m, &w);
-    c.displayLists();
+    //Controller c(m, &w);
+    //c.displayLists();
 
     /*
     TaskDialog taskDialog;

@@ -21,7 +21,7 @@ class ListOfTasks : public QWidget
     Q_OBJECT
 
     public:
-        explicit ListOfTasks(int width, QWidget *parent = 0);
+        explicit ListOfTasks(QWidget *parent = 0);
         ~ListOfTasks();
 
         void displayTasks();
