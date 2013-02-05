@@ -1,40 +1,50 @@
-#ifndef TASKDIALOG_HPP
-#define TASKDIALOG_HPP
+#ifndef _TASKDIALOG_HPP_
+#define _TASKDIALOG_HPP_
 
 #include <QDialog>
-#include <QDialogButtonBox>
-#include <QFormLayout>
 #include <QLabel>
-#include <QCheckBox>
-#include <QComboBox>
+#include <QWidget>
+#include <QFormLayout>
 #include <QLineEdit>
-#include <QHBoxLayout>
-#include <QGridLayout>
+#include <QDateTimeEdit>
+#include <QDialogButtonBox>
+#include <QMessageBox>
 
-class TaskDialog : public QDialog {
+class TaskDialog: public QDialog
+{
     Q_OBJECT
-public:
-    explicit TaskDialog(QWidget *parent = 0);
-    ~TaskDialog();
 
-private:
-    QDialogButtonBox* buttonBox;
-    QFormLayout* formLayout;
-    QLineEdit* nameLineEdit;
-    QCheckBox* dateCheckbox;
-    QLabel* timeRemainingLabel;
-    QComboBox* numberCombobox;
-    QComboBox* durationCombobox;
-    QLabel* dependencyLabel;
-    QHBoxLayout* timeHorizontalLayout;
-    QGridLayout* dependencyLayout;
-    QComboBox* dependencyCombobox1;
-    QComboBox* dependencyCombobox2;
-    QComboBox* dependencyCombobox3;
+    public:
+        TaskDialog(QWidget *parent);
+       ~TaskDialog();
 
-signals:
+        QWidget *formLayoutWidget;
+        QFormLayout *formLayout;
+        QDateTimeEdit *dateStartEdit;
+        QDateTimeEdit *dateEndEdit;
+        QLineEdit *titleEdit;
+        QLineEdit *descriptionEdit;
+        QLineEdit *locationEdit;
+        QDialogButtonBox *buttonBox;
 
-public slots:
+        //void setArgs(Time* dateStart, Time* dateEnd, string intitule, string description);
+
+    private:
+        //Time time;
+
+        QWidget *frame;
+
+        QLabel *dateStartLabel;
+        QLabel *dateEndLabel;
+        QLabel *titleLabel;
+        QLabel *descriptionLabel;
+        QLabel *locationLabel;
+
+    public slots:
+        void checkFields();
+
+    signals:
+        void acceptedAndOk();
 };
 
 #endif

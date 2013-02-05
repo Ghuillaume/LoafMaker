@@ -27,7 +27,8 @@ HEADERS += headers/common.h \
            headers/Model/Time.hpp \
            headers/View/ListOfTasks.hpp \
            headers/View/ListsAndTemplates.hpp \
-           headers/View/Window.hpp
+           headers/View/Window.hpp \
+    headers/View/TaskDialog.hpp
 SOURCES += main.cpp \
            src/Controller/Controller.cpp \
            src/Model/List.cpp \
@@ -36,4 +37,5 @@ SOURCES += main.cpp \
            src/Model/Time.cpp \
            src/View/ListOfTasks.cpp \
            src/View/ListsAndTemplates.cpp \
-           src/View/Window.cpp
+           src/View/Window.cpp \
+    src/View/TaskDialog.cpp

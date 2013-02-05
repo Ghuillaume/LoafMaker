@@ -80,6 +80,14 @@ void Task::setAbsoluteDate(Time* deadline) {
     this->deadline = deadline;
 }
 
+void Task::addRequiredTask(Task* task) {
+    this->requiredTasks.push_back(task);
+}
+
+void Task::removeRequiredTask(int row) {
+    this->requiredTasks.erase(this->requiredTasks.begin()+row);
+}
+
 bool Task::isDeadlineRelative() {
     return (dayInterval != 0);
 }

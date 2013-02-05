@@ -51,7 +51,9 @@ int main(int argc, char *argv[])
     Controller c(m, &w);
     c.displayLists();
 
+    TaskDialog t(&w);
     w.show();
+    t.show();
 
     
     return a.exec();

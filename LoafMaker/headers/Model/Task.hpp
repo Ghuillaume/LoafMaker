@@ -24,6 +24,9 @@ public:
         void setRelativeDate(Task* relativeDeadline, int dayInterval);
         void setAbsoluteDate(Time* deadline);
 
+        void addRequiredTask(Task *task);
+        void removeRequiredTask(int row);
+
         void debug(string indent);
 
 private:
@@ -32,6 +35,8 @@ private:
         Task* relativeDeadline;
         int dayInterval;
         bool finished;
+
+        vector<Task*> requiredTasks;
 };
 
 #endif
