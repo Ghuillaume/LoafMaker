@@ -5,85 +5,113 @@ TaskDialog::TaskDialog(QWidget* parent):
 {
 
     this->setObjectName("Dialog");
-    this->resize(300, 230);
-    this->setWindowTitle(QString::fromUtf8("Create a new event"));
+    this->resize(500, 400);
+    this->setWindowTitle(QString::fromUtf8("Créer une nouvelle tâche"));
 
     frame = new QWidget(this);
     frame->setObjectName("frame");
-    frame->setGeometry(QRect(10, 10, 300, 230));
+    frame->setGeometry(QRect(10, 10, 500, 400));
 
     formLayoutWidget = new QWidget(frame);
     formLayoutWidget->setObjectName(QString::fromUtf8("formLayoutWidget"));
-    //formLayoutWidget->setGeometry(QRect(350, 100, 311, 251));
+    frame->setGeometry(QRect(10, 10, 500, 400));
     formLayout = new QFormLayout(formLayoutWidget);
+    formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
     formLayout->setObjectName(QString::fromUtf8("formLayout"));
     formLayout->setContentsMargins(0, 0, 0, 0);
 
 
     // Display labels
-    dateStartLabel = new QLabel(formLayoutWidget);
-    dateStartLabel->setObjectName("dateStartLabel");
-    dateStartLabel->setText("Start date :");
-    formLayout->setWidget(0, QFormLayout::LabelRole, dateStartLabel);
+    intituleLabel = new QLabel(formLayoutWidget);
+    intituleLabel->setObjectName("intituleLabel");
+    intituleLabel->setText(QString::fromUtf8("Intitulé :"));
+    formLayout->setWidget(0, QFormLayout::LabelRole, intituleLabel);
 
-    dateEndLabel = new QLabel(formLayoutWidget);
-    dateEndLabel->setObjectName("dateEndLabel");
-    dateEndLabel->setText("End date :");
-    formLayout->setWidget(1, QFormLayout::LabelRole, dateEndLabel);
+    QSpacerItem *horizontalSpacer1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    formLayout->setItem(1, QFormLayout::SpanningRole, horizontalSpacer1);
 
-    titleLabel = new QLabel(formLayoutWidget);
-    titleLabel->setObjectName("titleLabel");
-    titleLabel->setText("Title :");
-    formLayout->setWidget(2, QFormLayout::LabelRole, titleLabel);
+    dateLabel = new QLabel(formLayoutWidget);
+    dateLabel->setObjectName("dateLabel");
+    dateLabel->setText(QString::fromUtf8("Deadline :"));
+    formLayout->setWidget(2, QFormLayout::LabelRole, dateLabel);
 
-    descriptionLabel = new QLabel(formLayoutWidget);
-    descriptionLabel->setObjectName("descriptionLabel");
-    descriptionLabel->setText("Description :");
-    formLayout->setWidget(3, QFormLayout::LabelRole, descriptionLabel);
+    QSpacerItem *horizontalSpacer2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    formLayout->setItem(5, QFormLayout::SpanningRole, horizontalSpacer2);
 
-    locationLabel = new QLabel(formLayoutWidget);
-    locationLabel->setObjectName("locationLabel");
-    locationLabel->setText("Location :");
-    formLayout->setWidget(4, QFormLayout::LabelRole, locationLabel);
+    requiredLabel = new QLabel(formLayoutWidget);
+    requiredLabel->setObjectName("requiredLabel");
+    requiredLabel->setText(QString::fromUtf8("Dépend de :"));
+    formLayout->setWidget(6, QFormLayout::LabelRole, requiredLabel);
+
+    QSpacerItem *horizontalSpacer3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    formLayout->setItem(7, QFormLayout::SpanningRole, horizontalSpacer3);
 
 
     // Display parameters edition
-/*
-    dateStartEdit = new QDateTimeEdit(formLayoutWidget);
-    dateStartEdit->setObjectName(QString::fromUtf8("dateStartEdit"));
-    //dateStartEdit->setGeometry(QRect(150, 300, 194, 27));
-    dateStartEdit->setDate(QDate(time.getYear(), time.getMonth(), time.getDay()));
-    dateStartEdit->setTime(QTime(time.getHour()+1, 0, 0));
-    formLayout->setWidget(0, QFormLayout::FieldRole, dateStartEdit);
 
-    dateEndEdit = new QDateTimeEdit(formLayoutWidget);
-    dateEndEdit->setObjectName(QString::fromUtf8("dateEndEdit"));
-    //dateEndEdit->setGeometry(QRect(150, 300, 194, 27));
-    dateEndEdit->setDate(QDate(time.getYear(), time.getMonth(), time.getDay()));
-    dateEndEdit->setTime(QTime(time.getHour()+2, 0, 0));
-    formLayout->setWidget(1, QFormLayout::FieldRole, dateEndEdit);*/
+    intituleEdit = new QLineEdit(formLayoutWidget);
+    intituleEdit->setObjectName(QString::fromUtf8("intituleEdit"));
+    formLayout->setWidget(0, QFormLayout::FieldRole, intituleEdit);
 
-    titleEdit = new QLineEdit(formLayoutWidget);
-    titleEdit->setObjectName(QString::fromUtf8("titleEdit"));
-    formLayout->setWidget(2, QFormLayout::FieldRole, titleEdit);
-
-    descriptionEdit = new QLineEdit(formLayoutWidget);
-    descriptionEdit->setObjectName(QString::fromUtf8("descriptionEdit"));
-    formLayout->setWidget(3, QFormLayout::FieldRole, descriptionEdit);
-
-    locationEdit = new QLineEdit(formLayoutWidget);
-    locationEdit->setObjectName("locationEdit");
-    formLayout->setWidget(4, QFormLayout::FieldRole, locationEdit);
+    checkboxLayout = new QHBoxLayout();
+    absoluteRadio = new QRadioButton(formLayoutWidget);
+    absoluteRadio->setText(QString::fromUtf8("Absolue"));
+    QObject::connect(absoluteRadio, SIGNAL(clicked()), this, SLOT(setAbsoluteDeadline()));
+    checkboxLayout->addWidget(absoluteRadio);
+    relativeRadio = new QRadioButton(formLayoutWidget);
+    relativeRadio->setText(QString::fromUtf8("Relative"));
+    QObject::connect(relativeRadio, SIGNAL(clicked()), this, SLOT(setRelativeDeadline()));
+    checkboxLayout->addWidget(relativeRadio);
+    formLayout->setLayout(2, QFormLayout::FieldRole, checkboxLayout);
+    absoluteRadio->setChecked(true);
 
 
-    QSpacerItem *horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-    formLayout->setItem(5, QFormLayout::SpanningRole, horizontalSpacer);
+    absoluteDateEdit = new QDateEdit(formLayoutWidget);
+    formLayout->setWidget(3, QFormLayout::FieldRole, absoluteDateEdit);
+
+    relativeLayout = new QHBoxLayout();
+    relativeLayout->setObjectName(QString::fromUtf8("relativeLayout"));
+    nbDays = new QLineEdit(formLayoutWidget);
+    nbDays->setObjectName(QString::fromUtf8("nbDays"));
+    relativeLayout->addWidget(nbDays);
+
+    daysLabel = new QLabel(formLayoutWidget);
+    daysLabel->setObjectName(QString::fromUtf8("daysLabel"));
+    relativeLayout->addWidget(daysLabel);
+
+    relativeComboBox = new QComboBox(formLayoutWidget);
+    relativeComboBox->setObjectName(QString::fromUtf8("relativeComboBox"));
+    relativeLayout->addWidget(relativeComboBox);
+
+    taskComboBox = new QComboBox(formLayoutWidget);
+    taskComboBox->setObjectName(QString::fromUtf8("taskComboBox"));
+    relativeLayout->addWidget(taskComboBox);
+
+    daysLabel->setText(QApplication::translate("Dialog", "jours", 0, QApplication::UnicodeUTF8));
+    relativeComboBox->clear();
+    relativeComboBox->insertItems(0, QStringList()
+     << QApplication::translate("Dialog", "avant", 0, QApplication::UnicodeUTF8)
+     << QApplication::translate("Dialog", "après", 0, QApplication::UnicodeUTF8)
+    );
+
+    formLayout->setLayout(4, QFormLayout::FieldRole, relativeLayout);
+
+    setAbsoluteDeadline();
+
+    QComboBox* firstRequiredTask = new QComboBox(formLayoutWidget);
+    firstRequiredTask->insertItems(0, QStringList()
+     << QApplication::translate("Dialog", "Ajouter une tâche", 0, QApplication::UnicodeUTF8)
+    );
+    formLayout->setWidget(6, QFormLayout::FieldRole, firstRequiredTask);
+
+    //requiredTasks.push_back(firstRequiredTask);
+
 
     buttonBox = new QDialogButtonBox(formLayoutWidget);
     buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
     buttonBox->setOrientation(Qt::Horizontal);
     buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-    formLayout->setWidget(6, QFormLayout::FieldRole, buttonBox);
+    formLayout->setWidget(8, QFormLayout::FieldRole, buttonBox);
 
     QObject::connect(this->buttonBox, SIGNAL(accepted()), this, SLOT(checkFields()));
 
@@ -104,18 +132,13 @@ TaskDialog::~TaskDialog()
 
     delete frame;
 
-    delete dateStartLabel;
-    delete dateEndLabel;
-    delete titleLabel;
-    delete descriptionLabel;
-
+/*
     delete formLayoutWidget;
     delete formLayout;
-    delete dateStartEdit;
     delete dateEndEdit;
     delete titleEdit;
     delete descriptionEdit;
-    delete buttonBox;
+    delete buttonBox;*/
 }
 
 void TaskDialog::checkFields() {
@@ -123,4 +146,25 @@ void TaskDialog::checkFields() {
         QMessageBox::warning(this, "Error", "You must fill at least the title field");
     else
         emit acceptedAndOk();
+}
+
+void TaskDialog::setRelativeDeadline() {
+
+    nbDays->setVisible(true);
+    daysLabel->setVisible(true);
+    relativeComboBox->setVisible(true);
+    taskComboBox->setVisible(true);
+
+    absoluteDateEdit->setVisible(false);
+}
+
+void TaskDialog::setAbsoluteDeadline() {
+
+
+    nbDays->setVisible(false);
+    daysLabel->setVisible(false);
+    relativeComboBox->setVisible(false);
+    taskComboBox->setVisible(false);
+
+    absoluteDateEdit->setVisible(true);
 }

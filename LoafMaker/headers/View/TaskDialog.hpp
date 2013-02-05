@@ -1,6 +1,9 @@
 #ifndef _TASKDIALOG_HPP_
 #define _TASKDIALOG_HPP_
 
+#include <vector>
+
+#include <QApplication>
 #include <QDialog>
 #include <QLabel>
 #include <QWidget>
@@ -9,6 +12,10 @@
 #include <QDateTimeEdit>
 #include <QDialogButtonBox>
 #include <QMessageBox>
+#include <QHBoxLayout>
+#include <QRadioButton>
+#include <QComboBox>
+
 
 class TaskDialog: public QDialog
 {
@@ -20,8 +27,19 @@ class TaskDialog: public QDialog
 
         QWidget *formLayoutWidget;
         QFormLayout *formLayout;
-        QDateTimeEdit *dateStartEdit;
-        QDateTimeEdit *dateEndEdit;
+        QLineEdit *intituleEdit;
+        QRadioButton *absoluteRadio;
+        QRadioButton *relativeRadio;
+        QDateEdit *absoluteDateEdit;
+
+        QHBoxLayout *relativeLayout;
+        QLineEdit *nbDays;
+        QLabel *daysLabel;
+        QComboBox *relativeComboBox;
+        QComboBox *taskComboBox;
+
+        //vector<QComboBox> requiredTasks;
+
         QLineEdit *titleEdit;
         QLineEdit *descriptionEdit;
         QLineEdit *locationEdit;
@@ -34,14 +52,16 @@ class TaskDialog: public QDialog
 
         QWidget *frame;
 
-        QLabel *dateStartLabel;
-        QLabel *dateEndLabel;
-        QLabel *titleLabel;
-        QLabel *descriptionLabel;
-        QLabel *locationLabel;
+        QLabel *intituleLabel;
+        QLabel *dateLabel;
+        QLabel *requiredLabel;
+
+        QHBoxLayout *checkboxLayout;
 
     public slots:
         void checkFields();
+        void setRelativeDeadline();
+        void setAbsoluteDeadline();
 
     signals:
         void acceptedAndOk();

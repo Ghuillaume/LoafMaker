@@ -6,9 +6,10 @@
 		
 		
 	Important :
-		- Tâches préconditionelles (une tâche doit être fait avant telles autres). Modification du modèle nécessaire
 		- Tentative de validation d'une tâche -> vérifier que toutes les tâches antérieures ont été validées
-		- Permettre d'ordonner les tâches
+		- Listes ordonnées.
+		- Boite de dialogue pour ajouter des tâches
+		- Boite de dialogue pour ajouter des listes
 		
 		
 		
