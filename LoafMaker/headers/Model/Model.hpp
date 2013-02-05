@@ -13,6 +13,8 @@ class Model
         Model();
         ~Model();
 
+        string current_filename;
+
         void createBaseList(string name, int day, int month, int year);
         void createSubList(List* parent, string name, int day, int month, int year);
         void deleteList(int row);
@@ -24,7 +26,6 @@ class Model
         List* getList(int row);
 
         string debug();
-
 
     private:
         ListOfList lists;

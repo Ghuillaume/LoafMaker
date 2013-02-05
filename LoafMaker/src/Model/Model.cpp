@@ -1,8 +1,7 @@
 #include "Model.hpp"
 
 Model::Model() {
-
-
+    this->current_filename = "./default.xml";
 }
 
 Model::~Model() {
