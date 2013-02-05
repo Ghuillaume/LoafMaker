@@ -1,14 +1,16 @@
 #ifndef CONTROLLER_HPP
 #define CONTROLLER_HPP
 
-
 #include <QtGui>
 #include <QObject>
 
 #include <stack>
+#include <cstring>
 
 #include "Model.hpp"
 #include "Window.hpp"
+
+using namespace std;
 
 class Controller : public QObject
 {
@@ -30,6 +32,12 @@ class Controller : public QObject
         void displayLists();
         void displayTemplates();
         void setCurrentList();
+        void newModel();
+        void saveModel();
+        void loadModel();
+        void close();
+        void parseModel(string fileName);
+        void saveModelAs();
 
 };
 

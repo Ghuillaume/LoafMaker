@@ -6,7 +6,10 @@ Controller::Controller(Model* model, Window* window)
     this->view = window;
 
     // Menubar connections
-
+    QObject::connect(view -> newItem, SIGNAL(activated()), this, SLOT(newModel()));
+    QObject::connect(view -> saveItem, SIGNAL(activated()), this, SLOT(saveModel()));
+    QObject::connect(view -> openItem, SIGNAL(activated()), this, SLOT(loadModel()));
+    QObject::connect(view -> quitItem, SIGNAL(activated()), this, SLOT(close()));
 
     // ListAndTemplates widget connections
     QObject::connect(this->view->getListsView()->getTree(), SIGNAL(itemSelectionChanged()), this/*->view->getListsView()*/, SLOT(setCurrentList()));
@@ -65,4 +68,96 @@ void Controller::setCurrentList() {
     this->view->getListsView()->setCurrentList(selectedList);
     this->view->getTasksView()->setSelectedList(selectedList);
     this->view->getTasksView()->displayTasks();
+}
+
+void Controller::newModel() {
+
+    /*
+    TODO :
+
+
+    // Checking if current local changes are saved
+    bool ok = true;
+    switch(this->checkIfSaved()) {
+        // Not saved but continue
+        case 0:
+            ok = true;
+            break;
+
+            // Not saved, stop
+        case 1:
+            ok = false;
+            break;
+
+            // Saved, ok
+        case 2:
+            ok = true;
+            break;
+    }
+
+    if(ok) {
+        this->model->cleanList();
+        this->view->menubar->setVisible(false);
+        this->view->mainFrame->setVisible(false);
+        this->view->horizontalLayoutWidgetNewModel->setVisible(true);
+    } */
+}
+
+void Controller::saveModel() {
+    string fileName = "TODO"; //this->config->getFileName();
+    cout << "Filename : " << fileName << endl;
+    if(fileName == "") {
+        cout << "parse with file name" << endl;
+        this->parseModel(fileName);
+    }
+    else {
+        cout << "Going to ask filename" << endl;
+        //this->saveModelAs();
+    }
+}
+
+void Controller::loadModel() {
+    // TODO
+
+}
+
+void Controller::close() {
+    // TODO
+
+    /* switch(this->checkIfSaved()) {
+
+        // Not saved but continue
+        case 0:
+            this->view->close();
+            break;
+
+            // Not saved and stop exiting
+        case 1:
+            break;
+
+            // Saved, ok
+        case 2:
+            if(QMessageBox::question(this, "Warning", "Are you sure ?", QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
+                this->view->close();
+            }
+            break;
+    } */
+    if(QMessageBox::question(this->view, "Avertissement", QString::fromUtf8("Êtes-vous sûr(e) de vouloir quitter l'application ?")
+                             , QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
+        this->view->close();
+    }
+}
+
+void Controller::parseModel(string fileName) {
+    // TODO
+}
+
+void Controller::saveModelAs() {
+
+    string fileName = QFileDialog::getSaveFileName(this->view, tr("Save File"), "/home", tr("XML Document (*.xml)")).toStdString();
+    int extension_position = fileName.size() - 5;
+    if(fileName.compare(extension_position, 4,".xml") == 0)
+        fileName += ".xml";
+    //this->config->setFileName(fileName);
+    this->parseModel(fileName);
 }

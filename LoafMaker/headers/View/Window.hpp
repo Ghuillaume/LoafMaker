@@ -31,7 +31,6 @@ public:
     ListsAndTemplates* getListsView();
     ListOfTasks* getTasksView();
     
-private:
     QMenuBar* menubar;
     QMenu* fileMenu;
     QAction* newItem;
@@ -42,6 +41,7 @@ private:
     QMenu* editMenu;
     QMenu* settingsMenu;
 
+private:
     QWidget *centralWidget;
     QSplitter *splitter;
     ListOfTasks* listOfTasks;
