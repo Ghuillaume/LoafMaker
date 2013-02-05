@@ -6,6 +6,7 @@ QT       += core gui
 
 TARGET = LoafMaker
 TEMPLATE = app
+RESOURCES = images.qrc
 
 DEPENDPATH += . \
               headers \

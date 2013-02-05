@@ -89,6 +89,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
     splitter = new QSplitter(centralWidget);
     splitter->setMinimumSize(centralWidget->size());
+    splitter->setChildrenCollapsible(false);
 
     /* Left part of the screen */
     listsAndTemplates = new ListsAndTemplates(splitter);

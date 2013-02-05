@@ -11,9 +11,9 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
     gridLayout->addWidget(listLabel,0, 0, 1, 1);
 
     QIcon iconAdd;
-    iconAdd.addFile(QString::fromUtf8("resources/list-add.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconAdd.addFile(QString::fromUtf8(":list-add.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconDelete;
-    iconDelete.addFile(QString::fromUtf8("resources/list-remove.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconDelete.addFile(QString::fromUtf8(":list-remove.png"), QSize(), QIcon::Normal, QIcon::Off);
 
     buttonAddList = new QPushButton(iconAdd, QString("Ajouter"), this);
     buttonAddList->setIcon(iconAdd);
@@ -24,20 +24,20 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
     gridLayout->addWidget(buttonDelList,0, 2, 1, 1);
 
     listsTree = new QTreeWidget(this);
-    QTreeWidgetItem* treeHeader1;
+    /*QTreeWidgetItem* treeHeader1;
     treeHeader1 = listsTree->headerItem();
-    treeHeader1->setHidden(true);
+    treeHeader1->setHidden(true);*/
     listsTree->setGeometry(QRect(10, 60, 300, 290));
     gridLayout->addWidget(listsTree,1, 0, 1, 3);
 
-    horizontalLine = new QFrame(this);
+    /*horizontalLine = new QFrame(this);
     horizontalLine->setObjectName(QString::fromUtf8("line"));
     horizontalLine->setGeometry(QRect(320, 150, 300, 4));
     horizontalLine->setFrameShape(QFrame::HLine);
     horizontalLine->setFrameShadow(QFrame::Sunken);
     gridLayout->addWidget(horizontalLine,2, 0, 1, 3);
 
-    /* Template part */
+    // Template part
     templateLabel = new QLabel("Mes templates", this);
     templateLabel->setGeometry(QRect(10, 400, 300, 20));
     gridLayout->addWidget(templateLabel,3, 0, 1, 1);
@@ -49,7 +49,7 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
 
     templatesList = new QListWidget(this);
     templatesList->setGeometry(QRect(10, 390, 300, 200));
-    gridLayout->addWidget(templatesList,4, 0, 1, 3);
+    gridLayout->addWidget(templatesList,4, 0, 1, 3);*/
 }
 
 ListsAndTemplates::~ListsAndTemplates() {

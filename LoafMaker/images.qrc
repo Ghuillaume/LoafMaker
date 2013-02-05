@@ -1,0 +1,9 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+     <file alias="applications-office.png">resources/applications-office.png</file>
+     <file alias="edit-paste.png">resources/edit-paste.png</file>
+     <file alias="list-add.png">resources/list-add.png</file>
+     <file alias="list-remove.png">resources/list-remove.png</file>
+     <file alias="user-trash.png">resources/user-trash.png</file>
+</qresource>
+</RCC>
