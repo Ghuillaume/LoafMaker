@@ -71,12 +71,8 @@ void Controller::setCurrentList() {
 }
 
 void Controller::newModel() {
-
-    /*
-    TODO :
-
-
     // Checking if current local changes are saved
+
     bool ok = true;
     switch(this->checkIfSaved()) {
         // Not saved but continue
@@ -96,23 +92,27 @@ void Controller::newModel() {
     }
 
     if(ok) {
+        this->model = new Model();
+        /*
         this->model->cleanList();
         this->view->menubar->setVisible(false);
         this->view->mainFrame->setVisible(false);
         this->view->horizontalLayoutWidgetNewModel->setVisible(true);
-    } */
+        */
+    }
 }
 
 void Controller::saveModel() {
+    // TODO
     string fileName = "TODO"; //this->config->getFileName();
     cout << "Filename : " << fileName << endl;
-    if(fileName == "") {
+    if(fileName.compare("") == 0) {
         cout << "parse with file name" << endl;
         this->parseModel(fileName);
     }
     else {
         cout << "Going to ask filename" << endl;
-        //this->saveModelAs();
+        this->saveModelAs();
     }
 }
 
@@ -142,8 +142,8 @@ void Controller::close() {
             }
             break;
     } */
-    if(QMessageBox::question(this->view, "Avertissement", QString::fromUtf8("Êtes-vous sûr(e) de vouloir quitter l'application ?")
-                             , QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
+    if(QMessageBox::question(this->view, "Avertissement", QString::fromUtf8("Êtes-vous sûr(e) de vouloir quitter l'application ?"),
+                             QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
         this->view->close();
     }
 }
@@ -155,9 +155,24 @@ void Controller::parseModel(string fileName) {
 void Controller::saveModelAs() {
 
     string fileName = QFileDialog::getSaveFileName(this->view, tr("Save File"), "/home", tr("XML Document (*.xml)")).toStdString();
-    int extension_position = fileName.size() - 5;
-    if(fileName.compare(extension_position, 4,".xml") == 0)
+    if(fileName.find(".xml") == string::npos)
         fileName += ".xml";
     //this->config->setFileName(fileName);
     this->parseModel(fileName);
+}
+
+int Controller::checkIfSaved() {
+    // TODO : A CHANGER !!!
+    if(true) {
+        if(QMessageBox::warning(this->view, "Avertissement", QString::fromUtf8("Toutes les modifications n'ont pas été sauvegardées. Continuer ?"),
+                                QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Cancel) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+    else
+        return 2;
+
 }

@@ -38,6 +38,7 @@ class Controller : public QObject
         void close();
         void parseModel(string fileName);
         void saveModelAs();
+        int  checkIfSaved();
 
 };
 
