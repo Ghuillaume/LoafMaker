@@ -59,6 +59,16 @@ Task* List::getTask(int row) {
     }
 }
 
+int List::getNbTasks() {
+    int nbTasks = this->tasks.size();
+
+    for(vector<List*>::iterator it = subLists.begin() ; it != subLists.end() ; it++) {
+        nbTasks += (*it)->getNbTasks();
+    }
+
+    return nbTasks;
+}
+
 void List::addSubList(List* subList) {
     this->subLists.push_back(subList);
 }

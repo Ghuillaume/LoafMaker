@@ -51,7 +51,7 @@ List* Model::getList(int row) {
 }
 
 
-string Model::debug() {
+void Model::debug() {
 
     cout << "Debugging model. Length is " << lists.size() << endl;
 

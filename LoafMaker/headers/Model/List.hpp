@@ -20,6 +20,8 @@ public:
         vector<Task*> getAllTasks();
         Task* getTask(int row);
 
+        int getNbTasks();
+
         void addSubList(List *subList);
         void addTask(Task* task);
 

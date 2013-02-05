@@ -74,7 +74,6 @@ void Controller::newModel() {
     // TODO : demander un fichier pour la nouvelle liste
     this->saveModel();
     this->model = new Model();
-    this->saveModelAs();
 
 }
 

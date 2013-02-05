@@ -4,6 +4,8 @@
 #include "Model.hpp"
 #include "Controller.hpp"
 
+#include "Time.hpp"
+
 
 void testing(Model* m) {
 
@@ -30,7 +32,9 @@ void testing(Model* m) {
 
     m->getList(0)->getList(1)->getTask(1)->setFinished();
 
-    //m->deleteList(1);
+    m->getList(0)->getList(1)->getTask(2)->setRelativeDate(m->getList(0)->getList(1)->getTask(1), +3);
+
+    m->deleteList(2);
 
     m->debug();
 }
@@ -47,10 +51,6 @@ int main(int argc, char *argv[])
     Controller c(m, &w);
     c.displayLists();
 
-    /*
-    TaskDialog taskDialog;
-    taskDialog.exec();
-    */
     w.show();
 
     

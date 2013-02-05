@@ -25,7 +25,7 @@ class Model
         ListOfList getBaseLists();
         List* getList(int row);
 
-        string debug();
+        void debug();
 
     private:
         ListOfList lists;

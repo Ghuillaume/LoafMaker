@@ -85,7 +85,10 @@ void ListsAndTemplates::displayList(vector<List *> lists, QTreeWidgetItem *paren
             listItem = parent->child(level);
         }
 
-        listItem->setText(0, tr((*it)->getName().c_str()));
+        ostringstream taskLabel;
+        taskLabel << (*it)->getName() << " (" << (*it)->getNbTasks() << ")";
+
+        listItem->setText(0, tr(taskLabel.str().c_str()));
 
         // Recherche de sous listes sur la liste courante
         this->displayList((*it)->getAllLists(), listItem);
