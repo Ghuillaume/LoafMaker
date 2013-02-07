@@ -28,6 +28,7 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
     treeHeader1 = listsTree->headerItem();
     treeHeader1->setHidden(true);*/
     listsTree->setGeometry(QRect(10, 60, 300, 290));
+    listsTree->setAnimated(true);
     gridLayout->addWidget(listsTree,1, 0, 1, 3);
 
     /*horizontalLine = new QFrame(this);

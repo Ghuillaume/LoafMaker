@@ -50,7 +50,7 @@ class ListOfTasks : public QWidget
 
 
     public slots:
-    
+        void taskChanged(QTreeWidgetItem* item, int row);
 };
 
 #endif

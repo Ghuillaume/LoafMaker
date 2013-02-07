@@ -38,7 +38,7 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     treeHeader2->setText(1, QString::fromUtf8("Échéance"));
     QTreeWidgetItem* treeHeader3;
     treeHeader3 = tasksTree->headerItem();
-    treeHeader3->setText(2, QString::fromUtf8("État"));
+    treeHeader3->setText(2, QString::fromUtf8("Terminée"));
 
     QIcon iconAdd;
     iconAdd.addFile(QString::fromUtf8("resources/edit-paste.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -100,7 +100,10 @@ void ListOfTasks::displayTasks() {
         taskItem = tasksTree->topLevelItem(level);
         taskItem->setText(0, tr((*it)->getName().c_str()));
         taskItem->setText(1, tr((*it)->getDate().c_str()));
-        taskItem->setText(2, tr((*it)->getState().c_str()));
+        if((*it)->isFinished())
+            taskItem->setCheckState ( 2, Qt::Checked);
+        else
+            taskItem->setCheckState(2, Qt::Unchecked);
 
         if((*it)->isFinished())
             finishedTasks++;
@@ -116,9 +119,47 @@ void ListOfTasks::displayTasks() {
         progression = (finishedTasks * 100) / tasks.size();
 
     mainProgressbar->setValue(progression);
+
+    QObject::connect(tasksTree, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(taskChanged(QTreeWidgetItem*, int)));
+
 }
 
 
 void ListOfTasks::setSelectedList(List *list) {
     this->selectedList = list;
+}
+
+
+void ListOfTasks::taskChanged(QTreeWidgetItem *item, int row) {
+
+    int line = this->tasksTree->indexOfTopLevelItem(item);
+    Task* selectedTask = selectedList->getTask(line);
+
+    if(item->checkState(row) == Qt::Checked){
+        cout << "checked " << line << endl;
+        selectedTask->setFinished();
+    }
+    else {
+        cout << "unchecked " << line << endl;
+        selectedTask->setUnfinished();
+    }
+
+
+    // maj progression
+    // TODO : coder et utiliser getProgression() sur List
+    vector<Task*> tasks = selectedList->getAllTasks();
+    int finishedTasks = 0;
+    for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
+        if((*it)->isFinished())
+            finishedTasks++;
+    }
+
+    int progression;
+
+    if(finishedTasks == 0)
+        progression = 0;
+    else
+        progression = (finishedTasks * 100) / tasks.size();
+
+    mainProgressbar->setValue(progression);
 }

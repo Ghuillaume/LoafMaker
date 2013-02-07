@@ -69,6 +69,10 @@ int List::getNbTasks() {
     return nbTasks;
 }
 
+int List::getProgression() {
+
+}
+
 void List::addSubList(List* subList) {
     this->subLists.push_back(subList);
 }

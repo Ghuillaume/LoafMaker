@@ -21,6 +21,7 @@ public:
         Task* getTask(int row);
 
         int getNbTasks();
+        int getProgression();
 
         void addSubList(List *subList);
         void addTask(Task* task);
