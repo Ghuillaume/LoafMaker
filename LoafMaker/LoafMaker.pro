@@ -28,7 +28,8 @@ HEADERS += headers/common.h \
            headers/View/ListOfTasks.hpp \
            headers/View/ListsAndTemplates.hpp \
            headers/View/Window.hpp \
-    headers/View/TaskDialog.hpp
+    headers/View/TaskDialog.hpp \
+    headers/View/ListDialog.hpp
 SOURCES += main.cpp \
            src/Controller/Controller.cpp \
            src/Model/List.cpp \
@@ -38,4 +39,5 @@ SOURCES += main.cpp \
            src/View/ListOfTasks.cpp \
            src/View/ListsAndTemplates.cpp \
            src/View/Window.cpp \
-    src/View/TaskDialog.cpp
+    src/View/TaskDialog.cpp \
+    src/View/ListDialog.cpp

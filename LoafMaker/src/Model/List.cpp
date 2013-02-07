@@ -69,8 +69,37 @@ int List::getNbTasks() {
     return nbTasks;
 }
 
+int List::getNbFinishedTasks() {
+    int nbFinishedTasks = 0;
+
+    for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
+        if((*it)->isFinished())
+            nbFinishedTasks++;
+    }
+
+    for(vector<List*>::iterator it = subLists.begin() ; it != subLists.end() ; it++) {
+        nbFinishedTasks += (*it)->getNbFinishedTasks();
+    }
+
+    return nbFinishedTasks;
+}
+
 int List::getProgression() {
 
+    int finishedTasks = 0;
+    int nbTasks = 0;
+
+    finishedTasks = this->getNbFinishedTasks();
+    nbTasks = this->getNbTasks();
+
+    int progression;
+
+    if(finishedTasks == 0)
+        progression = 0;
+    else
+        progression = (finishedTasks * 100) / tasks.size();
+
+    return progression;
 }
 
 void List::addSubList(List* subList) {

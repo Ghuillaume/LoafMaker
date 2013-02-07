@@ -53,9 +53,6 @@ int main(int argc, char *argv[])
 
     w.show();
 
-    /*TaskDialog t(&w);
-    t.show();*/
-
     
     return a.exec();
 }

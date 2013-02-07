@@ -6,6 +6,7 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     int parent_height = parent->height();
     gridLayout = new QGridLayout(this);
 
+
     /* List presentation */
     QFont font;
     font.setBold(true);
@@ -20,8 +21,9 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     listNameLabel->setMinimumSize(parent_width/3, 20);
     gridLayout->addWidget(mainProgressbar, 0, 2, 1, 1);
 
-    dateLabel = new QLabel("", this);
+    dateLabel = new QLabel("Date", this);
     dateLabel->setStyleSheet("QLabel { color : green; }");
+    dateLabel->setVisible(false);
     listNameLabel->setMinimumSize(parent_width/3, 20);
     gridLayout->addWidget(dateLabel, 1, 0, 1, 3);
 
@@ -40,6 +42,8 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     treeHeader3 = tasksTree->headerItem();
     treeHeader3->setText(2, QString::fromUtf8("Terminée"));
 
+    tasksTree->setVisible(false);
+
     QIcon iconAdd;
     iconAdd.addFile(QString::fromUtf8("resources/edit-paste.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconEdit;
@@ -50,16 +54,19 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     buttonAddTask = new QPushButton(iconAdd, QString::fromUtf8("Ajouter"), this);
     buttonAddTask->setIcon(iconAdd);
     buttonAddTask->setMinimumWidth(parent_width/6);
+    buttonAddTask->setVisible(false);
     gridLayout->addWidget(buttonAddTask, 4, 0, 1, 1);
 
     buttonEditTask = new QPushButton(iconAdd, QString::fromUtf8("Éditer"), this);
     buttonEditTask->setIcon(iconEdit);
-    buttonAddTask->setMinimumWidth(parent_width/6);
+    buttonEditTask->setMinimumWidth(parent_width/6);
+    buttonEditTask->setVisible(false);
     gridLayout->addWidget(buttonEditTask, 4, 1, 1, 1);
 
     buttonDelTask = new QPushButton(iconDelete, QString::fromUtf8("Enlever"), this);
     buttonDelTask->setIcon(iconDelete);
-    buttonAddTask->setMinimumWidth(parent_width/6);
+    buttonDelTask->setMinimumWidth(parent_width/6);
+    buttonDelTask->setVisible(false);
     gridLayout->addWidget(buttonDelTask, 4, 2, 1, 1);
 }
 
@@ -84,8 +91,14 @@ ListOfTasks::~ListOfTasks(){
 
 void ListOfTasks::displayTasks() {
 
-    listNameLabel->setText(QString(selectedList->getName().c_str()));
     mainProgressbar->setVisible(true);
+    dateLabel->setVisible(true);
+    tasksTree->setVisible(true);
+    buttonAddTask->setVisible(true);
+    buttonEditTask->setVisible(true);
+    buttonDelTask->setVisible(true);
+
+    listNameLabel->setText(QString(selectedList->getName().c_str()));
     tasksTree->clear();
 
     dateLabel->setText(selectedList->getDate()->getReadableDate().c_str());
@@ -94,7 +107,6 @@ void ListOfTasks::displayTasks() {
 
     QTreeWidgetItem* taskItem;
     int level = 0;
-    int finishedTasks = 0;
     for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
         taskItem = new QTreeWidgetItem(tasksTree);
         taskItem = tasksTree->topLevelItem(level);
@@ -105,20 +117,10 @@ void ListOfTasks::displayTasks() {
         else
             taskItem->setCheckState(2, Qt::Unchecked);
 
-        if((*it)->isFinished())
-            finishedTasks++;
-
         level++;
     }
 
-    int progression;
-
-    if(finishedTasks == 0)
-        progression = 0;
-    else
-        progression = (finishedTasks * 100) / tasks.size();
-
-    mainProgressbar->setValue(progression);
+    mainProgressbar->setValue(selectedList->getProgression());
 
     QObject::connect(tasksTree, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(taskChanged(QTreeWidgetItem*, int)));
 

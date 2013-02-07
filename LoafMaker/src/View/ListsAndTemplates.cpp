@@ -31,33 +31,11 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
     listsTree->setAnimated(true);
     gridLayout->addWidget(listsTree,1, 0, 1, 3);
 
-    /*horizontalLine = new QFrame(this);
-    horizontalLine->setObjectName(QString::fromUtf8("line"));
-    horizontalLine->setGeometry(QRect(320, 150, 300, 4));
-    horizontalLine->setFrameShape(QFrame::HLine);
-    horizontalLine->setFrameShadow(QFrame::Sunken);
-    gridLayout->addWidget(horizontalLine,2, 0, 1, 3);
-
-    // Template part
-    templateLabel = new QLabel("Mes templates", this);
-    templateLabel->setGeometry(QRect(10, 400, 300, 20));
-    gridLayout->addWidget(templateLabel,3, 0, 1, 1);
-
-    buttonAddTemplate = new QPushButton(iconAdd, QString("Ajouter"), this);
-    gridLayout->addWidget(buttonAddTemplate,3, 1, 1, 1);
-    buttonDelTemplate = new QPushButton(iconDelete, QString("Enlever"), this);
-    gridLayout->addWidget(buttonDelTemplate,3, 2, 1, 1);
-
-    templatesList = new QListWidget(this);
-    templatesList->setGeometry(QRect(10, 390, 300, 200));
-    gridLayout->addWidget(templatesList,4, 0, 1, 3);*/
 }
 
 ListsAndTemplates::~ListsAndTemplates() {
     delete listLabel;
     delete listsTree;
-    delete templateLabel;
-    delete templatesList;
     delete gridLayout;
 }
 

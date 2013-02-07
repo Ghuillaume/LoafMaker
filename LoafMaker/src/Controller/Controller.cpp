@@ -11,11 +11,24 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(view -> openItem, SIGNAL(activated()), this, SLOT(loadModel()));
     QObject::connect(view -> quitItem, SIGNAL(activated()), this, SLOT(close()));
 
+    QObject::connect(view->createListItem, SIGNAL(triggered()), this, SLOT(addList()));
+    QObject::connect(view->editListItem, SIGNAL(triggered()), this, SLOT(editList()));
+    QObject::connect(view->deleteListItem, SIGNAL(triggered()), this, SLOT(delList()));
+
+    QObject::connect(view->createTaskItem, SIGNAL(triggered()), this, SLOT(addTask()));
+    QObject::connect(view->editTaskItem, SIGNAL(triggered()), this, SLOT(editTask()));
+    QObject::connect(view->deleteTaskItem, SIGNAL(triggered()), this, SLOT(delTask()));
+
     // ListAndTemplates widget connections
-    QObject::connect(this->view->getListsView()->getTree(), SIGNAL(itemSelectionChanged()), this/*->view->getListsView()*/, SLOT(setCurrentList()));
+    QObject::connect(this->view->getListsView()->getTree(), SIGNAL(itemSelectionChanged()), this, SLOT(setCurrentList()));
+    QObject::connect(this->view->getListsView()->buttonAddList, SIGNAL(clicked()), this, SLOT(addList()));
+    QObject::connect(this->view->getListsView()->buttonDelList, SIGNAL(clicked()), this, SLOT(delList()));
 
 
     // ListOfTasks widget connection
+    QObject::connect(this->view->getTasksView()->buttonAddTask, SIGNAL(clicked()), this, SLOT(addTask()));
+    QObject::connect(this->view->getTasksView()->buttonDelTask, SIGNAL(clicked()), this, SLOT(delTask()));
+    QObject::connect(this->view->getTasksView()->buttonEditTask, SIGNAL(clicked()), this, SLOT(editTask()));
 
 }
 
@@ -79,15 +92,7 @@ void Controller::newModel() {
 
 void Controller::saveModel() {
     string fileName = this->model->current_filename;
-    cout << "Filename : " << fileName << endl;
-    if(fileName.compare("") == 0) {
-        cout << "parse with file name" << endl;
-        this->parseModel(fileName);
-    }
-    else {
-        cout << "Going to ask filename" << endl;
-        this->saveModelAs();
-    }
+    this->parseModel(fileName);
 }
 
 void Controller::loadModel() {
@@ -104,6 +109,7 @@ void Controller::close() {
 
 void Controller::parseModel(string fileName) {
     // TODO
+    cout << "TODO : save model in " << fileName << endl;
 }
 
 void Controller::saveModelAs() {
@@ -116,4 +122,40 @@ void Controller::saveModelAs() {
         fileName = "default.xml";
     this->model->current_filename = fileName;
     this->parseModel(fileName);
+}
+
+void Controller::addList() {
+    cout << "To finish" << endl;
+
+    ListDialog* dialog = new ListDialog(this->view);
+    dialog->show();
+}
+
+void Controller::editList() {
+    cout << "To finish" << endl;
+
+    ListDialog* dialog = new ListDialog(this->view);
+    dialog->show();
+}
+
+void Controller::delList() {
+    cout << "TODO : delList " << endl;
+}
+
+void Controller::addTask() {
+    cout << "To Finish" << endl;
+
+    TaskDialog* dialog = new TaskDialog(this->view);
+    dialog->show();
+}
+
+void Controller::editTask() {
+    cout << "To Finish" << endl;
+
+    TaskDialog* dialog = new TaskDialog(this->view);
+    dialog->show();
+}
+
+void Controller::delTask() {
+    cout << "TODO : delTask" << endl;
 }

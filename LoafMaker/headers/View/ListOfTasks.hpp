@@ -27,6 +27,11 @@ class ListOfTasks : public QWidget
         void displayTasks();
         void setSelectedList(List* list);
 
+
+        QPushButton* buttonAddTask;
+        QPushButton* buttonEditTask;
+        QPushButton* buttonDelTask;
+
     private:
         List* selectedList;
 
@@ -41,10 +46,6 @@ class ListOfTasks : public QWidget
         QTreeWidgetItem* treeHeader1;
         QTreeWidgetItem* treeHeader2;
         QTreeWidgetItem* treeHeader3;
-
-        QPushButton* buttonAddTask;
-        QPushButton* buttonEditTask;
-        QPushButton* buttonDelTask;
 
     signals:
 

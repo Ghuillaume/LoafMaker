@@ -9,6 +9,8 @@
 
 #include "Model.hpp"
 #include "Window.hpp"
+#include "TaskDialog.hpp"
+#include "ListDialog.hpp"
 
 using namespace std;
 
@@ -38,6 +40,13 @@ class Controller : public QObject
         void close();
         void parseModel(string fileName);
         void saveModelAs();
+
+        void addList();
+        void editList();
+        void delList();
+        void addTask();
+        void delTask();
+        void editTask();
 
 };
 

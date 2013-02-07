@@ -38,7 +38,16 @@ public:
     QAction* saveItem;
     QAction* quitItem;
 
-    QMenu* editMenu;
+    QMenu* listMenu;
+    QAction* createListItem;
+    QAction* editListItem;
+    QAction* deleteListItem;
+
+    QMenu* taskMenu;
+    QAction* createTaskItem;
+    QAction* editTaskItem;
+    QAction* deleteTaskItem;
+
     QMenu* settingsMenu;
 
 private:

@@ -38,10 +38,45 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
         fileMenu->addAction(quitItem);
         quitItem->setText("Quitter");
 
-    editMenu = new QMenu(menubar);
-    editMenu->setObjectName("editMenu");
-    menubar->addAction(editMenu->menuAction());
-    editMenu->setTitle(QString::fromUtf8("Édition"));
+        listMenu = new QMenu(menubar);
+        listMenu->setObjectName("listMenu");
+        menubar->addAction(listMenu->menuAction());
+        listMenu->setTitle(QString::fromUtf8("Listes"));
+
+            createListItem = new QAction(this);
+            createListItem->setObjectName("createListItem");
+            listMenu->addAction(createListItem);
+            createListItem->setText(QString::fromUtf8("Créer"));
+
+            editListItem = new QAction(this);
+            editListItem->setObjectName("editListItem");
+            listMenu->addAction(editListItem);
+            editListItem->setText(QString::fromUtf8("Modifier"));
+
+            deleteListItem = new QAction(this);
+            deleteListItem->setObjectName("deleteListItem");
+            listMenu->addAction(deleteListItem);
+            deleteListItem->setText(QString::fromUtf8("Supprimer"));
+
+        taskMenu = new QMenu(menubar);
+        taskMenu->setObjectName("taskMenu");
+        menubar->addAction(taskMenu->menuAction());
+        taskMenu->setTitle(QString::fromUtf8("Tâches"));
+
+            createTaskItem = new QAction(this);
+            createTaskItem->setObjectName("createTaskItem");
+            taskMenu->addAction(createTaskItem);
+            createTaskItem->setText(QString::fromUtf8("Créer"));
+
+            editTaskItem = new QAction(this);
+            editTaskItem->setObjectName("editTaskItem");
+            taskMenu->addAction(editTaskItem);
+            editTaskItem->setText(QString::fromUtf8("Modifier"));
+
+            deleteTaskItem = new QAction(this);
+            deleteTaskItem->setObjectName("deleteTaskItem");
+            taskMenu->addAction(deleteTaskItem);
+            deleteTaskItem->setText(QString::fromUtf8("Supprimer"));
 
     /*
         newSlotItem = new QAction(this);

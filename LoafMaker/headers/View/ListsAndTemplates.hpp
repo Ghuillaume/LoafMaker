@@ -32,17 +32,14 @@ class ListsAndTemplates : public QWidget {
 
         List* currentList;
 
+        QPushButton* buttonAddList;
+        QPushButton* buttonDelList;
+
     private:
         QGridLayout* gridLayout;
         QFrame* horizontalLine;
         QLabel* listLabel;
         QTreeWidget* listsTree;
-        QLabel* templateLabel;
-        QListWidget* templatesList;
-        QPushButton* buttonAddList;
-        QPushButton* buttonDelList;
-        QPushButton* buttonAddTemplate;
-        QPushButton* buttonDelTemplate;
 
     signals:
 
