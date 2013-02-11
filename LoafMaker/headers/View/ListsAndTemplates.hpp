@@ -33,12 +33,12 @@ class ListsAndTemplates : public QWidget {
         List* currentList;
 
         QPushButton* buttonAddList;
+        QPushButton* buttonEditList;
         QPushButton* buttonDelList;
 
     private:
         QGridLayout* gridLayout;
         QFrame* horizontalLine;
-        QLabel* listLabel;
         QTreeWidget* listsTree;
 
     signals:

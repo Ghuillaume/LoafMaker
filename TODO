@@ -6,10 +6,12 @@
 		
 		
 	Important :
+		- Les dates fonctionnent pas oO (1/1/70)
 		- Tentative de validation d'une tâche -> vérifier que toutes les tâches antérieures ont été validées
 		- Listes ordonnées.
 		- Boite de dialogue pour ajouter des tâches
 		- Boite de dialogue pour ajouter des listes
+		- Resizer icônes d'ajout pour les listes (boutons carrés)
 		
 		
 		

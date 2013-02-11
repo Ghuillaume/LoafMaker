@@ -45,11 +45,11 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     tasksTree->setVisible(false);
 
     QIcon iconAdd;
-    iconAdd.addFile(QString::fromUtf8("resources/edit-paste.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconAdd.addFile(QString::fromUtf8(":add.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconEdit;
-    iconEdit.addFile(QString::fromUtf8("resources/applications-office.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconEdit.addFile(QString::fromUtf8(":edit.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconDelete;
-    iconDelete.addFile(QString::fromUtf8("resources/user-trash.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconDelete.addFile(QString::fromUtf8(":trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
     buttonAddTask = new QPushButton(iconAdd, QString::fromUtf8("Ajouter"), this);
     buttonAddTask->setIcon(iconAdd);

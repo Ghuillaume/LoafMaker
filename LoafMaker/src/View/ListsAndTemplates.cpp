@@ -5,36 +5,33 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
     //this->resize(800, 400);
     gridLayout = new QGridLayout(this);
 
-    /* List part */
-    listLabel = new QLabel("Mes listes", this);
-    listLabel->setGeometry(QRect(10, 30, 300, 20));
-    gridLayout->addWidget(listLabel,0, 0, 1, 1);
-
     QIcon iconAdd;
-    iconAdd.addFile(QString::fromUtf8(":list-add.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconAdd.addFile(QString::fromUtf8(":add.png"), QSize(), QIcon::Normal, QIcon::Off);
+    QIcon iconEdit;
+    iconEdit.addFile(QString::fromUtf8(":edit.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconDelete;
-    iconDelete.addFile(QString::fromUtf8(":list-remove.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconDelete.addFile(QString::fromUtf8(":trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
-    buttonAddList = new QPushButton(iconAdd, QString("Ajouter"), this);
+    buttonAddList = new QPushButton(iconAdd, QString(""), this);
     buttonAddList->setIcon(iconAdd);
-    gridLayout->addWidget(buttonAddList,0, 1, 1, 1);
+    gridLayout->addWidget(buttonAddList,0, 0, 1, 1);
 
-    buttonDelList = new QPushButton(iconDelete, QString("Enlever"), this);
+    buttonEditList = new QPushButton(iconAdd, QString(""), this);
+    buttonEditList->setIcon(iconEdit);
+    gridLayout->addWidget(buttonEditList,0, 1, 1, 1);
+
+    buttonDelList = new QPushButton(iconDelete, QString(""), this);
     buttonDelList->setIcon(iconDelete);
     gridLayout->addWidget(buttonDelList,0, 2, 1, 1);
 
     listsTree = new QTreeWidget(this);
-    /*QTreeWidgetItem* treeHeader1;
-    treeHeader1 = listsTree->headerItem();
-    treeHeader1->setHidden(true);*/
-    listsTree->setGeometry(QRect(10, 60, 300, 290));
+    listsTree->setGeometry(QRect(10, 60, 300, 0));
     listsTree->setAnimated(true);
     gridLayout->addWidget(listsTree,1, 0, 1, 3);
 
 }
 
 ListsAndTemplates::~ListsAndTemplates() {
-    delete listLabel;
     delete listsTree;
     delete gridLayout;
 }
