@@ -5,16 +5,17 @@ ListDialog::ListDialog(QWidget* parent):
 {
 
     this->setObjectName("Dialog");
-    this->resize(500, 400);
+    this->resize(500, 220);
     this->setWindowTitle(QString::fromUtf8("Créer une nouvelle liste"));
 
     frame = new QWidget(this);
     frame->setObjectName("frame");
-    frame->setGeometry(QRect(10, 10, 500, 400));
+    frame->setGeometry(QRect(10, 10, 500, 220));
 
     formLayoutWidget = new QWidget(frame);
     formLayoutWidget->setObjectName(QString::fromUtf8("formLayoutWidget"));
-    frame->setGeometry(QRect(10, 10, 500, 400));
+    formLayoutWidget->setGeometry(QRect(10, 10, 450, 200));
+    formLayoutWidget->setMinimumSize(450, 200);
     formLayout = new QFormLayout(formLayoutWidget);
     formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
     formLayout->setObjectName(QString::fromUtf8("formLayout"));
