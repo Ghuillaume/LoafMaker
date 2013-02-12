@@ -5,9 +5,10 @@ StartView::StartView(QWidget *parent) : QWidget(parent) {
     startLayout = new QVBoxLayout(this);
 
     logoWidget = new QWidget(this);
+    logoWidget->setFixedSize(200,200);
     logoWidget->setObjectName(QString::fromUtf8("logoWidget"));
     logoWidget->setStyleSheet(QString::fromUtf8("border: 1px solid black"));
-    logoWidget->setStyleSheet("background-image: url(resources/logo.jpg)");
+    logoWidget->setStyleSheet("background-image: url(:logo.png)");
 
     title = new QLabel(this);
     title->setWordWrap(true);

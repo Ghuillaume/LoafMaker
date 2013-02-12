@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
+        <file alias="logo.png">resources/logo.png</file>
+        <file alias="ico.png">resources/logo_ico.png</file>
         <file alias="applications-office.png">resources/applications-office.png</file>
         <file alias="edit-paste.png">resources/edit-paste.png</file>
         <file alias="list-add.png">resources/list-add.png</file>
@@ -15,6 +17,5 @@
         <file alias="menu_import.png">resources/import.png</file>
         <file alias="menu_export.png">resources/document-send.png</file>
         <file alias="menu_quit.png">resources/fileclose.png</file>
-        <file alias="logo.jpg">resources/logo.jpg</file>
     </qresource>
 </RCC>

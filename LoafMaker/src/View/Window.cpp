@@ -3,6 +3,11 @@
 Window::Window(QWidget *parent) : QMainWindow(parent)
 {
     this->resize(APP_WIDTH, APP_HEIGHT);
+    this->setFixedSize(APP_WIDTH, APP_HEIGHT);
+
+    QIcon favicon;
+    favicon.addFile(QString::fromUtf8(":ico.png"), QSize(), QIcon::Normal, QIcon::Off);
+    this->setWindowIcon(favicon);
 
     /* Menubar */
     menubar = new QMenuBar(this);
@@ -116,16 +121,16 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     splitter->setChildrenCollapsible(false);
 
     /* Left part of the screen */
-    listsAndTemplates = new ListsAndTemplates(splitter);
+    listsAndTemplates = new ListsAndTemplates(centralWidget);
     listsAndTemplates->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT);
     splitter->addWidget(listsAndTemplates);
 
     /* Right part of the screen */
-    startView = new StartView(this);
+    startView = new StartView(centralWidget);
     startView->setMinimumSize(400, APP_HEIGHT);
     splitter->addWidget(startView);
 
-    listOfTasks = new ListOfTasks(splitter);
+    listOfTasks = new ListOfTasks(centralWidget);
     listOfTasks->setMinimumSize(400, APP_HEIGHT);
     splitter->addWidget(listOfTasks);
     listOfTasks->setVisible(false);

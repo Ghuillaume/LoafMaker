@@ -1,8 +1,6 @@
-#include "../../headers/View/ListsAndTemplates.hpp"
+#include "ListsOfLists.hpp"
 
 ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
-
-    //this->resize(800, 400);
 
     mainLayout = new QVBoxLayout(this);
     gridLayout = new QHBoxLayout(this);

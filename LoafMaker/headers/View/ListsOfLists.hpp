@@ -18,7 +18,7 @@
 
 #include "List.hpp"
 
-#define BUTTON_SIZE 50
+#define BUTTON_SIZE 35
 
 class ListsAndTemplates : public QWidget {
 
