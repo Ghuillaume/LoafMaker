@@ -3,31 +3,45 @@
 ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
 
     //this->resize(800, 400);
-    gridLayout = new QGridLayout(this);
+
+    mainLayout = new QVBoxLayout(this);
+    gridLayout = new QHBoxLayout(this);
 
     QIcon iconAdd;
     iconAdd.addFile(QString::fromUtf8(":add.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconEdit;
     iconEdit.addFile(QString::fromUtf8(":edit.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconDelete;
-    iconDelete.addFile(QString::fromUtf8(":trash.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconDelete.addFile(QString::fromUtf8(":user-trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
     buttonAddList = new QPushButton(iconAdd, QString(""), this);
     buttonAddList->setIcon(iconAdd);
-    gridLayout->addWidget(buttonAddList,0, 0, 1, 1);
+    buttonAddList->setIconSize(QSize(BUTTON_SIZE-15,BUTTON_SIZE-15));
+    buttonAddList->setMinimumSize(BUTTON_SIZE,BUTTON_SIZE);
+    buttonAddList->setMaximumSize(BUTTON_SIZE,BUTTON_SIZE);
+    gridLayout->addWidget(buttonAddList);
 
     buttonEditList = new QPushButton(iconAdd, QString(""), this);
     buttonEditList->setIcon(iconEdit);
-    gridLayout->addWidget(buttonEditList,0, 1, 1, 1);
+    buttonEditList->setMinimumSize(BUTTON_SIZE,BUTTON_SIZE);
+    buttonEditList->setMaximumSize(BUTTON_SIZE,BUTTON_SIZE);
+    buttonEditList->setIconSize(QSize(BUTTON_SIZE-15,BUTTON_SIZE-15));
+    gridLayout->addWidget(buttonEditList);
 
     buttonDelList = new QPushButton(iconDelete, QString(""), this);
     buttonDelList->setIcon(iconDelete);
-    gridLayout->addWidget(buttonDelList,0, 2, 1, 1);
+    buttonDelList->setMinimumSize(BUTTON_SIZE,BUTTON_SIZE);
+    buttonDelList->setMaximumSize(BUTTON_SIZE,BUTTON_SIZE);
+    buttonDelList->setIconSize(QSize(BUTTON_SIZE-15,BUTTON_SIZE-15));
+    gridLayout->addWidget(buttonDelList);
+
+    mainLayout->addLayout(gridLayout);
 
     listsTree = new QTreeWidget(this);
     listsTree->setGeometry(QRect(10, 60, 300, 0));
     listsTree->setAnimated(true);
-    gridLayout->addWidget(listsTree,1, 0, 1, 3);
+    mainLayout->addWidget(listsTree);
+
 
 }
 

@@ -13,8 +13,12 @@
 #include <QHeaderView>
 #include <QIcon>
 #include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include "List.hpp"
+
+#define BUTTON_SIZE 50
 
 class ListsAndTemplates : public QWidget {
 
@@ -37,7 +41,8 @@ class ListsAndTemplates : public QWidget {
         QPushButton* buttonDelList;
 
     private:
-        QGridLayout* gridLayout;
+        QVBoxLayout* mainLayout;
+        QHBoxLayout* gridLayout;
         QFrame* horizontalLine;
         QTreeWidget* listsTree;
 

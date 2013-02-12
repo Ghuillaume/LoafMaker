@@ -104,43 +104,6 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
             taskMenu->addAction(deleteTaskItem);
             deleteTaskItem->setText(QString::fromUtf8("Supprimer"));
 
-    /*
-        newSlotItem = new QAction(this);
-        newSlotItem->setShortcut(Qt::CTRL+Qt::Key_A);
-        newSlotItem->setObjectName("newSlotItem");
-        editMenu->addAction(newSlotItem);
-        newSlotItem->setText("Create an event");
-
-    settingsMenu = new QMenu(menubar);
-    settingsMenu->setObjectName("settingsMenu");
-    menubar->addAction(settingsMenu->menuAction());
-    settingsMenu->setTitle("Synchronization");
-
-        reloadItem = new QAction(this);
-        reloadItem->setShortcut(Qt::Key_F5);
-        reloadItem->setObjectName("reloadItem");
-        settingsMenu->addAction(reloadItem);
-        reloadItem->setText("Reset local calendar with my Google Calendar");
-
-        importItem = new QAction(this);
-        importItem->setShortcut(Qt::Key_F6);
-        importItem->setObjectName("importItem");
-        settingsMenu->addAction(importItem);
-        importItem->setText(QString("Update local calendar from UnivNantes (CELCAT)"));
-
-        exportItem = new QAction(this);
-        exportItem->setShortcut(Qt::Key_F7);
-        exportItem->setObjectName("exportItem");
-        settingsMenu->addAction(exportItem);
-        exportItem->setText("Save my calendar on Google Calendar");
-
-        settingsMenu->addSeparator();
-
-        settingsItem = new QAction(this);
-        settingsItem->setObjectName("settingsItem");
-        settingsMenu->addAction(settingsItem);
-        settingsItem->setText("Settings..");
-    */
 
     /* Central widget */
     centralWidget = new QWidget(this);
@@ -158,9 +121,15 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     splitter->addWidget(listsAndTemplates);
 
     /* Right part of the screen */
+    startView = new StartView(this);
+    startView->setMinimumSize(400, APP_HEIGHT);
+    splitter->addWidget(startView);
+
     listOfTasks = new ListOfTasks(splitter);
     listOfTasks->setMinimumSize(400, APP_HEIGHT);
     splitter->addWidget(listOfTasks);
+    listOfTasks->setVisible(false);
+
 }
 
 Window::~Window()
@@ -177,4 +146,10 @@ ListsAndTemplates* Window::getListsView() {
 
 ListOfTasks* Window::getTasksView() {
     return this->listOfTasks;
+}
+
+void Window::start() {
+    cout << "Delete start view" << endl;
+    this->startView->setVisible(false);
+    this->listOfTasks->setVisible(true);
 }

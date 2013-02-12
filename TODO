@@ -16,7 +16,5 @@
 		
 		
 	Détails :
-		- Remplacer les boutons par des icônes cliquables
-		- Si pas de liste sélectionnée, par d'affichage à droite
 		- Date : possibilité de mettre ASAP à la place
 		- Dans le tree des listes, ajouter pour chaque liste un état [OK], [En cours], [Pas commencé] avec une couleur du vert au rouge

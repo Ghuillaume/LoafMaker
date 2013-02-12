@@ -11,6 +11,7 @@
 
 #include "ListOfTasks.hpp"
 #include "ListsAndTemplates.hpp"
+#include "StartView.hpp"
 
 #define APP_WIDTH 900
 #define APP_HEIGHT 540
@@ -55,6 +56,10 @@ private:
     QSplitter *splitter;
     ListOfTasks* listOfTasks;
     ListsAndTemplates* listsAndTemplates;
+    StartView* startView;
+
+public slots:
+    void start();
 };
 
 #endif // WINDOW_HPP
