@@ -40,9 +40,9 @@ class TaskDialog: public QDialog
 
         //vector<QComboBox> requiredTasks;
 
-        QLineEdit *titleEdit;
+        /*QLineEdit *titleEdit;
         QLineEdit *descriptionEdit;
-        QLineEdit *locationEdit;
+        QLineEdit *locationEdit;*/
         QDialogButtonBox *buttonBox;
 
         //void setArgs(Time* dateStart, Time* dateEnd, string intitule, string description);

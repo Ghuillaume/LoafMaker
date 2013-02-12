@@ -145,10 +145,29 @@ void Controller::delList() {
 
 void Controller::addTask() {
 
-    cout << "To Finish" << endl;
-
     TaskDialog* dialog = new TaskDialog(this->view);
-    dialog->show();
+    dialog->exec();
+
+    if(dialog->result() == QDialog::Accepted) {
+
+        // Create task
+        string name = dialog->intituleEdit->text().toStdString();
+        Time* absoluteDeadline = new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year());
+        this->view->getListsView()->currentList->addTask(new Task(name, absoluteDeadline));
+
+        // If relative deadline asked, set relative
+        if(dialog->relativeRadio->isChecked()) {
+            int interval = dialog->nbDays->text().toInt();
+            if(dialog->relativeComboBox->currentIndex() == 0) {
+                interval = -interval;
+            }
+
+            // Getting task related TODO
+            //int row = dialog->taskComboBox->currentIndex();
+        }
+
+        this->displayLists();
+    }
 }
 
 void Controller::editTask() {
