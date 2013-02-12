@@ -136,7 +136,29 @@ void Controller::saveModelAs() {
 void Controller::addList() {
     cout << "To finish" << endl;
     ListDialog* dialog = new ListDialog(this->view, this->model->getBaseLists());
-    dialog->show();
+    dialog->exec();
+
+    if(dialog->result() == QDialog::Accepted) {
+
+        string name = dialog->intituleEdit->text().toStdString();
+
+        // Base list
+        if(dialog->listComboBox->currentIndex() == 0) {
+            this->model->createBaseList(dialog->intituleEdit->text().toStdString(),
+                                        dialog->absoluteDateEdit->date().day(),
+                                        dialog->absoluteDateEdit->date().month(),
+                                        dialog->absoluteDateEdit->date().year());
+        }
+        else { // List with parent
+            this->model->createSubList(dialog->listsAdded.at(dialog->listComboBox->currentIndex()-1),
+                                       dialog->intituleEdit->text().toStdString(),
+                                       dialog->absoluteDateEdit->date().day(),
+                                       dialog->absoluteDateEdit->date().month(),
+                                       dialog->absoluteDateEdit->date().year());
+        }
+
+        this->displayLists();
+    }
 }
 
 void Controller::editList() {

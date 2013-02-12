@@ -31,15 +31,11 @@ ListDialog::ListDialog(QWidget* parent, ListOfList listOfList):
 
     requiredLabel = new QLabel(formLayoutWidget);
     requiredLabel->setObjectName("requiredLabel");
-    requiredLabel->setText(QString::fromUtf8("Liste parente principale :"));
+    requiredLabel->setText(QString::fromUtf8("Liste parente :"));
     formLayout->setWidget(1, QFormLayout::LabelRole, requiredLabel);
 
-
-    requiredLabel2 = new QLabel(formLayoutWidget);
-    requiredLabel2->setObjectName("requiredLabel2");
-    requiredLabel2->setText(QString::fromUtf8("Liste parente secondaire :"));
-    formLayout->setWidget(2, QFormLayout::LabelRole, requiredLabel2);
-
+    QSpacerItem *horizontalSpacer1 = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    formLayout->setItem(2, QFormLayout::SpanningRole, horizontalSpacer1);
 
     dateLabel = new QLabel(formLayoutWidget);
     dateLabel->setObjectName("dateLabel");
@@ -48,7 +44,7 @@ ListDialog::ListDialog(QWidget* parent, ListOfList listOfList):
 
     orderedLabel = new QLabel(formLayoutWidget);
     orderedLabel->setObjectName("orderedLabel");
-    orderedLabel->setText(QString::fromUtf8("Ordonnée ?"));
+    orderedLabel->setText(QString::fromUtf8("Options"));
     formLayout->setWidget(4, QFormLayout::LabelRole, orderedLabel);
 
     QSpacerItem *horizontalSpacer2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -61,18 +57,20 @@ ListDialog::ListDialog(QWidget* parent, ListOfList listOfList):
     intituleEdit->setObjectName(QString::fromUtf8("intituleEdit"));
     formLayout->setWidget(0, QFormLayout::FieldRole, intituleEdit);
 
-    listListComboBox = new QComboBox(formLayoutWidget);
-    listListComboBox->setObjectName(QString::fromUtf8("listComboBox"));
-    formLayout->setWidget(1, QFormLayout::FieldRole, listListComboBox);
-
     listComboBox = new QComboBox(formLayoutWidget);
     listComboBox->setObjectName(QString::fromUtf8("listComboBox"));
-    formLayout->setWidget(2, QFormLayout::FieldRole, listComboBox);
+    formLayout->setWidget(1, QFormLayout::FieldRole, listComboBox);
 
     absoluteDateEdit = new QDateEdit(formLayoutWidget);
     absoluteDateEdit->setCalendarPopup(true);
     absoluteDateEdit->setDate(QDate::currentDate());
     formLayout->setWidget(3, QFormLayout::FieldRole, absoluteDateEdit);
+
+    orderedCheckBox = new QCheckBox(formLayoutWidget);
+    orderedCheckBox->setObjectName(QString::fromUtf8("checkBox"));
+    orderedCheckBox->setText(QString::fromUtf8("Liste ordonnée"));
+    formLayout->setWidget(4, QFormLayout::FieldRole, orderedCheckBox);
+
 
 
     buttonBox = new QDialogButtonBox(formLayoutWidget);
@@ -81,9 +79,14 @@ ListDialog::ListDialog(QWidget* parent, ListOfList listOfList):
     buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
     formLayout->setWidget(6, QFormLayout::FieldRole, buttonBox);
 
-    QObject::connect(this->buttonBox, SIGNAL(accepted()), this, SLOT(checkFields()));
 
+    this->listComboBox->addItem(QString::fromUtf8("Aucune"));
     this->fillComboBox(&listOfList, 0);
+
+    QObject::connect(this->buttonBox, SIGNAL(accepted()), this, SLOT(checkFields()));
+    QObject::connect(this, SIGNAL(acceptedAndOk()), this, SLOT(accept()));
+    QObject::connect(this->buttonBox, SIGNAL(rejected()), this, SLOT(close()));
+
 
 }
 /*
@@ -109,10 +112,11 @@ void ListDialog::fillComboBox(ListOfList *listOfList, int level) {
         for(int i = 0; i < listOfList->size(); i ++) {
             string listName =  "";
             for (int j = 0; j < level; j++) {
-                listName += "-";
+                listName += "--";
             }
             listName += " " + listOfList->at(i)->getName();
-            this->listListComboBox->addItem(QString::fromUtf8(listName.c_str()));
+            this->listComboBox->addItem(QString::fromUtf8(listName.c_str()));
+            this->listsAdded.push_back(listOfList->at(i));
             ListOfList sublist = listOfList->at(i)->getAllLists();
             if(!sublist.empty()) {
                 fillComboBox(&sublist, level + 1);
@@ -122,8 +126,8 @@ void ListDialog::fillComboBox(ListOfList *listOfList, int level) {
 }
 
 void ListDialog::checkFields() {
-    /*if(titleEdit->text().isEmpty())
-        QMessageBox::warning(this, "Error", "You must fill at least the title field");
+    if(intituleEdit->text().isEmpty())
+        QMessageBox::warning(this, "Erreur", "Prout");
     else
-        emit acceptedAndOk();*/
+        emit acceptedAndOk();
 }
