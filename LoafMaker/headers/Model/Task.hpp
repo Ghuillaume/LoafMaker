@@ -14,9 +14,12 @@ public:
         int getRelativeDate();
         Time* getDeadline();
         string getState();
+        int getDayInterval();
+        vector<Task*> getRequiredTasks();
 
         bool isDeadlineRelative();
 
+        void setName(string name);
         void setFinished();
         void setUnfinished();
         bool isFinished();

@@ -23,6 +23,7 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getListsView()->getTree(), SIGNAL(itemSelectionChanged()), this, SLOT(setCurrentList()));
     QObject::connect(this->view->getListsView()->getTree(), SIGNAL(itemSelectionChanged()), this->view, SLOT(start()));
     QObject::connect(this->view->getListsView()->buttonAddList, SIGNAL(clicked()), this, SLOT(addList()));
+    QObject::connect(this->view->getListsView()->buttonEditList, SIGNAL(clicked()), this, SLOT(editList()));
     QObject::connect(this->view->getListsView()->buttonDelList, SIGNAL(clicked()), this, SLOT(delList()));
 
 
@@ -35,6 +36,14 @@ Controller::Controller(Model* model, Window* window)
 
 Controller::~Controller() {
 
+}
+
+
+
+Task* Controller::getCurrentTask() {
+    List* currentList = this->view->getListsView()->currentList;
+    int currentTaskRow = this->view->getTasksView()->getList()->currentColumn();
+    return currentList->getTask(currentTaskRow);
 }
 
 
@@ -126,16 +135,59 @@ void Controller::saveModelAs() {
 }
 
 void Controller::addList() {
-    cout << "To finish" << endl;
     ListDialog* dialog = new ListDialog(this->view, this->model->getBaseLists());
-    dialog->show();
+    dialog->exec();
+
+    if(dialog->result() == QDialog::Accepted) {
+
+        string name = dialog->intituleEdit->text().toStdString();
+
+        // Base list
+        if(dialog->listComboBox->currentIndex() == 0) {
+            this->model->createBaseList(dialog->intituleEdit->text().toStdString(),
+                                        dialog->absoluteDateEdit->date().day(),
+                                        dialog->absoluteDateEdit->date().month(),
+                                        dialog->absoluteDateEdit->date().year(),
+                                        dialog->orderedCheckBox->isChecked());
+        }
+        else { // List with parent
+            this->model->createSubList(dialog->listsAdded.at(dialog->listComboBox->currentIndex()-1),
+                                       dialog->intituleEdit->text().toStdString(),
+                                       dialog->absoluteDateEdit->date().day(),
+                                       dialog->absoluteDateEdit->date().month(),
+                                       dialog->absoluteDateEdit->date().year(),
+                                       dialog->orderedCheckBox->isChecked());
+        }
+
+        this->displayLists();
+    }
 }
 
 void Controller::editList() {
-    cout << "To finish" << endl;
 
-    ListDialog* dialog = new ListDialog(this->view, this->model->getBaseLists());
-    dialog->show();
+    if(this->view->getListsView()->getTree()->currentColumn() == -1) {
+        QMessageBox::information(this->view, QString::fromUtf8("Aucune liste selectionnée"),
+                                     QString::fromUtf8("Veuillez d'abord selectionner la liste que vous souhaitez modifier"));
+    }
+    else {
+        ListDialog* dialog = new ListDialog(this->view, this->model->getBaseLists());
+        dialog->setArgs(this->view->getListsView()->currentList->getName(),
+                        this->view->getListsView()->currentList->getParent(),
+                        this->view->getListsView()->currentList->getDate(),
+                        this->view->getListsView()->currentList->isOrdered());
+        dialog->exec();
+
+        if(dialog->result() == QDialog::Accepted) {
+
+            string name = dialog->intituleEdit->text().toStdString();
+
+            this->view->getListsView()->currentList->setName(name);
+            this->view->getListsView()->currentList->setDate(new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year()));
+            this->view->getListsView()->currentList->setOrdered(dialog->orderedCheckBox->isChecked());
+
+            this->displayLists();
+        }
+    }
 }
 
 void Controller::delList() {
@@ -169,28 +221,37 @@ void Controller::delList() {
 
 void Controller::addTask() {
 
-    TaskDialog* dialog = new TaskDialog(this->view);
-    dialog->exec();
+    if(this->view->getListsView()->getTree()->currentColumn() == -1) {
+        QMessageBox::information(this->view, QString::fromUtf8("Aucune liste selectionnée"),
+                                     QString::fromUtf8("Veuillez d'abord selectionner une liste"));
+    }
+    else {
+        TaskDialog* dialog = new TaskDialog(this->view);
+        dialog->exec();
 
-    if(dialog->result() == QDialog::Accepted) {
+        if(dialog->result() == QDialog::Accepted) {
 
-        // Create task
-        string name = dialog->intituleEdit->text().toStdString();
-        Time* absoluteDeadline = new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year());
-        this->view->getListsView()->currentList->addTask(new Task(name, absoluteDeadline));
+            // Create task
+            string name = dialog->intituleEdit->text().toStdString();
+            Time* absoluteDeadline = new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year());
+            Task* newTask = new Task(name, absoluteDeadline);
+            this->view->getListsView()->currentList->addTask(newTask);
 
-        // If relative deadline asked, set relative
-        if(dialog->relativeRadio->isChecked()) {
-            int interval = dialog->nbDays->text().toInt();
-            if(dialog->relativeComboBox->currentIndex() == 0) {
-                interval = -interval;
+            // If relative deadline asked, set relative
+            if(dialog->relativeRadio->isChecked()) {
+                int interval = dialog->nbDays->text().toInt();
+                if(dialog->relativeComboBox->currentIndex() == 0) {
+                    interval = -interval;
+                }
+
+                // Getting task related TODO
+                //int row = dialog->taskComboBox->currentIndex();
+                //newTask->setRelativeDate(relatedTask, interval);
+
             }
 
-            // Getting task related TODO
-            //int row = dialog->taskComboBox->currentIndex();
+            this->displayLists();
         }
-
-        this->displayLists();
     }
 }
 
@@ -201,10 +262,33 @@ void Controller::editTask() {
                                      QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez modifier"));
     }
     else {
-        cout << "To Finish" << endl;
-
         TaskDialog* dialog = new TaskDialog(this->view);
-        dialog->show();
+        dialog->setArgs(this->getCurrentTask()->getName(),
+                        this->getCurrentTask()->getDeadline(),
+                        this->getCurrentTask()->isDeadlineRelative(),
+                        this->getCurrentTask()->getDayInterval(),
+                        this->getCurrentTask()->getRequiredTasks());
+        dialog->exec();
+
+        if(dialog->result() == QDialog::Accepted) {
+            this->getCurrentTask()->setName(dialog->intituleEdit->text().toStdString());
+
+            if(dialog->relativeRadio->isChecked()) {
+                int interval = dialog->nbDays->text().toInt();
+                if(dialog->relativeComboBox->currentIndex() == 0) {
+                    interval = -interval;
+                }
+
+                // Getting task related TODO
+                //int row = dialog->taskComboBox->currentIndex();
+                //this->getCurrentTask()->setRelativeDate(relatedTask, interval);
+            }
+            else {
+                this->getCurrentTask()->setAbsoluteDate(new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year()));
+            }
+        }
+
+        this->view->getTasksView()->displayTasks();
     }
 }
 
@@ -215,6 +299,10 @@ void Controller::delTask() {
                                      QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez supprimer"));
     }
     else {
-        cout << "TODO : delTask" << endl;
+        string question = "Voulez-vous vraiment supprimer la tâche " + this->getCurrentTask()->getName() + " ?";
+        if(QMessageBox::question(this->view, QString::fromUtf8("Êtes-vous sûr ?"), QString::fromUtf8(question.c_str()), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
+            this->model->deleteTask(this->view->getListsView()->currentList, this->view->getTasksView()->getList()->currentColumn());
+            this->displayLists();
+        }
     }
 }

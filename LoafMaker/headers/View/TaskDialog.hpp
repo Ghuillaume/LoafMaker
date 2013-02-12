@@ -16,6 +16,9 @@
 #include <QRadioButton>
 #include <QComboBox>
 
+#include "Time.hpp"
+#include "Task.hpp"
+
 
 class TaskDialog: public QDialog
 {
@@ -40,12 +43,9 @@ class TaskDialog: public QDialog
 
         //vector<QComboBox> requiredTasks;
 
-        /*QLineEdit *titleEdit;
-        QLineEdit *descriptionEdit;
-        QLineEdit *locationEdit;*/
         QDialogButtonBox *buttonBox;
 
-        //void setArgs(Time* dateStart, Time* dateEnd, string intitule, string description);
+        void setArgs(string name, Time* deadline, bool isRelative, int dayInterval, vector<Task *> relatedTasks);
 
     private:
         //Time time;

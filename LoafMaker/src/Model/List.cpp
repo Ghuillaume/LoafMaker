@@ -27,6 +27,14 @@ void List::setName(string name) {
     this->name = name;
 }
 
+void List::setDate(Time *date) {
+    this->creationDate = date;
+}
+
+void List::setOrdered(bool ordered) {
+    this->ordered = ordered;
+}
+
 Time* List::getDate() {
     return this->creationDate;
 }
@@ -102,12 +110,24 @@ int List::getProgression() {
     return progression;
 }
 
+bool List::isOrdered() {
+    return this->ordered;
+}
+
+List* List::getParent() {
+    return this->parent;
+}
+
 void List::addSubList(List* subList) {
     this->subLists.push_back(subList);
 }
 
 void List::addTask(Task* task) {
     this->tasks.push_back(task);
+}
+
+void List::removeTask(int row) {
+    this->tasks.erase(this->tasks.begin()+row);
 }
 
 /*

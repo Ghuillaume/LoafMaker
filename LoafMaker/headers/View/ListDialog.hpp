@@ -15,6 +15,7 @@
 #include <QHBoxLayout>
 #include <QRadioButton>
 #include <QComboBox>
+#include <QCheckBox>
 
 #include "List.hpp"
 
@@ -31,33 +32,31 @@ class ListDialog: public QDialog
         ListDialog(QWidget *parent, ListOfList listOfList);
        ~ListDialog();
 
+
+        vector<List*> listsAdded;
+
         QWidget *formLayoutWidget;
         QFormLayout *formLayout;
         QLineEdit *intituleEdit;
         QDateEdit *absoluteDateEdit;
 
         QLineEdit *nbDays;
-        QLabel *daysLabel;
-        QLabel *orderedLabel;
-        QComboBox* listListComboBox;
+        QCheckBox *orderedCheckBox;
         QComboBox *listComboBox;
 
-        /*QLineEdit *titleEdit;
-        QLineEdit *descriptionEdit;
-        QLineEdit *locationEdit;*/
         QDialogButtonBox *buttonBox;
 
-        //void setArgs(Time* dateStart, Time* dateEnd, string intitule, string description);
+        void setArgs(string name, List* parent, Time* date, bool ordered);
 
     private:
         //Time time;
 
         QWidget *frame;
 
+        QLabel *orderedLabel;
         QLabel *intituleLabel;
         QLabel *dateLabel;
         QLabel *requiredLabel;
-        QLabel *requiredLabel2;
 
         QHBoxLayout *checkboxLayout;
 

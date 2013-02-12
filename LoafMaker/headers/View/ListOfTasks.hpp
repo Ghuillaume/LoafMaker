@@ -41,6 +41,7 @@ class ListOfTasks : public QWidget
 
         QLabel* listNameLabel;
         QProgressBar* mainProgressbar;
+        QLabel* orderedLabel;
         QLabel* dateLabel;
 
         QHBoxLayout* hboxLayout;

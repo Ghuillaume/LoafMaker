@@ -13,6 +13,9 @@ public:
         ~List();
 
         void setName(string name);
+        void setDate(Time* date);
+        void setOrdered(bool ordered);
+
         string getName();
         Time* getDate();
         vector<List*> getAllLists();
@@ -23,9 +26,12 @@ public:
         int getNbTasks();
         int getNbFinishedTasks();
         int getProgression();
+        bool isOrdered();
+        List* getParent();
 
         void addSubList(List *subList);
         void addTask(Task* task);
+        void removeTask(int row);
 
         string toString();
 
