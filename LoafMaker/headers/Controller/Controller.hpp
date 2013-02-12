@@ -23,6 +23,8 @@ class Controller : public QObject
         Controller(Model* model, Window* window);
         ~Controller();
 
+        Task* getCurrentTask();
+
 
     private:
         Model* model;

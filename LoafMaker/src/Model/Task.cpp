@@ -54,6 +54,18 @@ string Task::getState() {
     return (this->finished ? "OK" : "");
 }
 
+int Task::getDayInterval() {
+    return this->dayInterval;
+}
+
+vector<Task*> Task::getRequiredTasks() {
+    return this->requiredTasks;
+}
+
+void Task::setName(string name) {
+    this->name = name;
+}
+
 
 void Task::setFinished() {
     this->finished = true;

@@ -38,6 +38,14 @@ Controller::~Controller() {
 }
 
 
+
+Task* Controller::getCurrentTask() {
+    List* currentList = this->view->getListsView()->currentList;
+    int currentTaskRow = this->view->getTasksView()->getList()->currentColumn();
+    return currentList->getTask(currentTaskRow);
+}
+
+
 void Controller::displayLists() {
     this->view->getListsView()->clearList();
     this->view->getListsView()->displayList(this->model->getBaseLists(), NULL);
@@ -153,7 +161,8 @@ void Controller::addTask() {
         // Create task
         string name = dialog->intituleEdit->text().toStdString();
         Time* absoluteDeadline = new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year());
-        this->view->getListsView()->currentList->addTask(new Task(name, absoluteDeadline));
+        Task* newTask = new Task(name, absoluteDeadline);
+        this->view->getListsView()->currentList->addTask(newTask);
 
         // If relative deadline asked, set relative
         if(dialog->relativeRadio->isChecked()) {
@@ -164,6 +173,8 @@ void Controller::addTask() {
 
             // Getting task related TODO
             //int row = dialog->taskComboBox->currentIndex();
+            //newTask->setRelativeDate(relatedTask, interval);
+
         }
 
         this->displayLists();
@@ -177,10 +188,33 @@ void Controller::editTask() {
                                      QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez modifier"));
     }
     else {
-        cout << "To Finish" << endl;
-
         TaskDialog* dialog = new TaskDialog(this->view);
-        dialog->show();
+        dialog->setArgs(this->getCurrentTask()->getName(),
+                        this->getCurrentTask()->getDeadline(),
+                        this->getCurrentTask()->isDeadlineRelative(),
+                        this->getCurrentTask()->getDayInterval(),
+                        this->getCurrentTask()->getRequiredTasks());
+        dialog->exec();
+
+        if(dialog->result() == QDialog::Accepted) {
+            this->getCurrentTask()->setName(dialog->intituleEdit->text().toStdString());
+
+            if(dialog->relativeRadio->isChecked()) {
+                int interval = dialog->nbDays->text().toInt();
+                if(dialog->relativeComboBox->currentIndex() == 0) {
+                    interval = -interval;
+                }
+
+                // Getting task related TODO
+                //int row = dialog->taskComboBox->currentIndex();
+                //this->getCurrentTask()->setRelativeDate(relatedTask, interval);
+            }
+            else {
+                this->getCurrentTask()->setAbsoluteDate(new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year()));
+            }
+        }
+
+        this->view->getTasksView()->displayTasks();
     }
 }
 

@@ -123,15 +123,21 @@ TaskDialog::TaskDialog(QWidget* parent):
     QObject::connect(this->buttonBox, SIGNAL(rejected()), this, SLOT(close()));
 
 }
-/*
-void TaskDialog::setArgs(Time* dateStart, Time* dateEnd, string intitule, string description) {
-    dateStartEdit->setDate(QDate(dateStart->getYear(), dateStart->getMonth(), dateStart->getDay()));
-    dateStartEdit->setTime(QTime(dateStart->getHour(), 0, 0));
-    dateEndEdit->setDate(QDate(dateEnd->getYear(), dateEnd->getMonth(), dateEnd->getDay()));
-    dateEndEdit->setTime(QTime(dateEnd->getHour(), 0, 0));
-    this->titleEdit->setText(QString(intitule.c_str()));
-    this->descriptionEdit->setText(QString(description.c_str()));
-}*/
+
+void TaskDialog::setArgs(string name, Time* deadline, bool isRelative, int dayInterval, vector<Task*> relatedTasks) {
+
+    this->intituleEdit->setText(QString::fromUtf8(name.c_str()));
+    this->absoluteDateEdit->setDate(QDate(deadline->getYear(), deadline->getMonth(), deadline->getDay()));
+    if(isRelative) {
+        this->relativeRadio->setChecked(true);
+        if(dayInterval < 0)
+            this->nbDays->setText(QString::number(-dayInterval));
+        else {
+            this->relativeComboBox->setCurrentIndex(1);
+            this->nbDays->setText(QString::number(dayInterval));
+        }
+    }
+}
 
 
 TaskDialog::~TaskDialog()
@@ -143,7 +149,7 @@ TaskDialog::~TaskDialog()
 
 void TaskDialog::checkFields() {
     if(intituleEdit->text().isEmpty())
-        QMessageBox::warning(this, "Error", "You must fill at least the title field");
+        QMessageBox::warning(this, "Erreur", QString::fromUtf8("Vous devez spécifier un nom à la tâche"));
     else
         emit acceptedAndOk();
 }
