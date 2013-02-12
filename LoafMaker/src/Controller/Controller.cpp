@@ -144,6 +144,7 @@ void Controller::delList() {
 }
 
 void Controller::addTask() {
+
     cout << "To Finish" << endl;
 
     TaskDialog* dialog = new TaskDialog(this->view);
@@ -151,12 +152,26 @@ void Controller::addTask() {
 }
 
 void Controller::editTask() {
-    cout << "To Finish" << endl;
 
-    TaskDialog* dialog = new TaskDialog(this->view);
-    dialog->show();
+    if(this->view->getTasksView()->getList()->currentColumn() == -1) {
+        QMessageBox::information(this->view, QString::fromUtf8("Aucune tâche selectionnée"),
+                                     QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez modifier"));
+    }
+    else {
+        cout << "To Finish" << endl;
+
+        TaskDialog* dialog = new TaskDialog(this->view);
+        dialog->show();
+    }
 }
 
 void Controller::delTask() {
-    cout << "TODO : delTask" << endl;
+
+    if(this->view->getTasksView()->getList()->currentColumn() == -1) {
+        QMessageBox::information(this->view, QString::fromUtf8("Aucune tâche selectionnée"),
+                                     QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez supprimer"));
+    }
+    else {
+        cout << "TODO : delTask" << endl;
+    }
 }

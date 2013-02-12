@@ -68,6 +68,8 @@ TaskDialog::TaskDialog(QWidget* parent):
 
 
     absoluteDateEdit = new QDateEdit(formLayoutWidget);
+    absoluteDateEdit->setCalendarPopup(true);
+    absoluteDateEdit->setDate(QDate::currentDate());
     formLayout->setWidget(3, QFormLayout::FieldRole, absoluteDateEdit);
 
     relativeLayout = new QHBoxLayout();
@@ -115,6 +117,7 @@ TaskDialog::TaskDialog(QWidget* parent):
     formLayout->setWidget(8, QFormLayout::FieldRole, buttonBox);
 
     QObject::connect(this->buttonBox, SIGNAL(accepted()), this, SLOT(checkFields()));
+    QObject::connect(this->buttonBox, SIGNAL(rejected()), this, SLOT(close()));
 
 }
 /*

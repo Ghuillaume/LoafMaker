@@ -2,6 +2,8 @@
 
 ListsOfLists::ListsOfLists(QWidget *parent) : QWidget(parent) {
 
+    currentList = NULL;
+
     mainLayout = new QVBoxLayout(this);
     gridLayout = new QHBoxLayout();
 

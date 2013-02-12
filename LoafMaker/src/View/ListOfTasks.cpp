@@ -2,6 +2,8 @@
 
 ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
 
+    selectedList = NULL;
+
     int parent_width = parent->width();
     int parent_height = parent->height();
 
@@ -120,6 +122,11 @@ void ListOfTasks::displayTasks() {
 
 void ListOfTasks::setSelectedList(List *list) {
     this->selectedList = list;
+}
+
+
+QTreeWidget* ListOfTasks::getList() {
+    return this->tasksTree;
 }
 
 

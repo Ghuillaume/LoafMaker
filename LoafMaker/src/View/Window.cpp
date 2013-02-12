@@ -121,9 +121,9 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     splitter->setChildrenCollapsible(false);
 
     /* Left part of the screen */
-    listsAndTemplates = new ListsOfLists(centralWidget);
-    listsAndTemplates->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT-BUTTON_SIZE+10);
-    splitter->addWidget(listsAndTemplates);
+    listsOfLists = new ListsOfLists(centralWidget);
+    listsOfLists->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT-BUTTON_SIZE+10);
+    splitter->addWidget(listsOfLists);
 
     /* Right part of the screen */
     startView = new StartView(centralWidget);
@@ -140,13 +140,13 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 Window::~Window()
 {
     delete listOfTasks;
-    delete listsAndTemplates;
+    delete listsOfLists;
     delete splitter;
     delete centralWidget;
 }
 
 ListsOfLists* Window::getListsView() {
-    return this->listsAndTemplates;
+    return this->listsOfLists;
 }
 
 ListOfTasks* Window::getTasksView() {

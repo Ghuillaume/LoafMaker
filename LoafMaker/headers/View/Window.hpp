@@ -55,7 +55,7 @@ private:
     QWidget *centralWidget;
     QSplitter *splitter;
     ListOfTasks* listOfTasks;
-    ListsOfLists* listsAndTemplates;
+    ListsOfLists* listsOfLists;
     StartView* startView;
 
 public slots:

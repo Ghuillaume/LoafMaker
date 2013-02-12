@@ -62,6 +62,8 @@ ListDialog::ListDialog(QWidget* parent):
 
 
     absoluteDateEdit = new QDateEdit(formLayoutWidget);
+    absoluteDateEdit->setCalendarPopup(true);
+    absoluteDateEdit->setDate(QDate::currentDate());
     formLayout->setWidget(3, QFormLayout::FieldRole, absoluteDateEdit);
 
 
