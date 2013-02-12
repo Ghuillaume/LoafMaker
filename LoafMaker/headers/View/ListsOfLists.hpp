@@ -20,13 +20,13 @@
 
 #define BUTTON_SIZE 35
 
-class ListsAndTemplates : public QWidget {
+class ListsOfLists : public QWidget {
 
     Q_OBJECT
 
     public:
-        explicit ListsAndTemplates(QWidget *parent = 0);
-        ~ListsAndTemplates();
+        explicit ListsOfLists(QWidget *parent = 0);
+        ~ListsOfLists();
 
         void displayList(vector<List*> lists, QTreeWidgetItem* parent);
         void clearList();

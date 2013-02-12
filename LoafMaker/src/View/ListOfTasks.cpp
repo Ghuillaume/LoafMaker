@@ -4,8 +4,8 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
 
     int parent_width = parent->width();
     int parent_height = parent->height();
-    gridLayout = new QGridLayout(this);
 
+    gridLayout = new QGridLayout(this);
 
     /* List presentation */
     QFont font;
@@ -17,12 +17,10 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
 
     mainProgressbar = new QProgressBar(this);
     mainProgressbar->setValue(0);
-    mainProgressbar->setVisible(false);
     gridLayout->addWidget(mainProgressbar, 0, 2, 1, 1);
 
     dateLabel = new QLabel("Date", this);
     dateLabel->setStyleSheet("QLabel { color : green; }");
-    dateLabel->setVisible(false);
     dateLabel->setMinimumSize(parent_width/3, 20);
     gridLayout->addWidget(dateLabel, 1, 0, 1, 3);
 
@@ -40,8 +38,6 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     treeHeader3 = tasksTree->headerItem();
     treeHeader3->setText(2, QString::fromUtf8("Terminée"));
 
-    tasksTree->setVisible(false);
-
     QIcon iconAdd;
     iconAdd.addFile(QString::fromUtf8(":add.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconEdit;
@@ -49,27 +45,24 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     QIcon iconDelete;
     iconDelete.addFile(QString::fromUtf8(":trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
-    hboxLayout = new QHBoxLayout(this);
+    hboxLayout = new QHBoxLayout();
 
     buttonAddTask = new QPushButton(iconAdd, QString::fromUtf8("Ajouter"), this);
     buttonAddTask->setIcon(iconAdd);
     buttonAddTask->setMinimumWidth(parent_width/8);
     buttonAddTask->setMaximumWidth(parent_width/6);
-    buttonAddTask->setVisible(false);
     hboxLayout->addWidget(buttonAddTask);
 
     buttonEditTask = new QPushButton(iconAdd, QString::fromUtf8("Éditer"), this);
     buttonEditTask->setIcon(iconEdit);
     buttonEditTask->setMinimumWidth(parent_width/8);
     buttonEditTask->setMaximumWidth(parent_width/6);
-    buttonEditTask->setVisible(false);
     hboxLayout->addWidget(buttonEditTask);
 
     buttonDelTask = new QPushButton(iconDelete, QString::fromUtf8("Enlever"), this);
     buttonDelTask->setIcon(iconDelete);
     buttonDelTask->setMinimumWidth(parent_width/8);
     buttonDelTask->setMaximumWidth(parent_width/6);
-    buttonDelTask->setVisible(false);
     hboxLayout->addWidget(buttonDelTask);
 
     gridLayout->addLayout(hboxLayout, 4, 0, 1, 3);
@@ -95,12 +88,6 @@ ListOfTasks::~ListOfTasks(){
 
 void ListOfTasks::displayTasks() {
 
-    mainProgressbar->setVisible(true);
-    dateLabel->setVisible(true);
-    tasksTree->setVisible(true);
-    buttonAddTask->setVisible(true);
-    buttonEditTask->setVisible(true);
-    buttonDelTask->setVisible(true);
 
     listNameLabel->setText(QString(selectedList->getName().c_str()));
     tasksTree->clear();
@@ -117,7 +104,7 @@ void ListOfTasks::displayTasks() {
         taskItem->setText(0, tr((*it)->getName().c_str()));
         taskItem->setText(1, tr((*it)->getDate().c_str()));
         if((*it)->isFinished())
-            taskItem->setCheckState ( 2, Qt::Checked);
+            taskItem->setCheckState(2, Qt::Checked);
         else
             taskItem->setCheckState(2, Qt::Unchecked);
 
@@ -138,34 +125,33 @@ void ListOfTasks::setSelectedList(List *list) {
 
 void ListOfTasks::taskChanged(QTreeWidgetItem *item, int row) {
 
-    int line = this->tasksTree->indexOfTopLevelItem(item);
-    Task* selectedTask = selectedList->getTask(line);
+    if(row == 2) {
+        int line = this->tasksTree->indexOfTopLevelItem(item);
+        Task* selectedTask = selectedList->getTask(line);
 
-    if(item->checkState(row) == Qt::Checked){
-        cout << "checked " << line << endl;
-        selectedTask->setFinished();
+        if(item->checkState(row) == Qt::Checked){
+            selectedTask->setFinished();
+        }
+        else {
+            selectedTask->setUnfinished();
+        }
+
+
+        // maj progression
+        vector<Task*> tasks = selectedList->getAllTasks();
+        int finishedTasks = 0;
+        for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
+            if((*it)->isFinished())
+                finishedTasks++;
+        }
+
+        int progression;
+
+        if(finishedTasks == 0)
+            progression = 0;
+        else
+            progression = (finishedTasks * 100) / tasks.size();
+
+        mainProgressbar->setValue(progression);
     }
-    else {
-        cout << "unchecked " << line << endl;
-        selectedTask->setUnfinished();
-    }
-
-
-    // maj progression
-    // TODO : coder et utiliser getProgression() sur List
-    vector<Task*> tasks = selectedList->getAllTasks();
-    int finishedTasks = 0;
-    for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
-        if((*it)->isFinished())
-            finishedTasks++;
-    }
-
-    int progression;
-
-    if(finishedTasks == 0)
-        progression = 0;
-    else
-        progression = (finishedTasks * 100) / tasks.size();
-
-    mainProgressbar->setValue(progression);
 }

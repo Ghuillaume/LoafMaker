@@ -113,7 +113,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     /* Central widget */
     centralWidget = new QWidget(this);
     centralWidget->setObjectName(QString::fromUtf8("centralwidget"));
-    centralWidget->setMinimumSize(APP_WIDTH, APP_HEIGHT);
+    centralWidget->setFixedSize(APP_WIDTH, APP_HEIGHT-BUTTON_SIZE+10);
     this->setCentralWidget(centralWidget);
 
     splitter = new QSplitter(centralWidget);
@@ -121,17 +121,17 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     splitter->setChildrenCollapsible(false);
 
     /* Left part of the screen */
-    listsAndTemplates = new ListsAndTemplates(centralWidget);
-    listsAndTemplates->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT);
+    listsAndTemplates = new ListsOfLists(centralWidget);
+    listsAndTemplates->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT-BUTTON_SIZE+10);
     splitter->addWidget(listsAndTemplates);
 
     /* Right part of the screen */
     startView = new StartView(centralWidget);
-    startView->setMinimumSize(400, APP_HEIGHT);
+    startView->setMinimumSize(400, APP_HEIGHT-BUTTON_SIZE);
     splitter->addWidget(startView);
 
     listOfTasks = new ListOfTasks(centralWidget);
-    listOfTasks->setMinimumSize(400, APP_HEIGHT);
+    listOfTasks->setMinimumSize(400, APP_HEIGHT-BUTTON_SIZE);
     splitter->addWidget(listOfTasks);
     listOfTasks->setVisible(false);
 
@@ -145,7 +145,7 @@ Window::~Window()
     delete centralWidget;
 }
 
-ListsAndTemplates* Window::getListsView() {
+ListsOfLists* Window::getListsView() {
     return this->listsAndTemplates;
 }
 
@@ -154,7 +154,6 @@ ListOfTasks* Window::getTasksView() {
 }
 
 void Window::start() {
-    cout << "Delete start view" << endl;
     this->startView->setVisible(false);
     this->listOfTasks->setVisible(true);
 }

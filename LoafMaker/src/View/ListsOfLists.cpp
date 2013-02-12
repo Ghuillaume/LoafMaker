@@ -1,9 +1,9 @@
 #include "ListsOfLists.hpp"
 
-ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
+ListsOfLists::ListsOfLists(QWidget *parent) : QWidget(parent) {
 
     mainLayout = new QVBoxLayout(this);
-    gridLayout = new QHBoxLayout(this);
+    gridLayout = new QHBoxLayout();
 
     QIcon iconAdd;
     iconAdd.addFile(QString::fromUtf8(":add.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -40,20 +40,20 @@ ListsAndTemplates::ListsAndTemplates(QWidget *parent) : QWidget(parent) {
     listsTree->setAnimated(true);
     mainLayout->addWidget(listsTree);
 
-
-}
-
-ListsAndTemplates::~ListsAndTemplates() {
-    delete listsTree;
-    delete gridLayout;
-}
-
-void ListsAndTemplates::displayList(vector<List *> lists, QTreeWidgetItem *parent) {
-
     // Ajout du header
     QTreeWidgetItem* treewidgetitem;
     treewidgetitem = listsTree->headerItem();
     treewidgetitem->setText(0, QString::fromUtf8("Mes Listes de tâches"));
+
+
+}
+
+ListsOfLists::~ListsOfLists() {
+    delete listsTree;
+    delete gridLayout;
+}
+
+void ListsOfLists::displayList(vector<List *> lists, QTreeWidgetItem *parent) {
 
     int level = 0;
 
@@ -85,14 +85,14 @@ void ListsAndTemplates::displayList(vector<List *> lists, QTreeWidgetItem *paren
     }
 }
 
-void ListsAndTemplates::clearList() {
+void ListsOfLists::clearList() {
     this->listsTree->clear();
 }
 
-QTreeWidget* ListsAndTemplates::getTree() {
+QTreeWidget* ListsOfLists::getTree() {
     return this->listsTree;
 }
 
-void ListsAndTemplates::setCurrentList(List* list) {
+void ListsOfLists::setCurrentList(List* list) {
     this->currentList = list;
 }

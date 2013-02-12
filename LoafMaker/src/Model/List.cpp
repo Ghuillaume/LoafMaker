@@ -97,7 +97,7 @@ int List::getProgression() {
     if(finishedTasks == 0)
         progression = 0;
     else
-        progression = (finishedTasks * 100) / tasks.size();
+        progression = (finishedTasks * 100) / nbTasks;
 
     return progression;
 }
