@@ -152,31 +152,37 @@ void Controller::delList() {
 
 void Controller::addTask() {
 
-    TaskDialog* dialog = new TaskDialog(this->view);
-    dialog->exec();
+    if(this->view->getListsView()->getTree()->currentColumn() == -1) {
+        QMessageBox::information(this->view, QString::fromUtf8("Aucune liste selectionnée"),
+                                     QString::fromUtf8("Veuillez d'abord selectionner une liste"));
+    }
+    else {
+        TaskDialog* dialog = new TaskDialog(this->view);
+        dialog->exec();
 
-    if(dialog->result() == QDialog::Accepted) {
+        if(dialog->result() == QDialog::Accepted) {
 
-        // Create task
-        string name = dialog->intituleEdit->text().toStdString();
-        Time* absoluteDeadline = new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year());
-        Task* newTask = new Task(name, absoluteDeadline);
-        this->view->getListsView()->currentList->addTask(newTask);
+            // Create task
+            string name = dialog->intituleEdit->text().toStdString();
+            Time* absoluteDeadline = new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year());
+            Task* newTask = new Task(name, absoluteDeadline);
+            this->view->getListsView()->currentList->addTask(newTask);
 
-        // If relative deadline asked, set relative
-        if(dialog->relativeRadio->isChecked()) {
-            int interval = dialog->nbDays->text().toInt();
-            if(dialog->relativeComboBox->currentIndex() == 0) {
-                interval = -interval;
+            // If relative deadline asked, set relative
+            if(dialog->relativeRadio->isChecked()) {
+                int interval = dialog->nbDays->text().toInt();
+                if(dialog->relativeComboBox->currentIndex() == 0) {
+                    interval = -interval;
+                }
+
+                // Getting task related TODO
+                //int row = dialog->taskComboBox->currentIndex();
+                //newTask->setRelativeDate(relatedTask, interval);
+
             }
 
-            // Getting task related TODO
-            //int row = dialog->taskComboBox->currentIndex();
-            //newTask->setRelativeDate(relatedTask, interval);
-
+            this->displayLists();
         }
-
-        this->displayLists();
     }
 }
 
