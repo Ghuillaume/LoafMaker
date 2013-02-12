@@ -7,10 +7,10 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QProgressBar>
-#include <QSpacerItem>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QPushButton>
+#include <QHBoxLayout>
 
 #include "List.hpp"
 
@@ -39,8 +39,9 @@ class ListOfTasks : public QWidget
 
         QLabel* listNameLabel;
         QProgressBar* mainProgressbar;
-        QSpacerItem* spacerList;
         QLabel* dateLabel;
+
+        QHBoxLayout* hboxLayout;
 
         QTreeWidget* tasksTree;
         QTreeWidgetItem* treeHeader1;

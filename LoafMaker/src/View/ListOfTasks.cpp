@@ -18,18 +18,16 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     mainProgressbar = new QProgressBar(this);
     mainProgressbar->setValue(0);
     mainProgressbar->setVisible(false);
-    listNameLabel->setMinimumSize(parent_width/3, 20);
     gridLayout->addWidget(mainProgressbar, 0, 2, 1, 1);
 
     dateLabel = new QLabel("Date", this);
     dateLabel->setStyleSheet("QLabel { color : green; }");
     dateLabel->setVisible(false);
-    listNameLabel->setMinimumSize(parent_width/3, 20);
+    dateLabel->setMinimumSize(parent_width/3, 20);
     gridLayout->addWidget(dateLabel, 1, 0, 1, 3);
 
 
     tasksTree = new QTreeWidget(this);
-    tasksTree->setMinimumSize(parent_width/2, parent_height/2);
 
     gridLayout->addWidget(tasksTree, 2, 0, 1, 3);
     QTreeWidgetItem* treeHeader1;
@@ -51,30 +49,36 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     QIcon iconDelete;
     iconDelete.addFile(QString::fromUtf8(":trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
+    hboxLayout = new QHBoxLayout(this);
+
     buttonAddTask = new QPushButton(iconAdd, QString::fromUtf8("Ajouter"), this);
     buttonAddTask->setIcon(iconAdd);
-    buttonAddTask->setMinimumWidth(parent_width/6);
+    buttonAddTask->setMinimumWidth(parent_width/8);
+    buttonAddTask->setMaximumWidth(parent_width/6);
     buttonAddTask->setVisible(false);
-    gridLayout->addWidget(buttonAddTask, 4, 0, 1, 1);
+    hboxLayout->addWidget(buttonAddTask);
 
     buttonEditTask = new QPushButton(iconAdd, QString::fromUtf8("Éditer"), this);
     buttonEditTask->setIcon(iconEdit);
-    buttonEditTask->setMinimumWidth(parent_width/6);
+    buttonEditTask->setMinimumWidth(parent_width/8);
+    buttonEditTask->setMaximumWidth(parent_width/6);
     buttonEditTask->setVisible(false);
-    gridLayout->addWidget(buttonEditTask, 4, 1, 1, 1);
+    hboxLayout->addWidget(buttonEditTask);
 
     buttonDelTask = new QPushButton(iconDelete, QString::fromUtf8("Enlever"), this);
     buttonDelTask->setIcon(iconDelete);
-    buttonDelTask->setMinimumWidth(parent_width/6);
+    buttonDelTask->setMinimumWidth(parent_width/8);
+    buttonDelTask->setMaximumWidth(parent_width/6);
     buttonDelTask->setVisible(false);
-    gridLayout->addWidget(buttonDelTask, 4, 2, 1, 1);
+    hboxLayout->addWidget(buttonDelTask);
+
+    gridLayout->addLayout(hboxLayout, 4, 0, 1, 3);
 }
 
 ListOfTasks::~ListOfTasks(){
     delete listNameLabel;
     delete mainProgressbar;
     delete dateLabel;
-    delete spacerList;
 
     delete tasksTree;
     delete treeHeader1;

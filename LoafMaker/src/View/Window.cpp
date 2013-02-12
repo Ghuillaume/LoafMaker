@@ -159,7 +159,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
     /* Right part of the screen */
     listOfTasks = new ListOfTasks(splitter);
-    listOfTasks->setMinimumSize(480, APP_HEIGHT);
+    listOfTasks->setMinimumSize(400, APP_HEIGHT);
     splitter->addWidget(listOfTasks);
 }
 
