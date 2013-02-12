@@ -21,6 +21,7 @@ Controller::Controller(Model* model, Window* window)
 
     // ListAndTemplates widget connections
     QObject::connect(this->view->getListsView()->getTree(), SIGNAL(itemSelectionChanged()), this, SLOT(setCurrentList()));
+    QObject::connect(this->view->getListsView()->getTree(), SIGNAL(itemSelectionChanged()), this->view, SLOT(start()));
     QObject::connect(this->view->getListsView()->buttonAddList, SIGNAL(clicked()), this, SLOT(addList()));
     QObject::connect(this->view->getListsView()->buttonDelList, SIGNAL(clicked()), this, SLOT(delList()));
 
@@ -142,19 +143,53 @@ void Controller::delList() {
 }
 
 void Controller::addTask() {
-    cout << "To Finish" << endl;
 
     TaskDialog* dialog = new TaskDialog(this->view);
-    dialog->show();
+    dialog->exec();
+
+    if(dialog->result() == QDialog::Accepted) {
+
+        // Create task
+        string name = dialog->intituleEdit->text().toStdString();
+        Time* absoluteDeadline = new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year());
+        this->view->getListsView()->currentList->addTask(new Task(name, absoluteDeadline));
+
+        // If relative deadline asked, set relative
+        if(dialog->relativeRadio->isChecked()) {
+            int interval = dialog->nbDays->text().toInt();
+            if(dialog->relativeComboBox->currentIndex() == 0) {
+                interval = -interval;
+            }
+
+            // Getting task related TODO
+            //int row = dialog->taskComboBox->currentIndex();
+        }
+
+        this->displayLists();
+    }
 }
 
 void Controller::editTask() {
-    cout << "To Finish" << endl;
 
-    TaskDialog* dialog = new TaskDialog(this->view);
-    dialog->show();
+    if(this->view->getTasksView()->getList()->currentColumn() == -1) {
+        QMessageBox::information(this->view, QString::fromUtf8("Aucune tâche selectionnée"),
+                                     QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez modifier"));
+    }
+    else {
+        cout << "To Finish" << endl;
+
+        TaskDialog* dialog = new TaskDialog(this->view);
+        dialog->show();
+    }
 }
 
 void Controller::delTask() {
-    cout << "TODO : delTask" << endl;
+
+    if(this->view->getTasksView()->getList()->currentColumn() == -1) {
+        QMessageBox::information(this->view, QString::fromUtf8("Aucune tâche selectionnée"),
+                                     QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez supprimer"));
+    }
+    else {
+        cout << "TODO : delTask" << endl;
+    }
 }

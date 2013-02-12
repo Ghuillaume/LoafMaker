@@ -10,10 +10,11 @@
 #include <iostream>
 
 #include "ListOfTasks.hpp"
-#include "ListsAndTemplates.hpp"
+#include "ListsOfLists.hpp"
+#include "StartView.hpp"
 
 #define APP_WIDTH 900
-#define APP_HEIGHT 540
+#define APP_HEIGHT 565
 #define LIST_PANEL_WIDTH 250
 #define TASK_PANEL_WIDTH (APP_WIDTH - LIST_PANEL_WIDTH - PANELS_SEPARATOR_SIZE)
 #define PANELS_SEPARATOR_SIZE 20
@@ -28,7 +29,7 @@ public:
     explicit Window(QWidget *parent = 0);
     ~Window();
 
-    ListsAndTemplates* getListsView();
+    ListsOfLists* getListsView();
     ListOfTasks* getTasksView();
     
     QMenuBar* menubar;
@@ -54,7 +55,11 @@ private:
     QWidget *centralWidget;
     QSplitter *splitter;
     ListOfTasks* listOfTasks;
-    ListsAndTemplates* listsAndTemplates;
+    ListsOfLists* listsOfLists;
+    StartView* startView;
+
+public slots:
+    void start();
 };
 
 #endif // WINDOW_HPP

@@ -3,19 +3,21 @@
 TaskDialog::TaskDialog(QWidget* parent):
     QDialog ( parent )
 {
+    int width = 350;
+    int height = 300;
 
     this->setObjectName("Dialog");
-    this->resize(500, 250);
+    this->resize(width, height);
     this->setWindowTitle(QString::fromUtf8("Créer une nouvelle tâche"));
 
     frame = new QWidget(this);
     frame->setObjectName("frame");
-    frame->setGeometry(QRect(10, 10, 500, 250));
+    frame->setGeometry(QRect(10, 10, width-20, height-20));
 
     formLayoutWidget = new QWidget(frame);
     formLayoutWidget->setObjectName(QString::fromUtf8("formLayoutWidget"));
-    formLayoutWidget->setGeometry(QRect(10, 10, 450, 230));
-    formLayoutWidget->setMinimumSize(450, 230);
+    //formLayoutWidget->setGeometry(QRect(0, 0, width-20, height-20));
+    //formLayoutWidget->setMinimumSize(width, height);
     formLayout = new QFormLayout(formLayoutWidget);
     formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
     formLayout->setObjectName(QString::fromUtf8("formLayout"));
@@ -68,6 +70,8 @@ TaskDialog::TaskDialog(QWidget* parent):
 
 
     absoluteDateEdit = new QDateEdit(formLayoutWidget);
+    absoluteDateEdit->setCalendarPopup(true);
+    absoluteDateEdit->setDate(QDate::currentDate());
     formLayout->setWidget(3, QFormLayout::FieldRole, absoluteDateEdit);
 
     relativeLayout = new QHBoxLayout();
@@ -115,6 +119,8 @@ TaskDialog::TaskDialog(QWidget* parent):
     formLayout->setWidget(8, QFormLayout::FieldRole, buttonBox);
 
     QObject::connect(this->buttonBox, SIGNAL(accepted()), this, SLOT(checkFields()));
+    QObject::connect(this, SIGNAL(acceptedAndOk()), this, SLOT(accept()));
+    QObject::connect(this->buttonBox, SIGNAL(rejected()), this, SLOT(close()));
 
 }
 /*
@@ -133,17 +139,10 @@ TaskDialog::~TaskDialog()
 
     delete frame;
 
-/*
-    delete formLayoutWidget;
-    delete formLayout;
-    delete dateEndEdit;
-    delete titleEdit;
-    delete descriptionEdit;
-    delete buttonBox;*/
 }
 
 void TaskDialog::checkFields() {
-    if(titleEdit->text().isEmpty())
+    if(intituleEdit->text().isEmpty())
         QMessageBox::warning(this, "Error", "You must fill at least the title field");
     else
         emit acceptedAndOk();

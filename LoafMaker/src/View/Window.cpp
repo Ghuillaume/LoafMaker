@@ -3,6 +3,11 @@
 Window::Window(QWidget *parent) : QMainWindow(parent)
 {
     this->resize(APP_WIDTH, APP_HEIGHT);
+    this->setFixedSize(APP_WIDTH, APP_HEIGHT);
+
+    QIcon favicon;
+    favicon.addFile(QString::fromUtf8(":ico.png"), QSize(), QIcon::Normal, QIcon::Off);
+    this->setWindowIcon(favicon);
 
     /* Menubar */
     menubar = new QMenuBar(this);
@@ -110,7 +115,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     /* Central widget */
     centralWidget = new QWidget(this);
     centralWidget->setObjectName(QString::fromUtf8("centralwidget"));
-    centralWidget->setMinimumSize(APP_WIDTH, APP_HEIGHT);
+    centralWidget->setFixedSize(APP_WIDTH, APP_HEIGHT-BUTTON_SIZE+10);
     this->setCentralWidget(centralWidget);
 
     splitter = new QSplitter(centralWidget);
@@ -118,28 +123,39 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
     splitter->setChildrenCollapsible(false);
 
     /* Left part of the screen */
-    listsAndTemplates = new ListsAndTemplates(splitter);
-    listsAndTemplates->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT);
-    splitter->addWidget(listsAndTemplates);
+    listsOfLists = new ListsOfLists(centralWidget);
+    listsOfLists->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT-BUTTON_SIZE+10);
+    splitter->addWidget(listsOfLists);
 
     /* Right part of the screen */
-    listOfTasks = new ListOfTasks(splitter);
-    listOfTasks->setMinimumSize(400, APP_HEIGHT);
+    startView = new StartView(centralWidget);
+    startView->setMinimumSize(400, APP_HEIGHT-BUTTON_SIZE);
+    splitter->addWidget(startView);
+
+    listOfTasks = new ListOfTasks(centralWidget);
+    listOfTasks->setMinimumSize(400, APP_HEIGHT-BUTTON_SIZE);
     splitter->addWidget(listOfTasks);
+    listOfTasks->setVisible(false);
+
 }
 
 Window::~Window()
 {
     delete listOfTasks;
-    delete listsAndTemplates;
+    delete listsOfLists;
     delete splitter;
     delete centralWidget;
 }
 
-ListsAndTemplates* Window::getListsView() {
-    return this->listsAndTemplates;
+ListsOfLists* Window::getListsView() {
+    return this->listsOfLists;
 }
 
 ListOfTasks* Window::getTasksView() {
     return this->listOfTasks;
+}
+
+void Window::start() {
+    this->startView->setVisible(false);
+    this->listOfTasks->setVisible(true);
 }

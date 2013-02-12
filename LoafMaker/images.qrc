@@ -1,19 +1,21 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource>
-     <file alias="applications-office.png">resources/applications-office.png</file>
-     <file alias="edit-paste.png">resources/edit-paste.png</file>
-     <file alias="list-add.png">resources/list-add.png</file>
-     <file alias="list-remove.png">resources/list-remove.png</file>
-     <file alias="user-trash.png">resources/user-trash.png</file>
-     <file alias="check.png">resources/agt_action_success.png</file>
-     <file alias="warning.png">resources/agt_update_critical.png</file>
-     <file alias="add.png">resources/edit_add.png</file>
-     <file alias="edit.png">resources/kate.png</file>
-     <file alias="exclamation.png">resources/exclamation.png</file>
-     <file alias="trash.png">resources/trash.png</file>
-     <file alias="menu_new.png">resources/mail_new.png</file>
-     <file alias="menu_import.png">resources/import.png</file>
-     <file alias="menu_export.png">resources/document-send.png</file>
-     <file alias="menu_quit.png">resources/fileclose.png</file>
-</qresource>
+<RCC>
+    <qresource prefix="/">
+        <file alias="logo.png">resources/logo.png</file>
+        <file alias="ico.png">resources/logo_ico.png</file>
+        <file alias="applications-office.png">resources/applications-office.png</file>
+        <file alias="edit-paste.png">resources/edit-paste.png</file>
+        <file alias="list-add.png">resources/list-add.png</file>
+        <file alias="list-remove.png">resources/list-remove.png</file>
+        <file alias="user-trash.png">resources/user-trash.png</file>
+        <file alias="check.png">resources/agt_action_success.png</file>
+        <file alias="warning.png">resources/agt_update_critical.png</file>
+        <file alias="add.png">resources/edit_add.png</file>
+        <file alias="edit.png">resources/kate.png</file>
+        <file alias="exclamation.png">resources/exclamation.png</file>
+        <file alias="trash.png">resources/trash.png</file>
+        <file alias="menu_new.png">resources/mail_new.png</file>
+        <file alias="menu_import.png">resources/import.png</file>
+        <file alias="menu_export.png">resources/document-send.png</file>
+        <file alias="menu_quit.png">resources/fileclose.png</file>
+    </qresource>
 </RCC>

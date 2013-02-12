@@ -6,17 +6,14 @@
 		
 		
 	Important :
-		- Les dates fonctionnent pas oO (1/1/70)
+		- Les dates fonctionnent pas pour les tâches oO (1/1/70)
 		- Tentative de validation d'une tâche -> vérifier que toutes les tâches antérieures ont été validées
 		- Listes ordonnées.
-		- Boite de dialogue pour ajouter des tâches
 		- Boite de dialogue pour ajouter des listes
-		- Resizer icônes d'ajout pour les listes (boutons carrés)
+		- Ajout de tâches : permettre les dates relatives (modèle OK, dialog pas fait)
 		
 		
 		
 	Détails :
-		- Remplacer les boutons par des icônes cliquables
-		- Si pas de liste sélectionnée, par d'affichage à droite
 		- Date : possibilité de mettre ASAP à la place
 		- Dans le tree des listes, ajouter pour chaque liste un état [OK], [En cours], [Pas commencé] avec une couleur du vert au rouge

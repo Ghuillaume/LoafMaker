@@ -27,6 +27,8 @@ class ListOfTasks : public QWidget
         void displayTasks();
         void setSelectedList(List* list);
 
+        QTreeWidget* getList();
+
 
         QPushButton* buttonAddTask;
         QPushButton* buttonEditTask;
