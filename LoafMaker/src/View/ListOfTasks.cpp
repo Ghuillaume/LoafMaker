@@ -26,10 +26,14 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     dateLabel->setMinimumSize(parent_width/3, 20);
     gridLayout->addWidget(dateLabel, 1, 0, 1, 3);
 
+    orderedLabel = new QLabel("", this);
+    orderedLabel->setMinimumSize(parent_width/3, 20);
+    gridLayout->addWidget(orderedLabel, 2, 0, 0, 0);
+
 
     tasksTree = new QTreeWidget(this);
 
-    gridLayout->addWidget(tasksTree, 2, 0, 1, 3);
+    gridLayout->addWidget(tasksTree, 3, 0, 1, 3);
     QTreeWidgetItem* treeHeader1;
     treeHeader1 = tasksTree->headerItem();
     treeHeader1->setText(0, QString::fromUtf8("Intitulé"));
@@ -67,7 +71,7 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     buttonDelTask->setMaximumWidth(parent_width/6);
     hboxLayout->addWidget(buttonDelTask);
 
-    gridLayout->addLayout(hboxLayout, 4, 0, 1, 3);
+    gridLayout->addLayout(hboxLayout, 5, 0, 1, 3);
 }
 
 ListOfTasks::~ListOfTasks(){
@@ -94,6 +98,13 @@ void ListOfTasks::displayTasks() {
 
     listNameLabel->setText(QString(selectedList->getName().c_str()));
     tasksTree->clear();
+
+    if(this->selectedList->isOrdered())
+        orderedLabel->setText(QString::fromUtf8("Cette liste est ordonnée. Vous devez valider chaque tâche dans l'ordre affiché"));
+    //orderedLabel->setMinimumSize( 100, 20);
+
+
+    gridLayout->addWidget(orderedLabel, 1, 0, 1, 3);
 
     dateLabel->setText(selectedList->getDate()->getReadableDate().c_str());
 

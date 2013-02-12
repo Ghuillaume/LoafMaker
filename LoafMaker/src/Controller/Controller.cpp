@@ -23,6 +23,7 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getListsView()->getTree(), SIGNAL(itemSelectionChanged()), this, SLOT(setCurrentList()));
     QObject::connect(this->view->getListsView()->getTree(), SIGNAL(itemSelectionChanged()), this->view, SLOT(start()));
     QObject::connect(this->view->getListsView()->buttonAddList, SIGNAL(clicked()), this, SLOT(addList()));
+    QObject::connect(this->view->getListsView()->buttonEditList, SIGNAL(clicked()), this, SLOT(editList()));
     QObject::connect(this->view->getListsView()->buttonDelList, SIGNAL(clicked()), this, SLOT(delList()));
 
 
@@ -134,7 +135,6 @@ void Controller::saveModelAs() {
 }
 
 void Controller::addList() {
-    cout << "To finish" << endl;
     ListDialog* dialog = new ListDialog(this->view, this->model->getBaseLists());
     dialog->exec();
 
@@ -147,14 +147,16 @@ void Controller::addList() {
             this->model->createBaseList(dialog->intituleEdit->text().toStdString(),
                                         dialog->absoluteDateEdit->date().day(),
                                         dialog->absoluteDateEdit->date().month(),
-                                        dialog->absoluteDateEdit->date().year());
+                                        dialog->absoluteDateEdit->date().year(),
+                                        dialog->orderedCheckBox->isChecked());
         }
         else { // List with parent
             this->model->createSubList(dialog->listsAdded.at(dialog->listComboBox->currentIndex()-1),
                                        dialog->intituleEdit->text().toStdString(),
                                        dialog->absoluteDateEdit->date().day(),
                                        dialog->absoluteDateEdit->date().month(),
-                                       dialog->absoluteDateEdit->date().year());
+                                       dialog->absoluteDateEdit->date().year(),
+                                       dialog->orderedCheckBox->isChecked());
         }
 
         this->displayLists();
@@ -162,14 +164,41 @@ void Controller::addList() {
 }
 
 void Controller::editList() {
-    cout << "To finish" << endl;
 
-    ListDialog* dialog = new ListDialog(this->view, this->model->getBaseLists());
-    dialog->show();
+    if(this->view->getListsView()->getTree()->currentColumn() == -1) {
+        QMessageBox::information(this->view, QString::fromUtf8("Aucune liste selectionnée"),
+                                     QString::fromUtf8("Veuillez d'abord selectionner la liste que vous souhaitez modifier"));
+    }
+    else {
+        ListDialog* dialog = new ListDialog(this->view, this->model->getBaseLists());
+        dialog->setArgs(this->view->getListsView()->currentList->getName(),
+                        this->view->getListsView()->currentList->getParent(),
+                        this->view->getListsView()->currentList->getDate(),
+                        this->view->getListsView()->currentList->isOrdered());
+        dialog->exec();
+
+        if(dialog->result() == QDialog::Accepted) {
+
+            string name = dialog->intituleEdit->text().toStdString();
+
+            this->view->getListsView()->currentList->setName(name);
+            this->view->getListsView()->currentList->setDate(new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year()));
+            this->view->getListsView()->currentList->setOrdered(dialog->orderedCheckBox->isChecked());
+
+            this->displayLists();
+        }
+    }
 }
 
 void Controller::delList() {
-    cout << "TODO : delList " << endl;
+
+    if(this->view->getListsView()->getTree()->currentColumn() == -1) {
+        QMessageBox::information(this->view, QString::fromUtf8("Aucune liste selectionnée"),
+                                     QString::fromUtf8("Veuillez d'abord selectionner la liste que vous souhaitez modifier"));
+    }
+    else {
+
+    }
 }
 
 void Controller::addTask() {

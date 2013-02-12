@@ -11,14 +11,14 @@ Model::~Model() {
 
 
 
-void Model::createBaseList(string name, int day, int month, int year) {
+void Model::createBaseList(string name, int day, int month, int year, bool ordered) {
     Time* date = new Time(-1, -1 , day, month, year);
-    this->lists.push_back(new List(name, date, false));
+    this->lists.push_back(new List(name, date, ordered));
 }
 
-void Model::createSubList(List* parent, string name, int day, int month, int year) {
+void Model::createSubList(List* parent, string name, int day, int month, int year, bool ordered) {
     Time* date = new Time(-1, -1 , day, month, year);
-    parent->addSubList(new List(name, date, false, parent));
+    parent->addSubList(new List(name, date, ordered, parent));
 
 }
 

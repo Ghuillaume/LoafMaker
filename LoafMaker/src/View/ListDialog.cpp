@@ -89,15 +89,25 @@ ListDialog::ListDialog(QWidget* parent, ListOfList listOfList):
 
 
 }
-/*
-void ListDialog::setArgs(Time* dateStart, Time* dateEnd, string intitule, string description) {
-    dateStartEdit->setDate(QDate(dateStart->getYear(), dateStart->getMonth(), dateStart->getDay()));
-    dateStartEdit->setTime(QTime(dateStart->getHour(), 0, 0));
-    dateEndEdit->setDate(QDate(dateEnd->getYear(), dateEnd->getMonth(), dateEnd->getDay()));
-    dateEndEdit->setTime(QTime(dateEnd->getHour(), 0, 0));
-    this->titleEdit->setText(QString(intitule.c_str()));
-    this->descriptionEdit->setText(QString(description.c_str()));
-}*/
+
+
+void ListDialog::setArgs(string name, List* parent, Time* date, bool ordered) {
+    this->intituleEdit->setText(name.c_str());
+    int index = 0;
+    this->listComboBox->setCurrentIndex(0);
+    for(vector<List*>::iterator it = listsAdded.begin() ; it != listsAdded.end() ; it++) {
+        if((*it) == parent)
+            this->listComboBox->setCurrentIndex(index-1);
+        index++;
+    }
+
+
+    this->absoluteDateEdit->setDate(QDate(date->getYear(), date->getMonth(), date->getDay()));
+
+    if(ordered) {
+        this->orderedCheckBox->setChecked(true);
+    }
+}
 
 
 ListDialog::~ListDialog()

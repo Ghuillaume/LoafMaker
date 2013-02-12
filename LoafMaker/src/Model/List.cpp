@@ -27,6 +27,14 @@ void List::setName(string name) {
     this->name = name;
 }
 
+void List::setDate(Time *date) {
+    this->creationDate = date;
+}
+
+void List::setOrdered(bool ordered) {
+    this->ordered = ordered;
+}
+
 Time* List::getDate() {
     return this->creationDate;
 }
@@ -100,6 +108,14 @@ int List::getProgression() {
         progression = (finishedTasks * 100) / nbTasks;
 
     return progression;
+}
+
+bool List::isOrdered() {
+    return this->ordered;
+}
+
+List* List::getParent() {
+    return this->parent;
 }
 
 void List::addSubList(List* subList) {

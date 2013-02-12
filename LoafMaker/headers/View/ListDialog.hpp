@@ -46,7 +46,7 @@ class ListDialog: public QDialog
 
         QDialogButtonBox *buttonBox;
 
-        //void setArgs(Time* dateStart, Time* dateEnd, string intitule, string description);
+        void setArgs(string name, List* parent, Time* date, bool ordered);
 
     private:
         //Time time;

@@ -6,10 +6,12 @@
 		
 		
 	Important :
+		- Label de ListOfTasks pour prévenir qu'une liste est ordonnée (mal placé oO)
 		- Tentative de validation d'une tâche -> vérifier que toutes les tâches antérieures ont été validées
 		- Listes ordonnées.
 		- Boite de dialogue pour ajouter des listes
 		- Ajout de tâches : permettre les dates relatives (modèle OK, dialog pas fait)
+		- Edition de listes : pouvoir changer le parent (possible dans le modèle mais c'est le merdier)
 		
 		
 		
