@@ -110,6 +110,10 @@ void List::addTask(Task* task) {
     this->tasks.push_back(task);
 }
 
+void List::removeTask(int row) {
+    this->tasks.erase(this->tasks.begin()+row);
+}
+
 /*
 void List::addTask(Task *task, int number) {
     this->tasks.insert(number, task);

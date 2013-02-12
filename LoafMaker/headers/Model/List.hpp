@@ -26,6 +26,7 @@ public:
 
         void addSubList(List *subList);
         void addTask(Task* task);
+        void removeTask(int row);
 
         string toString();
 

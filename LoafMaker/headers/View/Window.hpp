@@ -29,6 +29,8 @@ public:
     explicit Window(QWidget *parent = 0);
     ~Window();
 
+    void createMenuBar();
+
     ListsOfLists* getListsView();
     ListOfTasks* getTasksView();
     

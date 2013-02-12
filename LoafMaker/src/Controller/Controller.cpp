@@ -224,6 +224,10 @@ void Controller::delTask() {
                                      QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez supprimer"));
     }
     else {
-        cout << "TODO : delTask" << endl;
+        string question = "Voulez-vous vraiment supprimer la tâche " + this->getCurrentTask()->getName() + " ?";
+        if(QMessageBox::question(this->view, QString::fromUtf8("Êtes-vous sûr ?"), QString::fromUtf8(question.c_str()), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
+            this->model->deleteTask(this->view->getListsView()->currentList, this->view->getTasksView()->getList()->currentColumn());
+            this->displayLists();
+        }
     }
 }

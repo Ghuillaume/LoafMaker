@@ -34,7 +34,9 @@ void Model::createTask(List* parent, string name, int day, int month, int year) 
 }
 
 void Model::deleteTask(List* list, int row) {
+    cout << "Deleting task " << list->getTask(row)->getName() << " in list " << list->getName() << endl;
 
+    list->removeTask(row);
 }
 
 ListOfList Model::getBaseLists() {
