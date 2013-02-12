@@ -5,7 +5,7 @@
 #include <QObject>
 
 #include <stack>
-#include <cstring>
+#include <string>
 
 #include "Model.hpp"
 #include "Window.hpp"

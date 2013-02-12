@@ -139,7 +139,32 @@ void Controller::editList() {
 }
 
 void Controller::delList() {
-    cout << "TODO : delList " << endl;
+    QList<QTreeWidgetItem*> listItemsTree = view->getListsView()->getTree()->selectedItems();
+
+    // Si des listes sont sélectionnées, on demande la confirmation de l'utilisateur
+    if (!listItemsTree.empty()) {
+        QMessageBox::StandardButton button;
+        string listName = view->getListsView()->getTree()->selectedItems().at(0)->text(0).toStdString();
+        string message = string("Êtes-vous sûr de vouloir supprimer la liste suivante et ses sous-listes ?\n\n")
+                        + listName
+                        + string("\n\nCette opération est irréversible.");
+        button = QMessageBox::question(this->view, QString::fromUtf8("Supprimer une liste"), QString::fromUtf8(message.c_str()),
+                                       QMessageBox::Yes | QMessageBox::No);
+
+        // Si la réponse est affirmative, on supprime les listes
+        if (button == QMessageBox::Yes) {
+            QModelIndexList indexes = view->getListsView()->getTree()->selectionModel()->selection().indexes();
+            cout << indexes.size();
+            for (int i = 0; i < indexes.size(); i++) {
+                cout << "LOL";
+                cout << indexes[i].row() << endl;
+                model->deleteList(indexes[i].row());
+            }
+            cout << "MDR" << endl;
+            this->displayLists();
+            // TODO
+        }
+    }
 }
 
 void Controller::addTask() {

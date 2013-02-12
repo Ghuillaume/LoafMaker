@@ -23,7 +23,7 @@ void Model::createSubList(List* parent, string name, int day, int month, int yea
 }
 
 void Model::deleteList(int row) {
-    delete this->lists.at(row);
+    //delete this->lists.at(row);
     this->lists.erase(this->lists.begin()+row);
 }
 
