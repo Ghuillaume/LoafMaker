@@ -12,12 +12,12 @@ public:
         List(string name, Time* creationDate, bool ordered, List* parent);
         ~List();
 
-        string getName();
         void setName(string name);
+        string getName();
         Time* getDate();
         vector<List*> getAllLists();
-        List* getList(int row);
         vector<Task*> getAllTasks();
+        List* getList(int row);
         Task* getTask(int row);
 
         int getNbTasks();

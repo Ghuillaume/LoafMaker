@@ -1,6 +1,7 @@
 #include "ListDialog.hpp"
+#include "List.hpp"
 
-ListDialog::ListDialog(QWidget* parent):
+ListDialog::ListDialog(QWidget* parent, ListOfList listOfList):
     QDialog ( parent )
 {
 
@@ -30,20 +31,24 @@ ListDialog::ListDialog(QWidget* parent):
 
     requiredLabel = new QLabel(formLayoutWidget);
     requiredLabel->setObjectName("requiredLabel");
-    requiredLabel->setText(QString::fromUtf8("Liste parente :"));
+    requiredLabel->setText(QString::fromUtf8("Liste parente principale :"));
     formLayout->setWidget(1, QFormLayout::LabelRole, requiredLabel);
 
-    QSpacerItem *horizontalSpacer1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-    formLayout->setItem(2, QFormLayout::SpanningRole, horizontalSpacer1);
+
+    requiredLabel2 = new QLabel(formLayoutWidget);
+    requiredLabel2->setObjectName("requiredLabel2");
+    requiredLabel2->setText(QString::fromUtf8("Liste parente secondaire :"));
+    formLayout->setWidget(2, QFormLayout::LabelRole, requiredLabel2);
+
 
     dateLabel = new QLabel(formLayoutWidget);
     dateLabel->setObjectName("dateLabel");
-    dateLabel->setText(QString::fromUtf8("Deadline :"));
+    dateLabel->setText(QString::fromUtf8("Échéance :"));
     formLayout->setWidget(3, QFormLayout::LabelRole, dateLabel);
 
     orderedLabel = new QLabel(formLayoutWidget);
     orderedLabel->setObjectName("orderedLabel");
-    orderedLabel->setText(QString::fromUtf8("Ordered :"));
+    orderedLabel->setText(QString::fromUtf8("Ordonnée ?"));
     formLayout->setWidget(4, QFormLayout::LabelRole, orderedLabel);
 
     QSpacerItem *horizontalSpacer2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -56,10 +61,13 @@ ListDialog::ListDialog(QWidget* parent):
     intituleEdit->setObjectName(QString::fromUtf8("intituleEdit"));
     formLayout->setWidget(0, QFormLayout::FieldRole, intituleEdit);
 
+    listListComboBox = new QComboBox(formLayoutWidget);
+    listListComboBox->setObjectName(QString::fromUtf8("listComboBox"));
+    formLayout->setWidget(1, QFormLayout::FieldRole, listListComboBox);
+
     listComboBox = new QComboBox(formLayoutWidget);
     listComboBox->setObjectName(QString::fromUtf8("listComboBox"));
-    formLayout->setWidget(1, QFormLayout::FieldRole, listComboBox);
-
+    formLayout->setWidget(2, QFormLayout::FieldRole, listComboBox);
 
     absoluteDateEdit = new QDateEdit(formLayoutWidget);
     formLayout->setWidget(3, QFormLayout::FieldRole, absoluteDateEdit);
@@ -72,6 +80,8 @@ ListDialog::ListDialog(QWidget* parent):
     formLayout->setWidget(6, QFormLayout::FieldRole, buttonBox);
 
     QObject::connect(this->buttonBox, SIGNAL(accepted()), this, SLOT(checkFields()));
+
+    this->fillComboBox(&listOfList, 0);
 
 }
 /*
@@ -87,9 +97,26 @@ void ListDialog::setArgs(Time* dateStart, Time* dateEnd, string intitule, string
 
 ListDialog::~ListDialog()
 {
-
     delete frame;
+}
 
+void ListDialog::fillComboBox(ListOfList *listOfList, int level) {
+    if (listOfList->empty()) {
+        return;
+    } else {
+        for(int i = 0; i < listOfList->size(); i ++) {
+            string listName =  "";
+            for (int j = 0; j < level; j++) {
+                listName += "-";
+            }
+            listName += " " + listOfList->at(i)->getName();
+            this->listListComboBox->addItem(QString::fromUtf8(listName.c_str()));
+            ListOfList sublist = listOfList->at(i)->getAllLists();
+            if(!sublist.empty()) {
+                fillComboBox(&sublist, level + 1);
+            }
+        }
+    }
 }
 
 void ListDialog::checkFields() {

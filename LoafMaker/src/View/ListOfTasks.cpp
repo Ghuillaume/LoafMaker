@@ -49,7 +49,7 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     QIcon iconDelete;
     iconDelete.addFile(QString::fromUtf8(":trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
-    hboxLayout = new QHBoxLayout(this);
+    hboxLayout = new QHBoxLayout();
 
     buttonAddTask = new QPushButton(iconAdd, QString::fromUtf8("Ajouter"), this);
     buttonAddTask->setIcon(iconAdd);
@@ -89,6 +89,7 @@ ListOfTasks::~ListOfTasks(){
     delete buttonEditTask;
     delete buttonDelTask;
 
+    delete hboxLayout;
     delete gridLayout;
 }
 
