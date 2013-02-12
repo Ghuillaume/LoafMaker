@@ -110,6 +110,11 @@ void List::addTask(Task* task) {
     this->tasks.push_back(task);
 }
 
+/*
+void List::addTask(Task *task, int number) {
+    this->tasks.insert(number, task);
+}*/
+
 string List::toString() {
     return this->name + " (" + this->creationDate->getReadableDate() + ")";
 }

@@ -16,13 +16,19 @@
 #include <QRadioButton>
 #include <QComboBox>
 
+#include "List.hpp"
+
+using namespace std;
+
+typedef vector<List*> ListOfList;
 
 class ListDialog: public QDialog
 {
     Q_OBJECT
 
     public:
-        ListDialog(QWidget *parent);
+        //ListDialog(QWidget *parent);
+        ListDialog(QWidget *parent, ListOfList listOfList);
        ~ListDialog();
 
         QWidget *formLayoutWidget;
@@ -33,6 +39,7 @@ class ListDialog: public QDialog
         QLineEdit *nbDays;
         QLabel *daysLabel;
         QLabel *orderedLabel;
+        QComboBox* listListComboBox;
         QComboBox *listComboBox;
 
         /*QLineEdit *titleEdit;
@@ -50,8 +57,11 @@ class ListDialog: public QDialog
         QLabel *intituleLabel;
         QLabel *dateLabel;
         QLabel *requiredLabel;
+        QLabel *requiredLabel2;
 
         QHBoxLayout *checkboxLayout;
+
+        void fillComboBox(ListOfList *listOfList, int level);
 
     public slots:
         void checkFields();

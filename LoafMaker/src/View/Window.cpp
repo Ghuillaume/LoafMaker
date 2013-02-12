@@ -46,6 +46,8 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
         fileMenu->addAction(saveItem);
         saveItem->setText("Exporter");
 
+        fileMenu->addSeparator();
+
 		QIcon iconQuit;
 		iconQuit.addFile(QString::fromUtf8(":menu_quit.png"), QSize(), QIcon::Normal, QIcon::Off);
         quitItem = new QAction(this);

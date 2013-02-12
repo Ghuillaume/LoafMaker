@@ -84,6 +84,7 @@ ListOfTasks::~ListOfTasks(){
     delete buttonEditTask;
     delete buttonDelTask;
 
+    delete hboxLayout;
     delete gridLayout;
 }
 

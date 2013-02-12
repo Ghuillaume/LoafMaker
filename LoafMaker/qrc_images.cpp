@@ -5098,3 +5098,4 @@ int QT_MANGLE_NAMESPACE(qCleanupResources_images)()
 
 Q_DESTRUCTOR_FUNCTION(QT_MANGLE_NAMESPACE(qCleanupResources_images))
 
+

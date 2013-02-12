@@ -135,15 +135,14 @@ void Controller::saveModelAs() {
 
 void Controller::addList() {
     cout << "To finish" << endl;
-
-    ListDialog* dialog = new ListDialog(this->view);
+    ListDialog* dialog = new ListDialog(this->view, this->model->getBaseLists());
     dialog->show();
 }
 
 void Controller::editList() {
     cout << "To finish" << endl;
 
-    ListDialog* dialog = new ListDialog(this->view);
+    ListDialog* dialog = new ListDialog(this->view, this->model->getBaseLists());
     dialog->show();
 }
 
