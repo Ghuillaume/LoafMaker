@@ -17,11 +17,11 @@ public:
     XmlParser(string name);
     ~XmlParser();
 
-    void parse();
+    List* parse();
     List* buildList(tinyxml2::XMLElement* current_element);
 
 private:
-
+    Time* buildDate(tinyxml2::XMLElement* current_element);
 };
 
 #endif

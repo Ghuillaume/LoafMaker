@@ -17,5 +17,6 @@
         <file alias="menu_import.png">resources/import.png</file>
         <file alias="menu_export.png">resources/document-send.png</file>
         <file alias="menu_quit.png">resources/fileclose.png</file>
+        <file>tests/LoafMaker.xml</file>
     </qresource>
 </RCC>

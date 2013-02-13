@@ -15,6 +15,7 @@ class Model
 
         string current_filename;
 
+        void createRootList(List* rootList);
         void createBaseList(string name, int day, int month, int year, bool ordered);
         void createSubList(List* parent, string name, int day, int month, int year, bool ordered);
         void deleteList(int row);

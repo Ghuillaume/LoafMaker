@@ -43,10 +43,10 @@ int main(int argc, char *argv[])
 
     testing(m);
 
-    /* Test for the parser */
-    string filename = "/home/yoros/workspace/LoafMaker/LoafMaker/tests/LoafMaker.xml";
+    string filename = "tests/LoafMaker.xml";
     XmlParser* p = new XmlParser(filename);
-    p->parse();
+    List* root_list = p->parse();
+    m->createRootList(root_list);
 
     Window w;
     Controller c(m, &w);

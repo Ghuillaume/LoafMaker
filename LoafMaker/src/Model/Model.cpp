@@ -10,6 +10,9 @@ Model::~Model() {
 }
 
 
+void Model::createRootList(List* rootList) {
+    this->lists.push_back(rootList);
+}
 
 void Model::createBaseList(string name, int day, int month, int year, bool ordered) {
     Time* date = new Time(-1, -1 , day, month, year);
