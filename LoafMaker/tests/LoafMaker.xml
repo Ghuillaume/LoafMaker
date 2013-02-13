@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listes>
+    <liste nom="nomListe1" ordonnee="oui">
+   		<date absolue="oui">01/01/1970</date>
+        <liste nom="nomListe1-2"  ordonnee="non">
+   			<date absolue="oui">01/01/1970</date>
+            <tache nom="nomTache1">
+                <date absolue="oui">01/01/1970</date>
+            </tache>
+            <tache nom="nomTache2">
+                <date absolue="oui">01/01/1970</date>
+            </tache>
+    	</liste>
+    </liste>
+    <liste nom="nomListe2" ordonnee="oui">
+        <tache nom="nomTache3">
+            <date absolue="oui">01/01/1970</date>
+        </tache>
+        <tache nom="nomTache4">
+            <date absolue="non">1 semaine</date>
+        </tache>
+    </liste>
+</listes>

@@ -15,8 +15,11 @@ DEPENDPATH += . \
               headers/View \
               src/Controller \
               src/Model \
-              src/View
-INCLUDEPATH += . headers/View headers/Model headers headers/Controller
+              src/View \
+              libs/tinyxml2
+
+INCLUDEPATH += . headers/View headers/Model headers \
+                headers/Controller libs/tinyxml2
 
 # Input
 HEADERS += headers/common.h \
@@ -30,7 +33,10 @@ HEADERS += headers/common.h \
     headers/View/TaskDialog.hpp \
     headers/View/ListDialog.hpp \
     headers/View/StartView.hpp \
-    headers/View/ListsOfLists.hpp
+    headers/View/ListsOfLists.hpp \
+    headers/Model/XmlParser.hpp \
+    libs/tinyxml2/tinyxml2.h
+
 SOURCES += main.cpp \
            src/Controller/Controller.cpp \
            src/Model/List.cpp \
@@ -42,4 +48,6 @@ SOURCES += main.cpp \
     src/View/TaskDialog.cpp \
     src/View/ListDialog.cpp \
     src/View/StartView.cpp \
-    src/View/ListsOfLists.cpp
+    src/View/ListsOfLists.cpp \
+    src/Model/XmlParser.cpp \
+    libs/tinyxml2/tinyxml2.cpp

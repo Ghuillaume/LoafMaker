@@ -1,11 +1,13 @@
 #include <QtGui/QApplication>
+
 #include "Window.hpp"
 #include "TaskDialog.hpp"
 #include "Model.hpp"
 #include "Controller.hpp"
-
 #include "Time.hpp"
+#include "XmlParser.hpp"
 
+using namespace std;
 
 void testing(Model* m) {
 
@@ -40,6 +42,11 @@ int main(int argc, char *argv[])
     Model* m = new Model();
 
     testing(m);
+
+    /* Test for the parser */
+    string filename = "/home/yoros/workspace/LoafMaker/LoafMaker/tests/LoafMaker.xml";
+    XmlParser* p = new XmlParser(filename);
+    p->parse();
 
     Window w;
     Controller c(m, &w);

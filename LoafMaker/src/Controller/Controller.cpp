@@ -208,13 +208,9 @@ void Controller::delList() {
             QModelIndexList indexes = view->getListsView()->getTree()->selectionModel()->selection().indexes();
             cout << indexes.size();
             for (int i = 0; i < indexes.size(); i++) {
-                cout << "LOL";
-                cout << indexes[i].row() << endl;
                 model->deleteList(indexes[i].row());
             }
-            cout << "MDR" << endl;
             this->displayLists();
-            // TODO
         }
     }
 }

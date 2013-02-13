@@ -82,7 +82,6 @@ void ListsOfLists::displayList(vector<List *> lists, QTreeWidgetItem *parent) {
 
         // Recherche de sous listes sur la liste courante
         this->displayList((*it)->getAllLists(), listItem);
-
         level++;
     }
 }
