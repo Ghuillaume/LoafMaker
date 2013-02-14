@@ -40,6 +40,11 @@ ListsOfLists::ListsOfLists(QWidget *parent) : QWidget(parent) {
     listsTree = new QTreeWidget(this);
     listsTree->setGeometry(QRect(10, 60, 300, 0));
     listsTree->setAnimated(true);
+    /* To allow drag & drop, use this :
+    listsTree->dragDropOverwriteMode();
+    listsTree->setDragEnabled(true);
+    listsTree->setDragDropMode(QAbstractItemView ::InternalMove);
+    */
     mainLayout->addWidget(listsTree);
 
     // Ajout du header

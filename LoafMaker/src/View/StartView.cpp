@@ -1,8 +1,8 @@
 #include "StartView.hpp"
 
 StartView::StartView(QWidget *parent) : QWidget(parent) {
-
     startLayout = new QVBoxLayout(this);
+    startLayout->setGeometry(QRect());
 
     logoWidget = new QWidget(this);
     logoWidget->setFixedSize(200,200);
@@ -22,7 +22,7 @@ StartView::StartView(QWidget *parent) : QWidget(parent) {
 
     text = new QLabel(this);
     text->setWordWrap(true);
-    text->setText(QString::fromUtf8("Blablalallalallblksdjfikdsjfsd jki jfgiksdh sdf is"));
+    text->setText(QString::fromUtf8("Pour visualisez vos tâches ou en créer de nouvelles, sélectionnez ou créez une liste de tâche à gauche de l'écran."));
 
 
     startLayout->addWidget(logoWidget);

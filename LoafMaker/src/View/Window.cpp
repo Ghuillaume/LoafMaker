@@ -28,7 +28,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
     /* Right part of the screen */
     startView = new StartView(centralWidget);
-    startView->setMinimumSize(600, APP_HEIGHT-BUTTON_SIZE);
+    startView->setMinimumSize(400, APP_HEIGHT-BUTTON_SIZE);
     splitter->addWidget(startView);
 
     listOfTasks = new ListOfTasks(centralWidget);

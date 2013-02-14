@@ -1,11 +1,9 @@
 
 	Urgent :
-		- Paper prototyping !!!!
-		- Gestionnaire de templates
+                - Paper prototyping !!!!
 		
 		
-	Important :
-		- Label de ListOfTasks pour prévenir qu'une liste est ordonnée (mal placé oO)
+        Important :
 		- Ajout de tâches : permettre les dates relatives (modèle OK, dialog pas fait)
 		- Tentative de validation d'une tâche -> vérifier que toutes les tâches antérieures ont été validées
 		- Edition de listes : pouvoir changer le parent (possible dans le modèle mais c'est le merdier)
@@ -14,6 +12,7 @@
 		
 	Détails :
 		- Dans le tree des listes, ajouter pour chaque liste un état [OK], [En cours], [Pas commencé] avec une couleur du vert au rouge
+                - Gestionnaire de templates
 		
 		
 		
