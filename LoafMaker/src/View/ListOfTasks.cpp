@@ -28,7 +28,7 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
 
     orderedLabel = new QLabel("", this);
     orderedLabel->setMinimumSize(parent_width/3, 20);
-    gridLayout->addWidget(orderedLabel, 2, 0, 1, 3);
+    //gridLayout->addWidget(orderedLabel, 2, 0, 1, 3);
 
 
     tasksTree = new QTreeWidget(this);
@@ -136,7 +136,7 @@ void ListOfTasks::displayTasks() {
     }
 
 
-    //gridLayout->addWidget(orderedLabel, 2, 0, 1, 3);
+    gridLayout->addWidget(orderedLabel, 2, 0, 1, 3);
 
     dateLabel->setText(selectedList->getDate()->getReadableDate().c_str());
 
