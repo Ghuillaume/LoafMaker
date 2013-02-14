@@ -13,11 +13,12 @@
     	</liste>
     </liste>
     <liste nom="nomListe2" ordonnee="oui">
+   		<date absolue="oui">14/02/2013</date>
         <tache nom="nomTache3">
             <date absolue="oui">01/01/1970</date>
         </tache>
         <tache nom="nomTache4">
-            <date absolue="non">1 semaine</date>
+            <date absolue="non" reference="nomTache3">-7</date>
         </tache>
     </liste>
 </listes>

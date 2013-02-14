@@ -18,10 +18,13 @@ public:
     ~XmlParser();
 
     List* parse();
-    List* buildList(tinyxml2::XMLElement* current_element);
+    List* buildList(tinyxml2::XMLElement* current_element, vector<Task*>* tasks);
 
 private:
+    vector<Task*> tasks;
+
     Time* buildDate(tinyxml2::XMLElement* current_element);
+    Task* buildRelativeDate(tinyxml2::XMLElement* current_element, vector<Task*>* tasks);
 };
 
 #endif
