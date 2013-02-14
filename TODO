@@ -2,13 +2,10 @@
 	Urgent :
 		- Paper prototyping !!!!
 		- Gestionnaire de templates
-		- Sauvegarde en XML + chargement à l'ouverture
 		
 		
 	Important :
 		- Label de ListOfTasks pour prévenir qu'une liste est ordonnée (mal placé oO)
-		- Listes ordonnées.
-		- Boite de dialogue pour ajouter des listes
 		- Ajout de tâches : permettre les dates relatives (modèle OK, dialog pas fait)
 		- Tentative de validation d'une tâche -> vérifier que toutes les tâches antérieures ont été validées
 		- Edition de listes : pouvoir changer le parent (possible dans le modèle mais c'est le merdier)
@@ -16,5 +13,12 @@
 		
 		
 	Détails :
-		- Date : possibilité de mettre ASAP à la place
 		- Dans le tree des listes, ajouter pour chaque liste un état [OK], [En cours], [Pas commencé] avec une couleur du vert au rouge
+		
+		
+		
+	Trucs qu'on fera pas mais qu'il faut préciser qu'on voulait faire (quoi que, dans un élan de motivation ??)
+	
+		- clic droit pour ajouter/modifier/supprimer des listes/tâches
+		- Drag&drop pour ordonner les tâches de listes ordonnées
+		- Vue pour voir X tâches classées par deadline (celles qui urgent le plus)
