@@ -3,6 +3,7 @@
 
 #include <QtGui>
 #include <QObject>
+#include <QTimer>
 
 #include <stack>
 #include <string>
@@ -11,6 +12,8 @@
 #include "Window.hpp"
 #include "TaskDialog.hpp"
 #include "ListDialog.hpp"
+
+#define SAVE_MS 1000*6*5 // 5min
 
 using namespace std;
 
@@ -29,6 +32,8 @@ class Controller : public QObject
     private:
         Model* model;
         Window* view;
+
+        QTimer* saveTimer;
 
     signals:
 

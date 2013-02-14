@@ -35,6 +35,10 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getTasksView()->buttonEditTask, SIGNAL(clicked()), this, SLOT(editTask()));
     QObject::connect(this->view->getTasksView()->addTaskAction, SIGNAL(triggered()), this, SLOT(addTask()));
 
+    saveTimer = new QTimer(this);
+    connect(saveTimer, SIGNAL(timeout()), this, SLOT(saveModel()));
+    saveTimer->start(SAVE_MS);
+
 }
 
 Controller::~Controller() {
@@ -104,12 +108,14 @@ void Controller::newModel() {
 }
 
 void Controller::saveModel() {
+    saveTimer->start(SAVE_MS);
+
     string fileName = this->model->current_filename;
     this->parseModel(fileName);
 }
 
 void Controller::loadModel() {
-    // TODO
+    cout << "TODO " << endl;
 }
 
 void Controller::close() {
