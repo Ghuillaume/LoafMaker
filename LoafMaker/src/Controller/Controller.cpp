@@ -26,12 +26,14 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getListsView()->buttonAddList, SIGNAL(clicked()), this, SLOT(addList()));
     QObject::connect(this->view->getListsView()->buttonEditList, SIGNAL(clicked()), this, SLOT(editList()));
     QObject::connect(this->view->getListsView()->buttonDelList, SIGNAL(clicked()), this, SLOT(delList()));
+    QObject::connect(this->view->getListsView()->addListAction, SIGNAL(triggered()), this, SLOT(addList()));
 
 
     // ListOfTasks widget connection
     QObject::connect(this->view->getTasksView()->buttonAddTask, SIGNAL(clicked()), this, SLOT(addTask()));
     QObject::connect(this->view->getTasksView()->buttonDelTask, SIGNAL(clicked()), this, SLOT(delTask()));
     QObject::connect(this->view->getTasksView()->buttonEditTask, SIGNAL(clicked()), this, SLOT(editTask()));
+    QObject::connect(this->view->getTasksView()->addTaskAction, SIGNAL(triggered()), this, SLOT(addTask()));
 
 }
 

@@ -2,6 +2,8 @@
 #define LISTOFTEMPLATES_HPP
 
 #include <QApplication>
+#include <QMenu>
+#include <QAction>
 #include <QWidget>
 #include <QFrame>
 #include <QGridLayout>
@@ -29,6 +31,8 @@ class ListsOfLists : public QWidget {
         explicit ListsOfLists(QWidget *parent = 0);
         ~ListsOfLists();
 
+        void setContextMenu();
+
         void displayList(vector<List*> lists, QTreeWidgetItem* parent);
         void clearList();
 
@@ -40,6 +44,11 @@ class ListsOfLists : public QWidget {
         QPushButton* buttonAddList;
         QPushButton* buttonEditList;
         QPushButton* buttonDelList;
+
+        QMenu* contextMenu;
+        QAction* addListAction;
+        QAction* editListAction;
+        QAction* deleteListAction;
 
     private:
         QVBoxLayout* mainLayout;

@@ -4,6 +4,9 @@
 #include <iostream>
 
 #include <QWidget>
+#include <QMenu>
+#include <QAction>
+#include <QIcon>
 #include <QGridLayout>
 #include <QLabel>
 #include <QProgressBar>
@@ -24,6 +27,8 @@ class ListOfTasks : public QWidget
         explicit ListOfTasks(QWidget *parent = 0);
         ~ListOfTasks();
 
+        void setContextMenu();
+
         void displayTasks();
         void setSelectedList(List* list);
 
@@ -33,6 +38,11 @@ class ListOfTasks : public QWidget
         QPushButton* buttonAddTask;
         QPushButton* buttonEditTask;
         QPushButton* buttonDelTask;
+
+        QMenu* contextMenu;
+        QAction* addTaskAction;
+        QAction* editTaskAction;
+        QAction* deleteTaskAction;
 
     private:
         List* selectedList;
