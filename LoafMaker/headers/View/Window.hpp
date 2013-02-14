@@ -6,6 +6,7 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QSplitter>
+#include <QEvent>
 
 #include <iostream>
 
@@ -53,6 +54,8 @@ public:
 
     QMenu* settingsMenu;
 
+    void closeEvent(QCloseEvent *event);
+
 private:
     QWidget *centralWidget;
     QSplitter *splitter;
@@ -62,6 +65,9 @@ private:
 
 public slots:
     void start();
+
+signals:
+    void closing();
 };
 
 #endif // WINDOW_HPP

@@ -17,6 +17,7 @@ class Model
 
         void createRootList(List* rootList);
         void createBaseList(string name, int day, int month, int year, bool ordered);
+        void createTemplate(string name, int day, int month, int year, bool ordered);
         void createSubList(List* parent, string name, int day, int month, int year, bool ordered);
         void deleteList(int row);
 
@@ -24,12 +25,16 @@ class Model
         void deleteTask(List* list, int row);
 
         ListOfList getBaseLists();
+        ListOfList getTemplates();
         List* getList(int row);
+
+
 
         void debug();
 
     private:
         ListOfList lists;
+        ListOfList templates;
 
 };
 

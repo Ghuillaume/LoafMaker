@@ -19,6 +19,12 @@ void Model::createBaseList(string name, int day, int month, int year, bool order
     this->lists.push_back(new List(name, date, ordered));
 }
 
+
+void Model::createTemplate(string name, int day, int month, int year, bool ordered) {
+    Time* date = new Time(-1, -1 , day, month, year);
+    this->templates.push_back(new List(name, date, ordered));
+}
+
 void Model::createSubList(List* parent, string name, int day, int month, int year, bool ordered) {
     Time* date = new Time(-1, -1 , day, month, year);
     parent->addSubList(new List(name, date, ordered, parent));
@@ -44,6 +50,10 @@ void Model::deleteTask(List* list, int row) {
 
 ListOfList Model::getBaseLists() {
     return this->lists;
+}
+
+ListOfList Model::getTemplates() {
+    return this->templates;
 }
 
 List* Model::getList(int row) {

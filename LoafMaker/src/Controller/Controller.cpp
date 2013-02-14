@@ -7,8 +7,9 @@ Controller::Controller(Model* model, Window* window)
 
     // Menubar connections
     QObject::connect(view -> newItem, SIGNAL(activated()), this, SLOT(newModel()));
-    QObject::connect(view -> saveItem, SIGNAL(activated()), this, SLOT(saveModel()));
+    QObject::connect(view -> saveItem, SIGNAL(activated()), this, SLOT(saveModelAs()));
     QObject::connect(view -> openItem, SIGNAL(activated()), this, SLOT(loadModel()));
+    QObject::connect(view, SIGNAL(closing()), this, SLOT(close()));
     QObject::connect(view -> quitItem, SIGNAL(activated()), this, SLOT(close()));
 
     QObject::connect(view->createListItem, SIGNAL(triggered()), this, SLOT(addList()));
@@ -25,12 +26,14 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getListsView()->buttonAddList, SIGNAL(clicked()), this, SLOT(addList()));
     QObject::connect(this->view->getListsView()->buttonEditList, SIGNAL(clicked()), this, SLOT(editList()));
     QObject::connect(this->view->getListsView()->buttonDelList, SIGNAL(clicked()), this, SLOT(delList()));
+    QObject::connect(this->view->getListsView()->addListAction, SIGNAL(triggered()), this, SLOT(addList()));
 
 
     // ListOfTasks widget connection
     QObject::connect(this->view->getTasksView()->buttonAddTask, SIGNAL(clicked()), this, SLOT(addTask()));
     QObject::connect(this->view->getTasksView()->buttonDelTask, SIGNAL(clicked()), this, SLOT(delTask()));
     QObject::connect(this->view->getTasksView()->buttonEditTask, SIGNAL(clicked()), this, SLOT(editTask()));
+    QObject::connect(this->view->getTasksView()->addTaskAction, SIGNAL(triggered()), this, SLOT(addTask()));
 
 }
 
@@ -124,7 +127,7 @@ void Controller::parseModel(string fileName) {
 
 void Controller::saveModelAs() {
 
-    string fileName = QFileDialog::getSaveFileName(this->view, tr("Save File"), "/home", tr("XML Document (*.xml)")).toStdString();
+    string fileName = QFileDialog::getSaveFileName(this->view, tr("Exporter une sauvegarde"), "/home", tr("XML Document (*.xml)")).toStdString();
     if(fileName.find(".xml") == string::npos)
         fileName += ".xml";
 

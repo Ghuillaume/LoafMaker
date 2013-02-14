@@ -49,7 +49,7 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     QIcon iconEdit;
     iconEdit.addFile(QString::fromUtf8(":edit.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconDelete;
-    iconDelete.addFile(QString::fromUtf8(":trash.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconDelete.addFile(QString::fromUtf8(":user-trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
     hboxLayout = new QHBoxLayout();
 
@@ -72,6 +72,9 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     hboxLayout->addWidget(buttonDelTask);
 
     gridLayout->addLayout(hboxLayout, 5, 0, 1, 3);
+
+
+    this->setContextMenu();
 }
 
 ListOfTasks::~ListOfTasks(){
@@ -92,6 +95,29 @@ ListOfTasks::~ListOfTasks(){
     delete gridLayout;
 }
 
+void ListOfTasks::setContextMenu() {
+    this->tasksTree->setContextMenuPolicy(Qt::ActionsContextMenu);
+
+
+    QIcon iconAdd;
+    iconAdd.addFile(QString::fromUtf8(":add.png"), QSize(), QIcon::Normal, QIcon::Off);
+
+    contextMenu = new QMenu(tasksTree);
+    addTaskAction = new QAction(iconAdd, QString::fromUtf8("Nouvelle tâche"), contextMenu);
+    addTaskAction->setIcon(iconAdd);
+    this->tasksTree->addAction(addTaskAction);
+
+    editTaskAction = new QAction(iconAdd, QString::fromUtf8("Éditer"), contextMenu);
+    editTaskAction->setIcon(iconAdd);
+    editTaskAction->setEnabled(false);
+    this->tasksTree->addAction(editTaskAction);
+
+    deleteTaskAction = new QAction(iconAdd, QString::fromUtf8("Supprimer"), contextMenu);
+    deleteTaskAction->setIcon(iconAdd);
+    deleteTaskAction->setEnabled(false);
+    this->tasksTree->addAction(deleteTaskAction);
+
+}
 
 void ListOfTasks::displayTasks() {
 
@@ -99,9 +125,15 @@ void ListOfTasks::displayTasks() {
     listNameLabel->setText(QString(selectedList->getName().c_str()));
     tasksTree->clear();
 
-    if(this->selectedList->isOrdered())
+    if(this->selectedList->isOrdered()) {
         orderedLabel->setText(QString::fromUtf8("Cette liste est ordonnée. Vous devez valider chaque tâche dans l'ordre affiché"));
-    //orderedLabel->setMinimumSize( 100, 20);
+        //orderedLabel->setMinimumSize( 100, 20);
+        tasksTree->setSortingEnabled(false);
+    }
+    else {
+        orderedLabel->setText("");
+        tasksTree->setSortingEnabled(true);
+    }
 
 
     gridLayout->addWidget(orderedLabel, 1, 0, 1, 3);
@@ -115,7 +147,11 @@ void ListOfTasks::displayTasks() {
     for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
         taskItem = new QTreeWidgetItem(tasksTree);
         taskItem = tasksTree->topLevelItem(level);
-        taskItem->setText(0, tr((*it)->getName().c_str()));
+        string taskName = (*it)->getName();
+        if(this->selectedList->isOrdered()) {
+            taskName = QString::number(level+1).toStdString() + ". " + taskName;
+        }
+        taskItem->setText(0, tr(taskName.c_str()));
         taskItem->setText(1, tr((*it)->getDate().c_str()));
         if((*it)->isFinished())
             taskItem->setCheckState(2, Qt::Checked);

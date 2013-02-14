@@ -47,12 +47,36 @@ ListsOfLists::ListsOfLists(QWidget *parent) : QWidget(parent) {
     treewidgetitem = listsTree->headerItem();
     treewidgetitem->setText(0, QString::fromUtf8("Mes Listes de tâches"));
 
-
+    this->setContextMenu();
 }
 
 ListsOfLists::~ListsOfLists() {
     delete listsTree;
     delete gridLayout;
+}
+
+void ListsOfLists::setContextMenu() {
+    this->listsTree->setContextMenuPolicy(Qt::ActionsContextMenu);
+
+
+    QIcon iconAdd;
+    iconAdd.addFile(QString::fromUtf8(":add.png"), QSize(), QIcon::Normal, QIcon::Off);
+
+    contextMenu = new QMenu(listsTree);
+    addListAction = new QAction(iconAdd, QString::fromUtf8("Nouvelle liste"), contextMenu);
+    addListAction->setIcon(iconAdd);
+    this->listsTree->addAction(addListAction);
+
+    editListAction = new QAction(iconAdd, QString::fromUtf8("Éditer"), contextMenu);
+    editListAction->setIcon(iconAdd);
+    editListAction->setEnabled(false);
+    this->listsTree->addAction(editListAction);
+
+    deleteListAction = new QAction(iconAdd, QString::fromUtf8("Supprimer"), contextMenu);
+    deleteListAction->setIcon(iconAdd);
+    deleteListAction->setEnabled(false);
+    this->listsTree->addAction(deleteListAction);
+
 }
 
 void ListsOfLists::displayList(vector<List *> lists, QTreeWidgetItem *parent) {

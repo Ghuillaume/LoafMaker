@@ -166,3 +166,8 @@ void Window::start() {
     this->startView->setVisible(false);
     this->listOfTasks->setVisible(true);
 }
+
+void Window::closeEvent(QCloseEvent *event)
+{
+    emit closing();
+}
