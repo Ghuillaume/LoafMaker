@@ -7,8 +7,9 @@ Controller::Controller(Model* model, Window* window)
 
     // Menubar connections
     QObject::connect(view -> newItem, SIGNAL(activated()), this, SLOT(newModel()));
-    QObject::connect(view -> saveItem, SIGNAL(activated()), this, SLOT(saveModel()));
+    QObject::connect(view -> saveItem, SIGNAL(activated()), this, SLOT(saveModelAs()));
     QObject::connect(view -> openItem, SIGNAL(activated()), this, SLOT(loadModel()));
+    QObject::connect(view, SIGNAL(closing()), this, SLOT(close()));
     QObject::connect(view -> quitItem, SIGNAL(activated()), this, SLOT(close()));
 
     QObject::connect(view->createListItem, SIGNAL(triggered()), this, SLOT(addList()));
@@ -124,7 +125,7 @@ void Controller::parseModel(string fileName) {
 
 void Controller::saveModelAs() {
 
-    string fileName = QFileDialog::getSaveFileName(this->view, tr("Save File"), "/home", tr("XML Document (*.xml)")).toStdString();
+    string fileName = QFileDialog::getSaveFileName(this->view, tr("Exporter une sauvegarde"), "/home", tr("XML Document (*.xml)")).toStdString();
     if(fileName.find(".xml") == string::npos)
         fileName += ".xml";
 

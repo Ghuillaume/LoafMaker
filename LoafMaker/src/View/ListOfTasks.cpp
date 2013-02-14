@@ -49,7 +49,7 @@ ListOfTasks::ListOfTasks(QWidget *parent) : QWidget(parent) {
     QIcon iconEdit;
     iconEdit.addFile(QString::fromUtf8(":edit.png"), QSize(), QIcon::Normal, QIcon::Off);
     QIcon iconDelete;
-    iconDelete.addFile(QString::fromUtf8(":trash.png"), QSize(), QIcon::Normal, QIcon::Off);
+    iconDelete.addFile(QString::fromUtf8(":user-trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
     hboxLayout = new QHBoxLayout();
 
@@ -99,9 +99,13 @@ void ListOfTasks::displayTasks() {
     listNameLabel->setText(QString(selectedList->getName().c_str()));
     tasksTree->clear();
 
-    if(this->selectedList->isOrdered())
+    if(this->selectedList->isOrdered()) {
         orderedLabel->setText(QString::fromUtf8("Cette liste est ordonnée. Vous devez valider chaque tâche dans l'ordre affiché"));
-    //orderedLabel->setMinimumSize( 100, 20);
+        //orderedLabel->setMinimumSize( 100, 20);
+    }
+    else {
+        orderedLabel->setText("");
+    }
 
 
     gridLayout->addWidget(orderedLabel, 1, 0, 1, 3);
@@ -115,7 +119,11 @@ void ListOfTasks::displayTasks() {
     for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
         taskItem = new QTreeWidgetItem(tasksTree);
         taskItem = tasksTree->topLevelItem(level);
-        taskItem->setText(0, tr((*it)->getName().c_str()));
+        string taskName = (*it)->getName();
+        if(this->selectedList->isOrdered()) {
+            taskName = QString::number(level+1).toStdString() + ". " + taskName;
+        }
+        taskItem->setText(0, tr(taskName.c_str()));
         taskItem->setText(1, tr((*it)->getDate().c_str()));
         if((*it)->isFinished())
             taskItem->setCheckState(2, Qt::Checked);
