@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<listes nom="rootListe">
+<listes nom="listeRacine">
+	<date absolue="oui">14/02/2013</date>
     <liste nom="nomListe1" ordonnee="oui">
    		<date absolue="oui">01/01/1970</date>
         <liste nom="nomListe1-2"  ordonnee="non">

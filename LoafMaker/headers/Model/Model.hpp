@@ -28,8 +28,6 @@ class Model
         ListOfList getTemplates();
         List* getList(int row);
 
-
-
         void debug();
 
     private:

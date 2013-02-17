@@ -152,11 +152,13 @@ string Time::getXmlDate() const {
     int year = this -> getYear ();
 
     stringstream s;
+    /*
     s << hour
       << ":"
       << minute
       << ":"
-      << ( ( day < 10 ) ? "0":"" )
+    */
+    s << ( ( day < 10 ) ? "0":"" )
       << day
       << "/"
       << ( ( month < 10 ) ? "0":"" )

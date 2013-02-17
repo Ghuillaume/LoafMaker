@@ -28,6 +28,7 @@ HEADERS += headers/common.h \
            headers/Model/Task.hpp \
            headers/Model/Time.hpp \
            headers/Model/XmlParser.hpp \
+           headers/Model/XmlWriter.hpp \
            headers/View/ListDialog.hpp \
            headers/View/ListOfTasks.hpp \
            headers/View/ListsOfLists.hpp \
@@ -35,6 +36,7 @@ HEADERS += headers/common.h \
            headers/View/TaskDialog.hpp \
            headers/View/Window.hpp \
            libs/tinyxml2/tinyxml2.h
+
 SOURCES += main.cpp \
            libs/tinyxml2/tinyxml2.cpp \
            src/Controller/Controller.cpp \
@@ -43,10 +45,12 @@ SOURCES += main.cpp \
            src/Model/Task.cpp \
            src/Model/Time.cpp \
            src/Model/XmlParser.cpp \
+           src/Model/XmlWriter.cpp \
            src/View/ListDialog.cpp \
            src/View/ListOfTasks.cpp \
            src/View/ListsOfLists.cpp \
            src/View/StartView.cpp \
            src/View/TaskDialog.cpp \
            src/View/Window.cpp
+
 RESOURCES += images.qrc

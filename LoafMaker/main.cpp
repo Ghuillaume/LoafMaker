@@ -6,6 +6,7 @@
 #include "Controller.hpp"
 #include "Time.hpp"
 #include "XmlParser.hpp"
+#include "XmlWriter.hpp"
 
 using namespace std;
 
@@ -44,9 +45,13 @@ int main(int argc, char *argv[])
     testing(m);
 
     string filename = "tests/LoafMaker.xml";
-    XmlParser* p = new XmlParser(filename);
-    List* root_list = p->parse();
-    m->createRootList(root_list);
+    XmlParser* parser = new XmlParser(filename);
+    List* rootList = parser->parse();
+    m->createRootList(rootList);
+
+    string filename2 = "tests/LoafMaker2.xml";
+    XmlWriter* writer = new XmlWriter(filename2);
+    writer->saveModel(m->getBaseLists());
 
     Window w;
     Controller c(m, &w);
