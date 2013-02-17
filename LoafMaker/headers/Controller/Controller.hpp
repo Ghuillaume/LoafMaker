@@ -12,6 +12,8 @@
 #include "Window.hpp"
 #include "TaskDialog.hpp"
 #include "ListDialog.hpp"
+#include "XmlParser.hpp"
+#include "XmlWriter.hpp"
 
 #define SAVE_MS 1000*6*5 // 5min
 

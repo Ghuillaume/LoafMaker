@@ -44,15 +44,6 @@ int main(int argc, char *argv[])
 
     testing(m);
 
-    string filename = "tests/LoafMaker.xml";
-    XmlParser* parser = new XmlParser(filename);
-    List* rootList = parser->parse();
-    m->createRootList(rootList);
-
-    string filename2 = "tests/LoafMaker2.xml";
-    XmlWriter* writer = new XmlWriter(filename2);
-    writer->saveModel(m->getBaseLists());
-
     Window w;
     Controller c(m, &w);
     c.displayLists();

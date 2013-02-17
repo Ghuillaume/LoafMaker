@@ -115,7 +115,13 @@ void Controller::saveModel() {
 }
 
 void Controller::loadModel() {
-    cout << "TODO " << endl;
+    cout << "LOL" << endl;
+    string fileName = "default.xml";
+    XmlParser* parser = new XmlParser(fileName);
+    List* rootList = parser->parse();
+    model->createRootList(rootList);
+    delete parser;
+    cout << "LOL2" << endl;
 }
 
 void Controller::close() {
@@ -127,8 +133,9 @@ void Controller::close() {
 }
 
 void Controller::parseModel(string fileName) {
-    // TODO
-    cout << "TODO : save model in " << fileName << endl;
+    XmlWriter* writer = new XmlWriter(fileName);
+    writer->saveModel(model->getBaseLists());
+    delete writer;
 }
 
 void Controller::saveModelAs() {
