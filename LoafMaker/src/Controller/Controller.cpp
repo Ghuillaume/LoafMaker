@@ -9,7 +9,7 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(view -> newItem, SIGNAL(activated()), this, SLOT(newModel()));
     QObject::connect(view -> saveItem, SIGNAL(activated()), this, SLOT(saveModelAs()));
     QObject::connect(view -> openItem, SIGNAL(activated()), this, SLOT(loadModel()));
-    QObject::connect(view, SIGNAL(closing()), this, SLOT(close()));
+    QObject::connect(view, SIGNAL(closing(QCloseEvent*)), this, SLOT(close(QCloseEvent*)));
     QObject::connect(view -> quitItem, SIGNAL(activated()), this, SLOT(close()));
 
     QObject::connect(view->createListItem, SIGNAL(triggered()), this, SLOT(addList()));
@@ -115,13 +115,21 @@ void Controller::saveModel() {
 }
 
 void Controller::loadModel() {
-    cout << "LOL" << endl;
     string fileName = "default.xml";
     XmlParser* parser = new XmlParser(fileName);
     List* rootList = parser->parse();
     model->createRootList(rootList);
     delete parser;
-    cout << "LOL2" << endl;
+}
+
+void Controller::close(QCloseEvent *event) {
+    if(QMessageBox::question(this->view, "Avertissement", QString::fromUtf8("Êtes-vous sûr(e) de vouloir quitter l'application ?"),
+                             QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
+        this->saveModel();
+        this->view->close();
+    } else {
+        event->ignore();
+    }
 }
 
 void Controller::close() {

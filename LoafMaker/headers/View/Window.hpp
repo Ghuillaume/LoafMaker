@@ -67,7 +67,7 @@ public slots:
     void start();
 
 signals:
-    void closing();
+    void closing(QCloseEvent *event);
 };
 
 #endif // WINDOW_HPP

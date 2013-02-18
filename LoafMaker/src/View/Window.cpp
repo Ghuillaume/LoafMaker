@@ -172,5 +172,5 @@ void Window::start() {
 
 void Window::closeEvent(QCloseEvent *event)
 {
-    emit closing();
+    emit closing(event);
 }
