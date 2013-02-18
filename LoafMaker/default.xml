@@ -30,7 +30,142 @@
     <liste nom="test2" ordonnee="non">
         <date absolue="oui">05/02/2013</date>
     </liste>
-    <liste nom="test" ordonnee="non">
-        <date absolue="oui">18/02/2013</date>
+    <liste nom="" ordonnee="oui">
+        <liste nom="test1" ordonnee="oui">
+            <liste nom="subtest1" ordonnee="oui">
+                <date absolue="oui">10/05/2013</date>
+            </liste>
+            <liste nom="subtest2" ordonnee="non">
+                <liste nom="subsubtest1" ordonnee="oui">
+                    <date absolue="oui">10/05/2013</date>
+                </liste>
+                <liste nom="subsubtest2" ordonnee="oui">
+                    <date absolue="oui">11/05/2013</date>
+                </liste>
+                <tache nom="task1">
+                    <date absolue="non" terminee="0">0</date>
+                </tache>
+                <tache nom="task2">
+                    <date absolue="non" terminee="0">0</date>
+                </tache>
+                <tache nom="task3">
+                    <date absolue="non" terminee="0">0</date>
+                </tache>
+                <date absolue="oui">11/05/2013</date>
+            </liste>
+            <liste nom="subtest3" ordonnee="oui">
+                <date absolue="oui">12/05/2013</date>
+            </liste>
+            <date absolue="oui">05/01/2013</date>
+        </liste>
+        <liste nom="test2" ordonnee="oui">
+            <date absolue="oui">05/02/2013</date>
+        </liste>
+        <liste nom="" ordonnee="non">
+            <liste nom="test1" ordonnee="non">
+                <liste nom="subtest1" ordonnee="non">
+                    <date absolue="oui">10/05/2013</date>
+                </liste>
+                <liste nom="subtest2" ordonnee="oui">
+                    <liste nom="subsubtest1" ordonnee="non">
+                        <date absolue="oui">10/05/2013</date>
+                    </liste>
+                    <liste nom="subsubtest2" ordonnee="non">
+                        <date absolue="oui">11/05/2013</date>
+                    </liste>
+                    <tache nom="task1">
+                        <date absolue="non" terminee="0">0</date>
+                    </tache>
+                    <tache nom="task2">
+                        <date absolue="non" terminee="0">0</date>
+                    </tache>
+                    <tache nom="task3">
+                        <date absolue="non" terminee="0">0</date>
+                    </tache>
+                    <date absolue="oui">11/05/2013</date>
+                </liste>
+                <liste nom="subtest3" ordonnee="non">
+                    <date absolue="oui">12/05/2013</date>
+                </liste>
+                <date absolue="oui">05/01/2013</date>
+            </liste>
+            <liste nom="test2" ordonnee="non">
+                <date absolue="oui">05/02/2013</date>
+            </liste>
+            <liste nom="test" ordonnee="non">
+                <date absolue="oui">18/02/2013</date>
+            </liste>
+            <date absolue="oui">01/01/1970</date>
+        </liste>
+        <date absolue="oui">01/01/1970</date>
+    </liste>
+    <liste nom="" ordonnee="oui">
+        <liste nom="test1" ordonnee="oui">
+            <liste nom="subtest1" ordonnee="oui">
+                <date absolue="oui">10/05/2013</date>
+            </liste>
+            <liste nom="subtest2" ordonnee="non">
+                <liste nom="subsubtest1" ordonnee="oui">
+                    <date absolue="oui">10/05/2013</date>
+                </liste>
+                <liste nom="subsubtest2" ordonnee="oui">
+                    <date absolue="oui">11/05/2013</date>
+                </liste>
+                <tache nom="task1">
+                    <date absolue="non" terminee="0">0</date>
+                </tache>
+                <tache nom="task2">
+                    <date absolue="non" terminee="0">0</date>
+                </tache>
+                <tache nom="task3">
+                    <date absolue="non" terminee="0">0</date>
+                </tache>
+                <date absolue="oui">11/05/2013</date>
+            </liste>
+            <liste nom="subtest3" ordonnee="oui">
+                <date absolue="oui">12/05/2013</date>
+            </liste>
+            <date absolue="oui">05/01/2013</date>
+        </liste>
+        <liste nom="test2" ordonnee="oui">
+            <date absolue="oui">05/02/2013</date>
+        </liste>
+        <liste nom="" ordonnee="non">
+            <liste nom="test1" ordonnee="non">
+                <liste nom="subtest1" ordonnee="non">
+                    <date absolue="oui">10/05/2013</date>
+                </liste>
+                <liste nom="subtest2" ordonnee="oui">
+                    <liste nom="subsubtest1" ordonnee="non">
+                        <date absolue="oui">10/05/2013</date>
+                    </liste>
+                    <liste nom="subsubtest2" ordonnee="non">
+                        <date absolue="oui">11/05/2013</date>
+                    </liste>
+                    <tache nom="task1">
+                        <date absolue="non" terminee="0">0</date>
+                    </tache>
+                    <tache nom="task2">
+                        <date absolue="non" terminee="0">0</date>
+                    </tache>
+                    <tache nom="task3">
+                        <date absolue="non" terminee="0">0</date>
+                    </tache>
+                    <date absolue="oui">11/05/2013</date>
+                </liste>
+                <liste nom="subtest3" ordonnee="non">
+                    <date absolue="oui">12/05/2013</date>
+                </liste>
+                <date absolue="oui">05/01/2013</date>
+            </liste>
+            <liste nom="test2" ordonnee="non">
+                <date absolue="oui">05/02/2013</date>
+            </liste>
+            <liste nom="test" ordonnee="non">
+                <date absolue="oui">18/02/2013</date>
+            </liste>
+            <date absolue="oui">01/01/1970</date>
+        </liste>
+        <date absolue="oui">01/01/1970</date>
     </liste>
 </listes>

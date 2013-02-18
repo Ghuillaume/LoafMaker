@@ -36,7 +36,7 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getTasksView()->addTaskAction, SIGNAL(triggered()), this, SLOT(addTask()));
 
 
-    //this->loadModel(this->model->current_filename);
+    this->loadModel(this->model->current_filename);
 
     saveTimer = new QTimer(this);
     connect(saveTimer, SIGNAL(timeout()), this, SLOT(saveModel()));
@@ -139,7 +139,6 @@ void Controller::loadModel(string fileName) {
     model->createRootList(rootList);
     delete parser;
     this->displayLists();
-    this->view->getTasksView()->displayTasks();
 }
 
 void Controller::parseModel(string fileName) {
