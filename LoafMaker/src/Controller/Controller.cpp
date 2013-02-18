@@ -134,7 +134,6 @@ void Controller::import() {
 }
 
 void Controller::loadModel(string fileName) {
-    this->model = new Model();
     XmlParser* parser = new XmlParser(fileName);
     List* rootList = parser->parse();
     model->createRootList(rootList);
