@@ -132,7 +132,8 @@ void ListOfTasks::displayTasks() {
     }
     else {
         orderedLabel->setText("");
-        tasksTree->setSortingEnabled(true);
+        //tasksTree->setSortingEnabled(true);
+
     }
 
 

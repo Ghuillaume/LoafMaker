@@ -157,7 +157,7 @@ void Controller::saveModelAs() {
 
     if(fileName.compare(".xml") == 0)
         fileName = "default.xml";
-    this->model->current_filename = fileName;
+
     this->parseModel(fileName);
 }
 
