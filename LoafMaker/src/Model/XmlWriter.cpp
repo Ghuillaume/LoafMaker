@@ -24,11 +24,7 @@ void XmlWriter::saveModel(vector<List*> rootElements) {
             buildListAttributes(doc, currentElement, rootElements[i]);
             parentElement->InsertEndChild(currentElement);
         }
-    } /*else if (rootElements.size() == 1) {
-        tinyxml2::XMLElement* currentElement = buildXmlTree(doc, rootElements[0]);
-        buildListAttributes(doc, currentElement, rootElements[0]);
-        parentElement->InsertEndChild(currentElement);
-    }*/
+    }
 
     // Save xml document in the file
     doc->SaveFile(fileName.c_str());
