@@ -5,14 +5,14 @@ StartView::StartView(QWidget *parent) : QWidget(parent) {
     startLayout->setGeometry(QRect());
 
     logoWidget = new QWidget(this);
-    logoWidget->setFixedSize(400,200);
+    logoWidget->setFixedSize(200,200);
     logoWidget->setObjectName(QString::fromUtf8("logoWidget"));
     logoWidget->setStyleSheet(QString::fromUtf8("border: 1px solid black"));
-    logoWidget->setStyleSheet("background-image: url(:logo.png); background-repeat: none; margin-left: 150px;");
+    logoWidget->setStyleSheet("background-image: url(:logo.png)");
 
     title = new QLabel(this);
     title->setWordWrap(true);
-    title->setText(QString::fromUtf8("\tBienvenue dans LoafMaker !"));
+    title->setText(QString::fromUtf8("Bienvenue dans LoafMaker !"));
     QFont titleFont;
     titleFont.setPointSize(18);
     titleFont.setBold(true);
