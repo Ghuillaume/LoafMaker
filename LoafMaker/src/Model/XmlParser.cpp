@@ -57,6 +57,16 @@ List* XmlParser::buildList(tinyxml2::XMLElement* current_element, vector<Task*>*
             Task* newTask = new Task(string(taskName), taskDate);
             tasks->push_back(newTask);
             newTask = buildRelativeDate(child_element, tasks);
+
+            // Is a task finished ?
+            const char* attributeFinished_t = child_element->Attribute("terminee");
+            if (attributeFinished_t != NULL) {
+                string attributeFinished(attributeFinished_t);
+                if (attributeFinished.compare("oui") == 0) {
+                    newTask->setFinished();
+                }
+            }
+
             newList->addTask(newTask);
             child_element = child_element->NextSiblingElement("tache");
         }
@@ -114,15 +124,6 @@ Task* XmlParser::buildRelativeDate(tinyxml2::XMLElement* current_element, vector
                             if (tasks->at(i)->getName().compare(attributeReference) == 0) {
                                reference = tasks->at(i);
                             }
-                        }
-                    }
-
-                    // Is a task finished ?
-                    const char* attributeFinished_t = current_element->Attribute("terminee");
-                    if (attributeFinished_t != NULL) {
-                        string attributeFinished(attributeFinished_t);
-                        if (attributeFinished.compare("oui") == 0) {
-                            lastTask->setFinished();
                         }
                     }
                 }

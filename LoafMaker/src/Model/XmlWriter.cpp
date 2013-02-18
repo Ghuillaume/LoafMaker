@@ -17,17 +17,13 @@ void XmlWriter::saveModel(vector<List*> rootElements) {
 
     // Build xml document
     tinyxml2::XMLElement* parentElement = doc->NewElement("listes");
-    if (rootElements.size() > 1) {
-        doc->InsertEndChild(parentElement);
+    doc->InsertEndChild(parentElement);
+    if (rootElements.size() >= 1) {
         for (int i = 0; i < rootElements.size(); i++) {
             tinyxml2::XMLElement* currentElement = buildXmlTree(doc, rootElements[i]);
             buildListAttributes(doc, currentElement, rootElements[i]);
             parentElement->InsertEndChild(currentElement);
         }
-    } else if (rootElements.size() == 1) {
-        tinyxml2::XMLElement* currentElement = buildXmlTree(doc, rootElements[0]);
-        buildListAttributes(doc, currentElement, rootElements[0]);
-        parentElement->InsertEndChild(currentElement);
     }
 
     // Save xml document in the file
