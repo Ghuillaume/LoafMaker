@@ -36,7 +36,7 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getTasksView()->addTaskAction, SIGNAL(triggered()), this, SLOT(addTask()));
 
 
-    this->loadModel(this->model->current_filename);
+    //this->loadModel(this->model->current_filename);
 
     saveTimer = new QTimer(this);
     connect(saveTimer, SIGNAL(timeout()), this, SLOT(saveModel()));
@@ -145,7 +145,6 @@ void Controller::parseModel(string fileName) {
     XmlWriter* writer = new XmlWriter(fileName);
     writer->saveModel(model->getBaseLists());
     delete writer;
-    this->displayLists();
 }
 
 void Controller::saveModelAs() {
@@ -274,6 +273,7 @@ void Controller::addTask() {
     }
     else {
         TaskDialog* dialog = new TaskDialog(this->view);
+        dialog->setDate(this->view->getListsView()->currentList->getDate());
         dialog->exec();
 
         if(dialog->result() == QDialog::Accepted) {
