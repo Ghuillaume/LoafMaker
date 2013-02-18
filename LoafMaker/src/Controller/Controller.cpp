@@ -104,7 +104,9 @@ void Controller::newModel() {
     // TODO : demander un fichier pour la nouvelle liste
     this->saveModel();
     this->model = new Model();
-
+    // TODO : Bug : pourquoi ?!
+    //this->displayLists();
+    //this->view->getTasksView()->displayTasks();
 }
 
 void Controller::saveModel() {
@@ -116,10 +118,13 @@ void Controller::saveModel() {
 
 void Controller::loadModel() {
     string fileName = "default.xml";
+    this->model = new Model();
     XmlParser* parser = new XmlParser(fileName);
     List* rootList = parser->parse();
     model->createRootList(rootList);
     delete parser;
+    this->displayLists();
+    this->view->getTasksView()->displayTasks();
 }
 
 void Controller::close(QCloseEvent *event) {
@@ -329,7 +334,8 @@ void Controller::delTask() {
         string question = "Voulez-vous vraiment supprimer la tâche " + this->getCurrentTask()->getName() + " ?";
         if(QMessageBox::question(this->view, QString::fromUtf8("Êtes-vous sûr ?"), QString::fromUtf8(question.c_str()), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
             this->model->deleteTask(this->view->getListsView()->currentList, this->view->getTasksView()->getList()->currentColumn());
-            this->displayLists();
+            //this->displayLists();
+            this->view->getTasksView()->displayTasks();
         }
     }
 }
