@@ -23,12 +23,12 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
 
     /* Left part of the screen */
     listsOfLists = new ListsOfLists(centralWidget);
-    listsOfLists->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT-BUTTON_SIZE+10);
+    listsOfLists->setMinimumSize(LIST_PANEL_WIDTH+100, APP_HEIGHT-BUTTON_SIZE+10);
     splitter->addWidget(listsOfLists);
 
     /* Right part of the screen */
     startView = new StartView(centralWidget);
-    startView->setMinimumSize(400, APP_HEIGHT-BUTTON_SIZE);
+    startView->setFixedSize(540, APP_HEIGHT-BUTTON_SIZE);
     splitter->addWidget(startView);
 
     listOfTasks = new ListOfTasks(centralWidget);
@@ -165,6 +165,9 @@ ListOfTasks* Window::getTasksView() {
 void Window::start() {
     this->startView->setVisible(false);
     this->listOfTasks->setVisible(true);
+
+    listOfTasks->setMinimumSize(400, APP_HEIGHT-BUTTON_SIZE);
+    listsOfLists->setMinimumSize(LIST_PANEL_WIDTH, APP_HEIGHT-BUTTON_SIZE+10);
 }
 
 void Window::closeEvent(QCloseEvent *event)
