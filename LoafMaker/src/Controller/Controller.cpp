@@ -55,8 +55,10 @@ Task* Controller::getCurrentTask() {
 
 
 void Controller::displayLists() {
+    QModelIndex current = this->view->getListsView()->getTree()->currentIndex();
     this->view->getListsView()->clearList();
     this->view->getListsView()->displayList(this->model->getBaseLists(), NULL);
+    this->view->getListsView()->getTree()->setCurrentIndex(current);
 }
 
 void Controller::displayTemplates() {
