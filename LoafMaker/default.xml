@@ -18,7 +18,7 @@
                 <date absolue="non" terminee="1">0</date>
             </tache>
             <tache nom="task3">
-                <date absolue="oui" terminee="0">04/01/1970</date>
+                <date absolue="oui" terminee="0">08/06/6666</date>
             </tache>
             <date absolue="oui">11/05/2013</date>
         </liste>
@@ -29,5 +29,11 @@
     </liste>
     <liste nom="test2" ordonnee="non">
         <date absolue="oui">05/02/2013</date>
+    </liste>
+    <liste nom="test" ordonnee="non">
+        <tache nom="test">
+            <date absolue="non" terminee="0">0</date>
+        </tache>
+        <date absolue="oui">18/02/2013</date>
     </liste>
 </listes>
