@@ -36,7 +36,7 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getTasksView()->addTaskAction, SIGNAL(triggered()), this, SLOT(addTask()));
 
 
-    //this->loadModel(this->model->current_filename);
+    this->loadModel(this->model->current_filename);
 
     saveTimer = new QTimer(this);
     connect(saveTimer, SIGNAL(timeout()), this, SLOT(saveModel()));
@@ -108,7 +108,7 @@ void Controller::setCurrentList() {
 void Controller::newModel() {
     if(QMessageBox::warning(this->view, "Avertissement", QString::fromUtf8("Toutes vos listes seront supprimées. Assurez-vous de les avoir exportées."),
                              QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
-        this->model = new Model();
+        this->model->clearModel();
         this->view->getListsView()->clearList();
     }
 }

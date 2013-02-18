@@ -16,6 +16,8 @@ List::~List() {
     for(vector<Task*>::iterator it = tasks.begin() ; it != tasks.end() ; it++) {
         delete (*it);
     }
+
+    delete creationDate;
 }
 
 
