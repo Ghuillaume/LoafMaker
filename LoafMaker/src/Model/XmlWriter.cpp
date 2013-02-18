@@ -55,9 +55,15 @@ tinyxml2::XMLElement* XmlWriter::buildXmlTree(tinyxml2::XMLDocument* doc, List* 
             string taskName = taskChildren.at(i)->getName();
             child->SetAttribute("nom", taskName.c_str());
 
+            char* boolean = "non";
+            if (taskChildren.at(i)->isFinished()) {
+                boolean = "oui";
+            }
+            child->SetAttribute("terminee", boolean);
+
+
             // Set the date
             tinyxml2::XMLElement* dateChild = doc->NewElement("date");
-            char* boolean;
             string dateString;
             if (taskChildren.at(i)->isDeadlineRelative()) {
                 boolean = "oui";
@@ -79,8 +85,6 @@ tinyxml2::XMLElement* XmlWriter::buildXmlTree(tinyxml2::XMLDocument* doc, List* 
             dateChild->SetAttribute("absolue", boolean);
             tinyxml2::XMLText* dateTask = doc->NewText(dateString.c_str());
             dateChild->InsertFirstChild(dateTask);
-            dateChild->SetAttribute("terminee", taskChildren.at(i)->isFinished());
-
             child->InsertEndChild(dateChild);
             element->InsertEndChild(child);
         }
