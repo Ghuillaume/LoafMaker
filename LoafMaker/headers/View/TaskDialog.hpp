@@ -46,6 +46,7 @@ class TaskDialog: public QDialog
         QDialogButtonBox *buttonBox;
 
         void setArgs(string name, Time* deadline, bool isRelative, int dayInterval, vector<Task *> relatedTasks);
+        void setDate(Time* deadline);
 
     private:
         //Time time;

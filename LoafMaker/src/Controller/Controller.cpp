@@ -108,7 +108,7 @@ void Controller::setCurrentList() {
 void Controller::newModel() {
     if(QMessageBox::warning(this->view, "Avertissement", QString::fromUtf8("Toutes vos listes seront supprimées. Assurez-vous de les avoir exportées."),
                              QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
-        this->model = new Model();
+        this->model->clearModel();
         this->view->getListsView()->clearList();
     }
 }
@@ -272,6 +272,7 @@ void Controller::addTask() {
     }
     else {
         TaskDialog* dialog = new TaskDialog(this->view);
+        dialog->setDate(this->view->getListsView()->currentList->getDate());
         dialog->exec();
 
         if(dialog->result() == QDialog::Accepted) {

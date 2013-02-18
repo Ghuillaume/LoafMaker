@@ -13,6 +13,8 @@ class Model
         Model();
         ~Model();
 
+        void clearModel();
+
         string current_filename;
 
         void createRootList(List* rootList);

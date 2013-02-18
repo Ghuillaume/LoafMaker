@@ -139,6 +139,10 @@ void TaskDialog::setArgs(string name, Time* deadline, bool isRelative, int dayIn
     }
 }
 
+void TaskDialog::setDate(Time *deadline) {
+    this->absoluteDateEdit->setDate(QDate(deadline->getYear(), deadline->getMonth(), deadline->getDay()));
+}
+
 
 TaskDialog::~TaskDialog()
 {

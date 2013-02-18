@@ -10,6 +10,11 @@ Model::~Model() {
 }
 
 
+void Model::clearModel() {
+    this->lists.clear();
+}
+
+
 void Model::createRootList(List* rootList) {
     this->lists.push_back(rootList);
 }
