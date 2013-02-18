@@ -17,7 +17,7 @@ public:
     XmlParser(string name);
     ~XmlParser();
 
-    List* parse();
+    vector<List*>* parse();
     List* buildList(tinyxml2::XMLElement* current_element, vector<Task*>* tasks);
 
 private:

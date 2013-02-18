@@ -8,14 +8,20 @@ XmlParser::~XmlParser() {
 
 }
 
-List* XmlParser::parse() {
+vector<List*>* XmlParser::parse() {
     tinyxml2::XMLDocument doc;
     doc.LoadFile(filename.c_str());
-    List* rootList = NULL;
+    vector<List*>* rootList = new vector<List*>();
 
     tinyxml2::XMLElement* root = doc.FirstChildElement( "listes" );
     if(!root->NoChildren()) {
-       rootList = buildList(root, &tasks);
+        tinyxml2::XMLElement* child_element = root->FirstChildElement("liste");
+        while (child_element != NULL) {
+            cout << "test" << endl;
+            rootList->push_back(buildList(child_element, &tasks));
+            child_element = child_element->NextSiblingElement("liste");
+        }
+        //rootList = buildList(root, &tasks);
     }
     return rootList;
 }

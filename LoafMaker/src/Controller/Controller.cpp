@@ -135,8 +135,11 @@ void Controller::import() {
 
 void Controller::loadModel(string fileName) {
     XmlParser* parser = new XmlParser(fileName);
-    List* rootList = parser->parse();
-    model->createRootList(rootList);
+    vector<List*>* rootList = parser->parse();
+    for (int i = 0; i < rootList->size(); i++) {
+        model->createRootList(rootList->at(i));
+    }
+    //model->createRootList(rootList);
     delete parser;
     this->displayLists();
 }
