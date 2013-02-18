@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
     Model* m = new Model();
 
-    //testing(m);
+    testing(m);
 
     Window w;
     Controller c(m, &w);

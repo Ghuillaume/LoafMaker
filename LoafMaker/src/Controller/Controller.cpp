@@ -36,7 +36,7 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getTasksView()->addTaskAction, SIGNAL(triggered()), this, SLOT(addTask()));
 
 
-    this->loadModel(this->model->current_filename);
+    //this->loadModel(this->model->current_filename);
 
     saveTimer = new QTimer(this);
     connect(saveTimer, SIGNAL(timeout()), this, SLOT(saveModel()));
@@ -106,13 +106,11 @@ void Controller::setCurrentList() {
 }
 
 void Controller::newModel() {
-
     if(QMessageBox::warning(this->view, "Avertissement", QString::fromUtf8("Toutes vos listes seront supprimées. Assurez-vous de les avoir exportées."),
                              QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
         this->model = new Model();
         this->view->getListsView()->clearList();
     }
-
 }
 
 void Controller::saveModel() {
@@ -136,10 +134,13 @@ void Controller::import() {
 }
 
 void Controller::loadModel(string fileName) {
+    this->model = new Model();
     XmlParser* parser = new XmlParser(fileName);
     List* rootList = parser->parse();
     model->createRootList(rootList);
     delete parser;
+    this->displayLists();
+    this->view->getTasksView()->displayTasks();
 }
 
 void Controller::parseModel(string fileName) {
@@ -350,7 +351,8 @@ void Controller::delTask() {
         string question = "Voulez-vous vraiment supprimer la tâche " + this->getCurrentTask()->getName() + " ?";
         if(QMessageBox::question(this->view, QString::fromUtf8("Êtes-vous sûr ?"), QString::fromUtf8(question.c_str()), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
             this->model->deleteTask(this->view->getListsView()->currentList, this->view->getTasksView()->getList()->currentColumn());
-            this->displayLists();
+            //this->displayLists();
+            this->view->getTasksView()->displayTasks();
         }
     }
 }
