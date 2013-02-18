@@ -29,9 +29,6 @@
             <tache nom="cartes" terminee="non">
                 <date absolue="non">0</date>
             </tache>
-            <tache nom="pull" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
             <date absolue="oui">18/02/2013</date>
         </liste>
         <liste nom="Approvisionnement repas" ordonnee="oui">
@@ -56,10 +53,13 @@
             <date absolue="oui">18/02/2013</date>
         </liste>
         <liste nom="sac perso" ordonnee="non">
+            <tache nom="veste de quart" terminee="non">
+                <date absolue="non">0</date>
+            </tache>
             <tache nom="bottes" terminee="non">
                 <date absolue="non">0</date>
             </tache>
-            <tache nom="pulle" terminee="non">
+            <tache nom="pull" terminee="non">
                 <date absolue="non">0</date>
             </tache>
             <tache nom="creme solaire" terminee="non">
