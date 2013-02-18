@@ -144,8 +144,6 @@ void Controller::loadModel(string fileName) {
 void Controller::parseModel(string fileName) {
     XmlWriter* writer = new XmlWriter(fileName);
     writer->saveModel(model->getBaseLists());
-    delete writer;
-    this->displayLists();
 }
 
 void Controller::saveModelAs() {
