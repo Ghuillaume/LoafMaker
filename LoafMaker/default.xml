@@ -30,28 +30,4 @@
     <liste nom="test2" ordonnee="non">
         <date absolue="oui">05/02/2013</date>
     </liste>
-    <liste nom="test" ordonnee="non">
-        <date absolue="oui">18/02/2013</date>
-    </liste>
-    <liste nom="test" ordonnee="non">
-        <date absolue="oui">18/02/2013</date>
-    </liste>
-    <liste nom="test" ordonnee="non">
-        <date absolue="oui">18/02/2013</date>
-    </liste>
-    <liste nom="test" ordonnee="non">
-        <date absolue="oui">18/02/2013</date>
-    </liste>
-    <liste nom="test" ordonnee="non">
-        <date absolue="oui">18/02/2013</date>
-    </liste>
-    <liste nom="test" ordonnee="non">
-        <date absolue="oui">18/02/2013</date>
-    </liste>
-    <liste nom="test" ordonnee="non">
-        <date absolue="oui">18/02/2013</date>
-    </liste>
-    <liste nom="test" ordonnee="non">
-        <date absolue="oui">18/02/2013</date>
-    </liste>
 </listes>

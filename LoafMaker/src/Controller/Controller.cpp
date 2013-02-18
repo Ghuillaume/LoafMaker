@@ -8,7 +8,7 @@ Controller::Controller(Model* model, Window* window)
     // Menubar connections
     QObject::connect(view -> newItem, SIGNAL(activated()), this, SLOT(newModel()));
     QObject::connect(view -> saveItem, SIGNAL(activated()), this, SLOT(saveModelAs()));
-    QObject::connect(view -> openItem, SIGNAL(activated()), this, SLOT(loadModel()));
+    QObject::connect(view -> openItem, SIGNAL(activated()), this, SLOT(import()));
     QObject::connect(view, SIGNAL(closing(QCloseEvent*)), this, SLOT(close(QCloseEvent*)));
     QObject::connect(view -> quitItem, SIGNAL(activated()), this, SLOT(close()));
 
@@ -34,6 +34,9 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getTasksView()->buttonDelTask, SIGNAL(clicked()), this, SLOT(delTask()));
     QObject::connect(this->view->getTasksView()->buttonEditTask, SIGNAL(clicked()), this, SLOT(editTask()));
     QObject::connect(this->view->getTasksView()->addTaskAction, SIGNAL(triggered()), this, SLOT(addTask()));
+
+
+    this->loadModel(this->model->current_filename);
 
     saveTimer = new QTimer(this);
     connect(saveTimer, SIGNAL(timeout()), this, SLOT(saveModel()));
@@ -103,9 +106,12 @@ void Controller::setCurrentList() {
 }
 
 void Controller::newModel() {
-    // TODO : demander un fichier pour la nouvelle liste
-    this->saveModel();
-    this->model = new Model();
+
+    if(QMessageBox::warning(this->view, "Avertissement", QString::fromUtf8("Toutes vos listes seront supprimées. Assurez-vous de les avoir exportées."),
+                             QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
+        this->model = new Model();
+        this->view->getListsView()->clearList();
+    }
 
 }
 
@@ -116,12 +122,43 @@ void Controller::saveModel() {
     this->parseModel(fileName);
 }
 
-void Controller::loadModel() {
-    string fileName = "default.xml";
+void Controller::import() {
+
+    if(QMessageBox::question(this->view, "Avertissement", QString::fromUtf8("Voulez-vous écraser vos listes avant d'en importer de nouvelles ?"),
+                             QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
+        this->model = new Model();
+        this->view->getListsView()->clearList();
+    }
+
+    string fileName = QFileDialog::getOpenFileName(this->view, tr("Importer une sauvegarde"), "/home", tr("XML Document (*.xml)")).toStdString();
+
+    loadModel(fileName);
+}
+
+void Controller::loadModel(string fileName) {
     XmlParser* parser = new XmlParser(fileName);
     List* rootList = parser->parse();
     model->createRootList(rootList);
     delete parser;
+}
+
+void Controller::parseModel(string fileName) {
+    XmlWriter* writer = new XmlWriter(fileName);
+    writer->saveModel(model->getBaseLists());
+    delete writer;
+    this->displayLists();
+}
+
+void Controller::saveModelAs() {
+
+    string fileName = QFileDialog::getSaveFileName(this->view, tr("Exporter une sauvegarde"), "/home", tr("XML Document (*.xml)")).toStdString();
+    if(fileName.find(".xml") == string::npos)
+        fileName += ".xml";
+
+    if(fileName.compare(".xml") == 0)
+        fileName = "default.xml";
+    this->model->current_filename = fileName;
+    this->parseModel(fileName);
 }
 
 void Controller::close(QCloseEvent *event) {
@@ -140,24 +177,6 @@ void Controller::close() {
         this->saveModel();
         this->view->close();
     }
-}
-
-void Controller::parseModel(string fileName) {
-    XmlWriter* writer = new XmlWriter(fileName);
-    writer->saveModel(model->getBaseLists());
-    delete writer;
-}
-
-void Controller::saveModelAs() {
-
-    string fileName = QFileDialog::getSaveFileName(this->view, tr("Exporter une sauvegarde"), "/home", tr("XML Document (*.xml)")).toStdString();
-    if(fileName.find(".xml") == string::npos)
-        fileName += ".xml";
-
-    if(fileName.compare(".xml") == 0)
-        fileName = "default.xml";
-    this->model->current_filename = fileName;
-    this->parseModel(fileName);
 }
 
 void Controller::addList() {

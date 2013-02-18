@@ -45,7 +45,8 @@ class Controller : public QObject
         void setCurrentList();
         void newModel();
         void saveModel();
-        void loadModel();
+        void import();
+        void loadModel(string fileName);
         void close(QCloseEvent *event);
         void close();
         void parseModel(string fileName);
