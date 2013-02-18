@@ -110,6 +110,15 @@ Task* XmlParser::buildRelativeDate(tinyxml2::XMLElement* current_element, vector
                             }
                         }
                     }
+
+                    // Is a task finished ?
+                    const char* attributeFinished_t = current_element->Attribute("terminee");
+                    if (attributeFinished_t != NULL) {
+                        string attributeFinished(attributeFinished_t);
+                        if (attributeFinished.compare("oui")) {
+                            lastTask->setFinished();
+                        }
+                    }
                 }
             }
         }
