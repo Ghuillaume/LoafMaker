@@ -101,19 +101,23 @@ void ListOfTasks::setContextMenu() {
 
     QIcon iconAdd;
     iconAdd.addFile(QString::fromUtf8(":add.png"), QSize(), QIcon::Normal, QIcon::Off);
+    QIcon iconEdit;
+    iconEdit.addFile(QString::fromUtf8(":edit.png"), QSize(), QIcon::Normal, QIcon::Off);
+    QIcon iconDelete;
+    iconDelete.addFile(QString::fromUtf8(":user-trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
     contextMenu = new QMenu(tasksTree);
     addTaskAction = new QAction(iconAdd, QString::fromUtf8("Nouvelle tâche"), contextMenu);
     addTaskAction->setIcon(iconAdd);
     this->tasksTree->addAction(addTaskAction);
 
-    editTaskAction = new QAction(iconAdd, QString::fromUtf8("Éditer"), contextMenu);
-    editTaskAction->setIcon(iconAdd);
+    editTaskAction = new QAction(iconEdit, QString::fromUtf8("Éditer"), contextMenu);
+    editTaskAction->setIcon(iconEdit);
     editTaskAction->setEnabled(false);
     this->tasksTree->addAction(editTaskAction);
 
-    deleteTaskAction = new QAction(iconAdd, QString::fromUtf8("Supprimer"), contextMenu);
-    deleteTaskAction->setIcon(iconAdd);
+    deleteTaskAction = new QAction(iconDelete, QString::fromUtf8("Supprimer"), contextMenu);
+    deleteTaskAction->setIcon(iconDelete);
     deleteTaskAction->setEnabled(false);
     this->tasksTree->addAction(deleteTaskAction);
 

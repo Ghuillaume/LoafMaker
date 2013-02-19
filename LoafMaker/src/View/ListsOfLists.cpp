@@ -66,19 +66,23 @@ void ListsOfLists::setContextMenu() {
 
     QIcon iconAdd;
     iconAdd.addFile(QString::fromUtf8(":add.png"), QSize(), QIcon::Normal, QIcon::Off);
+    QIcon iconEdit;
+    iconEdit.addFile(QString::fromUtf8(":edit.png"), QSize(), QIcon::Normal, QIcon::Off);
+    QIcon iconDelete;
+    iconDelete.addFile(QString::fromUtf8(":user-trash.png"), QSize(), QIcon::Normal, QIcon::Off);
 
     contextMenu = new QMenu(listsTree);
     addListAction = new QAction(iconAdd, QString::fromUtf8("Nouvelle liste"), contextMenu);
     addListAction->setIcon(iconAdd);
     this->listsTree->addAction(addListAction);
 
-    editListAction = new QAction(iconAdd, QString::fromUtf8("Éditer"), contextMenu);
-    editListAction->setIcon(iconAdd);
+    editListAction = new QAction(iconEdit, QString::fromUtf8("Éditer"), contextMenu);
+    editListAction->setIcon(iconEdit);
     editListAction->setEnabled(false);
     this->listsTree->addAction(editListAction);
 
-    deleteListAction = new QAction(iconAdd, QString::fromUtf8("Supprimer"), contextMenu);
-    deleteListAction->setIcon(iconAdd);
+    deleteListAction = new QAction(iconDelete, QString::fromUtf8("Supprimer"), contextMenu);
+    deleteListAction->setIcon(iconDelete);
     deleteListAction->setEnabled(false);
     this->listsTree->addAction(deleteListAction);
 
