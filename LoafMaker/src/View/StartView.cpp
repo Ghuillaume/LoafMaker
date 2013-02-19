@@ -12,7 +12,7 @@ StartView::StartView(QWidget *parent) : QWidget(parent) {
 
     title = new QLabel(this);
     title->setWordWrap(true);
-    title->setText(QString::fromUtf8("\tBienvenue dans LoafMaker !"));
+    title->setText(QString::fromUtf8("       Bienvenue dans LoafMaker !"));
     QFont titleFont;
     titleFont.setPointSize(18);
     titleFont.setBold(true);
