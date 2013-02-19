@@ -36,7 +36,7 @@ Controller::Controller(Model* model, Window* window)
     QObject::connect(this->view->getTasksView()->addTaskAction, SIGNAL(triggered()), this, SLOT(addTask()));
 
 
-    this->loadModel(this->model->current_filename);
+    //this->loadModel(this->model->current_filename);
 
     saveTimer = new QTimer(this);
     connect(saveTimer, SIGNAL(timeout()), this, SLOT(saveModel()));
@@ -52,16 +52,17 @@ Controller::~Controller() {
 
 Task* Controller::getCurrentTask() {
     List* currentList = this->view->getListsView()->currentList;
-    int currentTaskRow = this->view->getTasksView()->getList()->currentColumn();
+    int currentTaskRow =  this->view->getTasksView()->getList()->indexOfTopLevelItem(this->view->getTasksView()->getList()->currentItem());
     return currentList->getTask(currentTaskRow);
 }
 
 
 void Controller::displayLists() {
-    QModelIndex current = this->view->getListsView()->getTree()->currentIndex();
+    //QModelIndex current = this->view->getListsView()->getTree()->currentIndex();
+    //cout << current.row() << endl; // -1 quand on supprime une ligne : comment ça pourrait fonctionner ?!
     this->view->getListsView()->clearList();
     this->view->getListsView()->displayList(this->model->getBaseLists(), NULL);
-    this->view->getListsView()->getTree()->setCurrentIndex(current);
+    //this->view->getListsView()->getTree()->setCurrentIndex(current)
 }
 
 void Controller::displayTemplates() {
@@ -125,7 +126,7 @@ void Controller::import() {
     if(QMessageBox::question(this->view, "Avertissement", QString::fromUtf8("Voulez-vous écraser vos listes avant d'en importer de nouvelles ?"),
                              QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
         this->model = new Model();
-        this->view->getListsView()->clearList();
+        //this->view->getListsView()->clearList();
     }
 
     string fileName = QFileDialog::getOpenFileName(this->view, tr("Importer une sauvegarde"), "/home", tr("XML Document (*.xml)")).toStdString();
@@ -140,7 +141,7 @@ void Controller::loadModel(string fileName) {
         model->createRootList(rootList->at(i));
     }
     //model->createRootList(rootList);
-    delete parser;
+    //delete parser;
     this->displayLists();
 }
 
@@ -227,7 +228,10 @@ void Controller::editList() {
             string name = dialog->intituleEdit->text().toStdString();
 
             this->view->getListsView()->currentList->setName(name);
-            this->view->getListsView()->currentList->setDate(new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year()));
+            this->view->getListsView()->currentList->setDate(new Time(-1, -1,
+                                                                      dialog->absoluteDateEdit->date().day(),
+                                                                      dialog->absoluteDateEdit->date().month(),
+                                                                      dialog->absoluteDateEdit->date().year()));
             this->view->getListsView()->currentList->setOrdered(dialog->orderedCheckBox->isChecked());
 
             this->displayLists();
@@ -256,11 +260,10 @@ void Controller::delList() {
 
             // Si la réponse est affirmative, on supprime les listes
             if (button == QMessageBox::Yes) {
-                QModelIndexList indexes = view->getListsView()->getTree()->selectionModel()->selection().indexes();
-                cout << indexes.size();
-                for (int i = 0; i < indexes.size(); i++) {
-                    model->deleteList(indexes[i].row());
-                }
+                int row = this->view->getListsView()->getTree()->currentIndex().row();
+                cout << "row : ";
+                cout << row << endl;
+                this->model->deleteList(row);
                 this->displayLists();
             }
         }
@@ -282,7 +285,9 @@ void Controller::addTask() {
 
             // Create task
             string name = dialog->intituleEdit->text().toStdString();
-            Time* absoluteDeadline = new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year());
+            Time* absoluteDeadline = new Time(-1, -1, dialog->absoluteDateEdit->date().day(),
+                                              dialog->absoluteDateEdit->date().month(),
+                                              dialog->absoluteDateEdit->date().year());
             Task* newTask = new Task(name, absoluteDeadline);
             this->view->getListsView()->currentList->addTask(newTask);
 
@@ -298,15 +303,14 @@ void Controller::addTask() {
                 //newTask->setRelativeDate(relatedTask, interval);
 
             }
-
-            this->displayLists();
+            this->view->getTasksView()->displayTasks();
         }
     }
 }
 
 void Controller::editTask() {
 
-    if(this->view->getTasksView()->getList()->currentColumn() == -1) {
+    if( this->view->getTasksView()->getList()->indexOfTopLevelItem(this->view->getTasksView()->getList()->currentItem()) == -1) {
         QMessageBox::information(this->view, QString::fromUtf8("Aucune tâche selectionnée"),
                                      QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez modifier"));
     }
@@ -333,7 +337,9 @@ void Controller::editTask() {
                 //this->getCurrentTask()->setRelativeDate(relatedTask, interval);
             }
             else {
-                this->getCurrentTask()->setAbsoluteDate(new Time(-1, -1, dialog->absoluteDateEdit->date().day(), dialog->absoluteDateEdit->date().month(), dialog->absoluteDateEdit->date().year()));
+                this->getCurrentTask()->setAbsoluteDate(new Time(-1, -1, dialog->absoluteDateEdit->date().day(),
+                                                                 dialog->absoluteDateEdit->date().month(),
+                                                                 dialog->absoluteDateEdit->date().year()));
             }
         }
 
@@ -343,15 +349,14 @@ void Controller::editTask() {
 
 void Controller::delTask() {
 
-    if(this->view->getTasksView()->getList()->currentColumn() == -1) {
+    if(this->view->getTasksView()->getList()->indexOfTopLevelItem(this->view->getTasksView()->getList()->currentItem()) == -1) {
         QMessageBox::information(this->view, QString::fromUtf8("Aucune tâche selectionnée"),
                                      QString::fromUtf8("Veuillez d'abord selectionner la tâche que vous souhaitez supprimer"));
     }
     else {
         string question = "Voulez-vous vraiment supprimer la tâche " + this->getCurrentTask()->getName() + " ?";
         if(QMessageBox::question(this->view, QString::fromUtf8("Êtes-vous sûr ?"), QString::fromUtf8(question.c_str()), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
-            this->model->deleteTask(this->view->getListsView()->currentList, this->view->getTasksView()->getList()->currentColumn());
-            //this->displayLists();
+            this->model->deleteTask(this->view->getListsView()->currentList, this->view->getTasksView()->getList()->indexOfTopLevelItem(this->view->getTasksView()->getList()->currentItem()));
             this->view->getTasksView()->displayTasks();
         }
     }

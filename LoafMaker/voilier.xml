@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes" encoding="UTF-8" ?>
 <listes>
-    <liste nom="Les Açores en voilier" ordonnee="non">
-        <liste nom="Vérifier sécurité" ordonnee="non">
+    <liste nom="Les Açores en voilier" ordonnee="oui">
+        <liste nom="V\E9rifier s\E9curit\E9" ordonnee="oui">
             <tache nom="Manivelle de winch" terminee="non">
                 <date absolue="non">0</date>
             </tache>
@@ -31,7 +31,7 @@
             </tache>
             <date absolue="oui">18/02/2013</date>
         </liste>
-        <liste nom="Approvisionnement repas" ordonnee="oui">
+        <liste nom="Approvisionnement repas" ordonnee="non">
             <tache nom="Courses" terminee="non">
                 <date absolue="non">0</date>
             </tache>
@@ -43,7 +43,7 @@
             </tache>
             <date absolue="oui">18/02/2013</date>
         </liste>
-        <liste nom="Remplissage ponton" ordonnee="non">
+        <liste nom="Remplissage ponton" ordonnee="oui">
             <tache nom="eau/electricité" terminee="non">
                 <date absolue="non">0</date>
             </tache>
@@ -52,7 +52,7 @@
             </tache>
             <date absolue="oui">18/02/2013</date>
         </liste>
-        <liste nom="sac perso" ordonnee="non">
+        <liste nom="sac perso" ordonnee="oui">
             <tache nom="veste de quart" terminee="non">
                 <date absolue="non">0</date>
             </tache>

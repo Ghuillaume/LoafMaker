@@ -1,78 +1,12 @@
 <?xml version="1.0" standalone="yes" encoding="UTF-8" ?>
 <listes>
-    <liste nom="Les Açores en voilier" ordonnee="non">
-        <liste nom="Vérifier sécurité" ordonnee="non">
-            <tache nom="Manivelle de winch" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="gilet de sauvetage" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="feu de signalisation" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="bombard" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="outillage moteur" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="test moteur" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="remplir nourrice annexe" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="piles" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="cartes" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="pull" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <date absolue="oui">18/02/2013</date>
+    <liste nom="test" ordonnee="non">
+        <liste nom="test" ordonnee="non">
+            <date absolue="oui">19/02/2013</date>
         </liste>
-        <liste nom="Approvisionnement repas" ordonnee="oui">
-            <tache nom="Courses" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="charge non périssable" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="charger périssable" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <date absolue="oui">18/02/2013</date>
-        </liste>
-        <liste nom="Remplissage ponton" ordonnee="non">
-            <tache nom="eau/electricité" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="fuel" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <date absolue="oui">18/02/2013</date>
-        </liste>
-        <liste nom="sac perso" ordonnee="non">
-            <tache nom="bottes" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="pulle" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="creme solaire" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <tache nom="lunettes de soleil" terminee="non">
-                <date absolue="non">0</date>
-            </tache>
-            <date absolue="oui">18/02/2013</date>
-        </liste>
-        <tache nom="Réserver le bateau" terminee="non">
-            <date absolue="non">0</date>
-        </tache>
-        <date absolue="oui">18/02/2013</date>
+        <date absolue="oui">19/02/2013</date>
+    </liste>
+    <liste nom="test2" ordonnee="non">
+        <date absolue="oui">19/02/2013</date>
     </liste>
 </listes>

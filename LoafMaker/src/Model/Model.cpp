@@ -38,7 +38,13 @@ void Model::createSubList(List* parent, string name, int day, int month, int yea
 
 void Model::deleteList(int row) {
     //delete this->lists.at(row);
-    this->lists.erase(this->lists.begin()+row);
+    if(row >= lists.size()) {
+        cout << "Bug while deleting list. Row " << row << " but only " << lists.size() << "lists" << endl;
+    }
+    else {
+        cout << "Deleting list" << endl;
+        this->lists.erase(this->lists.begin()+row);
+    }
 }
 
 void Model::createTask(List* parent, string name, int day, int month, int year) {

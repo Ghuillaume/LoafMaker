@@ -90,6 +90,8 @@ void ListsOfLists::displayList(vector<List *> lists, QTreeWidgetItem *parent) {
 
     for(vector<List*>::iterator it = lists.begin() ; it != lists.end() ; it++) {
 
+        cout << "Displaying " << (*it)->getName() << endl;
+
         QTreeWidgetItem* listItem;
 
         // Si pas de parent, alors ce sont des listes de niveau 0
