@@ -1,2 +1,6 @@
 <?xml version="1.0" standalone="yes" encoding="UTF-8" ?>
-<listes/>
+<listes>
+    <liste nom="t" ordonnee="non">
+        <date absolue="oui">25/02/2013</date>
+    </liste>
+</listes>

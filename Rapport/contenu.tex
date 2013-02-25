@@ -175,13 +175,25 @@
 		\subsection{Fonctionnalités}
 			La principale limitation que nous voyons au niveau des fonctionnalités de l'interface est l'impossibilité de redimensionner la fenêtre principale et/ou de la mettre en plein écran.
 			
-			Cette limitation est dûe à la présence de bugs graphiques particulièrement gênants lorsque ce redimentionnement était possible. Puisque nous voulions nous préoccuper des principales fonctionnalités en priorité, nous avons abandonné celle-ci qui ne nous semblait pas incontournable. Si nous avions bénéficié de plus de temps, cela fait partie des changements que nous aurions pu apporter.
+			Cette limitation est dûe à la présence de bugs graphiques particulièrement gênants lorsque ce redimentionnement était possible. Puisque nous voulions nous préoccuper des principales fonctionnalités en priorité, nous avons abandonné celle-ci qui ne nous semblait pas incontournable. Si nous avions bénéficié de plus de temps, cela fait partie des changements que nous aurions pu apporter.\\
+			
+			De plus, certaines fonctionnalités du noyau n'ont pas été implémentées côté IHM faute de temps. Ainsi, il est impossible pour l'utilisateur de spécifier une date relative, bien que nous ayons prévu son implémentation ultérieure :
+			\begin{figure}[h!]
+				\centering
+			   \includegraphics[scale=0.6]{newTaskRelative.png}
+			   \caption{Spécification d'une tâche relative}
+			\end{figure}
+			\FloatBarrier
+		
+			De même, l'utilisateur ne peut pas spécifier de précondition à une tâche. En effet, lors de la création d'une tâche, un champ lui permet de sélectionner une tâche qui doit absolument être terminée avant celle qu'il créer. Cependant, aucun choix n'est possible puisque le champ de sélection est vide.
 			
 		
 		\subsection{Qualité visuelle}
 			Une des limites de l'application est la variation du rendu de l'interface graphique en fonction des systèmes d'exploitation ou/et des gestionnaires de fenêtres utilisés. Ce problème étant inhérent à Qt, il est cependant possible de diminuer son impact en ajoutant \og -style=cleanlooks \fg dans les options de lancement du programme. Cela permet plusieurs choses : sur certains système l'interface est plus agréable à l'{\oe}il, les fenêtres de dialogues peuvent proposer des icônes claires pour les boutons \emph{Ok} et \emph{Annuler} et cela permet d'uniformiser un peu plus les rendus. De plus, certains éléments comme le splitter, qui permet de modifier la taille des panneaux, sont plus visibles et un peu plus gros. Cela rend l'interface de l'application plus intuitive et plus explicite.
 	
 			Cependant, nous n'avons pas essayé notre application sur d'autres systèmes d'exploitation, nous ne garantissons pas ni son bon fonctionnement, ni l'intégrité de l'interface graphique. En revanche, les tests sur les machines du CIE ont été concluants, comme il était demandé dans le sujet du TP.\\
+			
+			Nous avons également rencontré quelques problèmes d'encodage que nous n'avons pas eu le temps de régler et qui affichent parfois mal les caractères spéciaux tels que les accents. Ce problème pourra être corrigé très vite ultérieurement.
 
 
 \chapter{Évaluations}
