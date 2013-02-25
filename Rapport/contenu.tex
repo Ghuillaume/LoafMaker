@@ -94,9 +94,45 @@
 
 \chapter{IHM}
 	
-	\section{Présentation (Guillaume)}
-		screens
-		dire que y a des popup pour confirmer la suppression (pas faire de caca) ou pour signaler à l'utilisateur que son action n'est pas possible (modifier une tache alors que y en a pas)
+	\section{Présentation}
+	
+		Lors de la conception de l'IHM, il nous a paru important de séparer les Listes et les Tâches afin de simplifier l'utilisation de l'application. Ainsi, le plus évident nous paraissait d'afficher d'une part les listes, et d'autre part les tâches correspondantes. 
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[scale=0.56]{mainView.png}
+			\caption{Vue principale}
+		\end{figure}
+		\FloatBarrier
+		
+		Au lancement de l'application, étant donné qu'aucune liste n'est sélectionnée, le panneau de droite affichant les tâches est vide. Nous avons donc ajouté une vue de démarrage rappelant aux utilisateurs le nom de l'application et lui donnant également quelques indications pour l'aider dans sa première utilisation. Ainsi, que l'utilisateur soit néophyte ou confirmé, il ne devrait y avoir aucun problème de compréhension du logiciel.
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[scale=0.56]{startView.png}
+			\caption{Vue de démarrage}
+		\end{figure}
+		\FloatBarrier
+		
+		L'ajout et la modification de listes et de tâches s'effectue en pop-up.
+		
+		\begin{figure}[h!]
+			\centering
+		 	\includegraphics[scale=0.65]{newTask.png}
+			\caption{Popup de demande de données}
+		\end{figure}
+		\FloatBarrier
+		
+		
+		De plus, nous avons conçu l'IHM de manière à ce qu'il n'y ait aucune action de l'utilisateur qui ne soit pas associée à une réaction. Ainsi, lorsque l'utilisateur effectue une action autorisée, il peut visualiser le résultat immédiatement. S'il effectue une action interdite, il est notifié de son erreur par une popup.
+		
+		\begin{figure}[h!]
+			\centering
+		   \includegraphics[scale=0.65]{popup.png}
+		   \caption{Popup d'avertissement}
+		\end{figure}
+		\FloatBarrier
+		
 	
 	\section{Ergonomie (Jerome)}
 		Toute la difficulté pour la réalisation de l'interface graphique d'une telle application est de permettre de proposer à l'utilisateur néophyte un rendu clair et intuitif tout en proposant des fonctionnalités plus avancées pour un {\oe}il plus expert. Pour réussir cela, nous avons listé les différentes fonctionnalités souhaitées par ces deux groupes d'utilisateurs et les moyens possibles pour y arriver.
@@ -109,12 +145,13 @@
 		
 		Nous avons souhaité permettre à l'utilisateur de contrôler dans une certaine mesure la taille des panneaux, c'est pourquoi nous avons permis d'agrandir l'un ou l'autre des côtés de la vue avec un /emph{splitter} vertical pour une meilleure lisibilité.
 		
-		En plus de cela, nous affichons une petite aide lors du lancement du programme pour permettre une prise en main rapide et aisée. En effet, le panneau dédié aux liste de tâche est temporairement remplacé par un message de bienvenue qui avertit l'utilisateur sur le fonctionnement du logiciel.
+		En plus de cela, nous affichons une petite aide lors du lancement du programme pour permettre une prise en main rapide et aisée. En effet, le panneau dédié aux liste de tâche est temporairement remplacé par un message de bienvenue qui informe l'utilisateur sur le fonctionnement du logiciel.
 		
 		
 	\section{Structure des widgets}
 	
 		\begin{figure}[h!]
+			\centering
 		   \includegraphics[scale=0.56]{struct_widget.png}
 		   \caption{Structure des widgets}
 		\end{figure}
@@ -123,7 +160,7 @@
 		
 		
 	
-\chapter{Limites de l'application (TOUS)}
+\chapter{Limites de l'application}
 	
 	\section{Fonctionnalités CRUD}
 	
@@ -147,7 +184,7 @@
 			Cependant, nous n'avons pas essayé notre application sur d'autres systèmes d'exploitation, nous ne garantissons pas ni son bon fonctionnement, ni l'intégrité de l'interface graphique. En revanche, les tests sur les machines du CIE ont été concluants, comme il était demandé dans le sujet du TP.\\
 
 
-\chapter{Évaluations (TOUS)}
+\chapter{Évaluations}
 	
 	Utilisateurs néophytes :
 		Ma mère et ma soeur
