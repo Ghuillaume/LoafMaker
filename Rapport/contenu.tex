@@ -16,16 +16,31 @@
 \chapter{Prototyping (Jerome)}
 
 	\section{Storyboard}
+		\begin{figure}[h!]
+		   \includegraphics{img/stotyboard_ihm.png}
+		   \caption{Storyboard de l'utilisation de l'application}
+		\end{figure}
 	
+		La planche ci-dessus présente les différentes étapes d'utilisation basique du logiciel par un utilisateur lambda (son niveau de compétence n'entre pas ici en compte). Voici la liste des fonctionnalités évoquées et qui devront être présentes dans l'application finale :
+		\begin{itemize}
+			\item Création de listes imbriquées de tâches;
+			\item Paramétrages possibles : dates relatives ou absolues, ordonnancement et dépendance des tâches;
+			\item Validation des tâches et affichage de l'avancement;
+			\item Sauvegarde en local des modifications effectuées.
+		\end{itemize}
 	
 	\section{Paper-prototype}
+	Une \href{https://www.youtube.com/watch?v=xbLaZvgkzjQ}{vidéo sur Youtube} est accessible pour montrer le fonctionnement de l'interface du prototype papier. Le rendu vidéo est en deça de ce à quoi nous nous attendions mais nous n'avons pas eu les conditions optimales (matérielles et logicielles) de production.
+	
+	
 	
 
 	\section{Scénarios d'utilisation}
-
+	
 	
 	
 	\section{Évaluation du prototype}
+		Pour avoir un point de vue extérieur, nous avons demandé à un étudiant (qui a souhaité gardé l'anonymat) de nous donner son avis sur le prototype papier. Après plusieurs 
 		On a demandé à Péneau ce qu'il pensait de notre paper-prototype, il a dit OK et on a modifié 2-3 trucs :)
 		
 
@@ -41,13 +56,15 @@
 		
 		Pour cela, nous avons décider de proposer plusieurs moyens d'arriver aux mêmes fonctionnalités. Par exemple, pour la création de tâches on peut passer par le menu de l'application, le bouton (+) sur la partie droite de l'écran, le clic droit sur cette même partie ou bien le raccourcis clavier. De cette manière, l'utilisateur aura toujours une solution qui lui conviendra plus que les autres et qu'il considèrera comme plus intuitive.
 		
-		De plus, nous avons choisi de toujours afficher le même menu pour ne pas perdre l'utilisateur avec des \og modes \fg d'utilisation. TODO
+		De plus, nous avons choisi de toujours afficher le même menu pour ne pas perdre l'utilisateur avec des \og modes \fg d'utilisation. Ainsi, l'utilisateur aura toujours les mêmes repères visuels. Cela est important, en particulier pour les débutants, qui ne peuvent pas se raccrocher à leur expérience avec d'autres logiciels similaires.\newline
 		
-		l'utilisation est facilité avec
-			- plusieurs manières de faire les choses
-			- des boutons-icones qui permettent de s'y retrouver plus facilement qu'avec du texte
-			- etc
-				
+		Pour rendre l'utilisation plus intuitive, nous avons aussi décidé d'intégrer des icônes colorées, explicites et facilement reconnaissables pour limiter la quantité de texte à l'écran. Pour cela, nous avons utilisé des images tirées de la bibliothèque du projet \emph{Gnome}\footnote{\href{https://commons.wikimedia.org/wiki/GNOME_Desktop_icons}{Icônes disponibles ici.}} et disponibles sous licence GNU General Public License version 2. Les avantages de ces icônes sont nombreux : gratuits, libres, ergonomiques et disponibles en de nombreuses tailles, \dots \newline
+		
+		Nous avons souhaité permettre à l'utilisateur de contrôler dans une certaine mesure la taille des panneaux, c'est pourquoi nous avons permis d'agrandir l'un ou l'autre des côtés de la vue avec un /emph{splitter} vertical pour une meilleure lisibilité.
+		
+		En plus de cela, nous affichons une petite aide lors du lancement du programme pour permettre une prise en main rapide et aisée. En effet, le panneau dédié aux liste de tâche est temporairement remplacé par un message de bienvenue qui avertit l'utilisateur sur le fonctionnement du logiciel.
+		
+		
 	\section{Structure des widgets (Guillaume)}
 		
 		
