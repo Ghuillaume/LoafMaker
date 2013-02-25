@@ -29,18 +29,25 @@
 			\item Sauvegarde en local des modifications effectuées.
 		\end{itemize}
 	
-	\section{Paper-prototype}
+		Une fois le contexte d'utilisation cerné, il faut maintenant réaliser le prototype papier pour permettre
+	
+	\section{Prototype papier}
 	Une \href{https://www.youtube.com/watch?v=xbLaZvgkzjQ}{vidéo sur Youtube} est accessible pour montrer le fonctionnement de l'interface du prototype papier. Le rendu vidéo est en deça de ce à quoi nous nous attendions mais nous n'avons pas eu les conditions optimales (matérielles et logicielles) de production.
 	
-	
+	TODO
 	
 
 	\section{Scénarios d'utilisation}
+		Plusieurs scénarios sont envisageables dans le cadre de notre application, en voici une liste non-exhaustive :
 	
+		\begin{itemize}
+			\item C'est la première fois que l'utilisateur teste le logiciel, il le lance et commence de zéro. Il va dans un premier temps créer les listes puis créer les tâches associées. Il peut ensuite paramétrer les dates et les dépendances. A n'importe quel moment il va pouvoir sauvegarder les informations en format xml sous le nom qu'il souhaite, et ce même s'il existe par défaut une sauvegarde automatique silencieuse. Il ne lui reste plus qu'à valider les tâches pour prendre en compte son avancement global.
+			\item L'utilisateur a déjà créé un fichier précédemment : il va pouvoir charger le fichier correspondant et continuer son travail là où il en était rendu. Dans le cas où certaines tâches ou listes ne sont plus d'actualité, il est possible de les modifier ou supprimer. Lorsque l'utilisateur va vouloir quitter l'application, un message va lui demander s'il souhaite conserver les modifications ou les annuler. 
+		\end{itemize}
 	
 	
 	\section{Évaluation du prototype}
-		Pour avoir un point de vue extérieur, nous avons demandé à un étudiant (qui a souhaité gardé l'anonymat) de nous donner son avis sur le prototype papier. Après plusieurs 
+		Pour avoir un point de vue extérieur, nous avons demandé à un étudiant (qui a souhaité gardé l'anonymat) de nous donner son avis sur le prototype papier. TODO 
 		On a demandé à Péneau ce qu'il pensait de notre paper-prototype, il a dit OK et on a modifié 2-3 trucs :)
 		
 
@@ -70,6 +77,13 @@
 		
 	
 \chapter{Limites de l'application (TOUS)}
+	Une des limites de l'application est la variation du rendu de l'interface graphique en fonction des systèmes d'exploitation ou/et des gestionnaires de fenêtres utilisés. Ce problème étant inhérent à Qt, il est cependant possible de diminuer son impact en ajoutant \og -style=cleanlooks \fg dans les options de lancement du programme. Cela permet plusieurs choses : sur certains système l'interface est plus agréable à l'{\oe}il, les fenêtres de dialogues peuvent proposer des icônes claires pour les boutons \emph{Ok} et \emph{Annuler} et cela permet d'uniformiser un peu plus les rendus. De plus, certains éléments comme le splitter, qui permet de modifier la taille des panneaux, sont plus visibles et un peu plus gros. Cela rend l'interface de l'application plus intuitive et plus explicite.
+	
+	Cependant, nous n'avons pas essayé notre application sur d'autres systèmes d'exploitation, nous ne garantissons pas ni son bon fonctionnement, ni l'intégrité de l'interface graphique. En revanche, les tests sur les machines du CIE ont été concluants, comme il était demandé dans le sujet du TP.\\
+	
+	 Un autre problème de l'application est l'impossibilité de redimentionner la fenêtre principale. Cette limitation est dûe à la présence de bugs graphiques particulièrement gênants lorsque ce redimentionnement était possible. Puisque nous voulions nous préoccuper des principales fonctionnalités en priorité, nous avons abandonné celle-ci qui ne nous semblait pas incontournable. Si nous avions bénéficié de plus de temps, cela fait partie des changements que nous aurions pu apporter.\\
+	
+	
 	
 
 
