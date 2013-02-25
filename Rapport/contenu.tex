@@ -1,16 +1,56 @@
-\chapter{Noyau de l'application (Guillaume)}
+\chapter{Noyau de l'application}
+
+	L'objectif de l'application finale est de fournir un gestionnaire de tâches (\emph{todolist}) proposant à l'utilisateur des fonctionnalités avancées. Il nous était justement demandé d'implémenter les fonctionnalités suivantes :
+	\begin{itemize}
+		\item Ajout/Modification/Suppression de tâches, de listes de tâches, et de listes de listes de tâches ;
+		\item Gestion de templates de listes de tâches ;
+		\item Préconditions à la validation de tâches ;
+		\item Permettre d'ordonner les listes ;
+		\item Gestion de dates limites (\emph{deadlines}) à une tâche ou à une liste, et pouvant être relatives à une autre date ;
+		\item Sauvegarde et chargement XML.
+	\end{itemize}
 
 	\section{Analyse}
-
-		Structures de données et fonctionnalités
 	
-		-> Listes, sous-listes, tâches
+		À partir des fonctionnalités qui nous étaient demandées, nous avons commencé à réfléchir à une conception du noyau de l'application qui nous permettrait une développement rapide au vu du peu de temps qui nous était imparti.\\
+		
+		À haut niveau, nous avons décidé de manipuler deux principaux types d'objets : les listes et les tâches. Un conteneur, que nous avons appelé modèle, nous servira de référence pour accéder au noyau de l'application. Il s'agit d'une sorte de porte d'accès aux données, un objet contenant une liste des listes ajoutées par l'utilisateur (vector<List*>), et proposant une interface complète permettant au développeur d'agir sur le noyau entier. Un objet liste est lui composé d'une liste de listes (vector<List*> qui seront en fait des sous-listes), et d'une liste de tâches (vector<Task*>). Cette conception nous permet ainsi de bénéficier d'un niveau de profondeur infini. L'ordonnancement des listes sera gérée à plus bas niveau, au niveau de la structure utilisée (vector).
+		Nous aurions pu n'utiliser qu'un seul objet Tâche qui aurait les propriétés de nos deux objets, ce qui aurait peut-être permi de simplifier la maintenance de l'application mais qui nous aurait fait perdre du temps sur le développement étant donné l'IHM que nous avons prototypée (différenciation claire des listes et des tâches, voir plus bas).\\
+		
+		Pour la gestion des dates, nous avons créer notre propre objet Time afin de pouvoir manipuler des dates plus simplement. Ainsi, chaque liste et chaque tâche dispose d'une date limite (ou échéance, deadline). Étant donné que nous voulions proposer une application souple, qui ne contraigne pas l'utilisateur, ces dates sont seulement indicatives et indépendantes, c'est-à-dire qu'une tâche peut avoir une échéance plus lointaine que sa liste. Pour les mêmes raisons, aucune contrainte n'est définie entre l'échéance et les préconditions. Le travail de traitement des échéances a été délégué à l'IHM qui s'occupera tout simplement d'avertir les utilisateurs avec des pictogrammes lorsqu'une date approche ou est dépassée.
+		
+		Les dates relatives sont quant à elles gérées de manière très simple grâce à un pointeur sur l'objet tâche référente.\\
+		
+		À propos des templates, nous avons pensé qu'il serait très simple de les considérer comme de simples listes. L'utilisateur créer donc un template comme il créer une liste, ce qui lui donne un point de repère et donc une facilité d'adaptation certain à la fonctionnalité. De même, les templates sont traités de la même manière côté applicatif, puisqu'ils sont stockés dans un objet Liste. Un attribut booléen associé à cet objet nous permettra de différencier les deux objets afin de n'afficher que l'un ou l'autre selon les demandes de la Vue.
+		
+		Cependant, les templates ont une particularité que n'ont pas les listes : du texte variable. L'utilisateur pourra en effet créer des templates en spécifiant dans le nom de ses sous-listes / tâches une sorte de variable délimitée par un caractère spécial (\% ma\_var \%). Il lui sera ensuite demander de remplir ces variables à la création d'une liste utilisant le template, ce qui lui permettra de créer des templates génériques et prêts à l'emploi.\\
+		
+		Au final, l'utilisateur pourra ajouter n'importe quelle donnée, celle-ci sera prise en compte et affichée, même si elle n'est pas cohérente. Il s'agit d'un choix que nous avons fait à la conception afin que l'utilisateur puisse faire ce qu'il veut et ne soit pas assailli de pop-up d'avertissement.
+		
 		
 	\section{Fonctionnalités}
 	
-		ghsdkglhsd
+		\subsection{CRUD listes \& tâches}
+			Fonctionnalité proposée par l'objet \emph{Model}.
+			
+		\subsection{Templates de listes}
+			Fonctionne de la même manière qu'une liste de tâches. Fonctionnalité de texte variable non implémentée.
 		
+		\subsection{Préconditions}
+			OK
+			
+		\subsection{Ordonnancement des tâches}
+			Cette fonctionnalité est prise en compte dans le noyau de l'application, mais le changement de l'ordre des tâches n'est pas implémenté.
+			
+		\subsection{Échéances absolues et relatives}
+			Les deux types de date ont été implémentés en utilisant notre objet Time.
 		
+		\subsection{Sauvegarde et chargement}
+			Ces fonctionnalités ont été implémentées mais n'ont pas été testées assez significativement pour être présentées comme robustes.\\
+			
+			Côté utilisateur, la sauvegarde se fait de manière totalement transparente à la fermeture de l'application, mais également toutes les 5 minutes afin de pallier à un éventuel crash de l'application. L'utilisateur peut également exporter sa sauvegarde pour réutiliser le fichier XML, mais aussi importer d'autres listes grâce à un fichier XML externe (généré d'une autre manière ou pas).
+			
+			La DTD associée n'est pas fournie mais peut être devinée très simplement.
 
 
 \chapter{Prototyping (Jerome)}
@@ -30,7 +70,7 @@
 		\end{itemize}
 	
 	\section{Paper-prototype}
-	Une \href{https://www.youtube.com/watch?v=xbLaZvgkzjQ}{vidéo sur Youtube} est accessible pour montrer le fonctionnement de l'interface du prototype papier. Le rendu vidéo est en deça de ce à quoi nous nous attendions mais nous n'avons pas eu les conditions optimales (matérielles et logicielles) de production.
+	Une \href{https://www.youtube.com/watch?v=xbLaZvgkzjQ}{vidéo sur Youtube} est accessible pour montrer le fonctionnement de l'interface du prototype papier. Le rendu vidéo est en deça de ce à quoi nous nous attendions mais nous n'avons pas eu les conditions optimales (matérielles et logicielles) de production. De plus, nous avons eu très peu de temps pour le prototypage et sommes passés rapidement au développement dès lors que nous avions une interface qui faisait consensus.
 	
 	
 	
@@ -65,12 +105,34 @@
 		En plus de cela, nous affichons une petite aide lors du lancement du programme pour permettre une prise en main rapide et aisée. En effet, le panneau dédié aux liste de tâche est temporairement remplacé par un message de bienvenue qui avertit l'utilisateur sur le fonctionnement du logiciel.
 		
 		
-	\section{Structure des widgets (Guillaume)}
+	\section{Structure des widgets}
+	
+		\begin{figure}[h!]
+		   \includegraphics{struct_widget.png}
+		   \caption{Structure des widgets}
+		\end{figure}
+		\FloatBarrier
+		
 		
 		
 	
 \chapter{Limites de l'application (TOUS)}
+
+	Blabla sur les bugs et autres limitations
 	
+	\section{Fonctionnalités CRUD}
+	
+		\begin{itemize}
+			\item Lors de la suppression d'une liste, il peut arrive que l'application crash. Ce bug étant apparu assez tardivement dans le développement de l'application, nous n'avons pas eu le temps de le corriger ;
+			\item Lors de la création, de la modification et de la suppression d'une liste, l'arbre des listes ne se met pas à jour correctement, et l'utilisateur est obligé de sélectionner à nouveau sa liste pour pouvoir y apporter des modifications ;
+		\end{itemize}
+		
+		
+	\section{IHM}
+	
+		\begin{itemize}
+			\item Au départ, nous voulions donner à l'utilisateur la possibilité d'agrandir ou de réduire la taille de la fenêtre, ainsi que de mettre l'application en plein écran. Nous n'avons malheureusement pas eu le temps de pousser le développement jusque là ;
+		\end{itemize}
 
 
 \chapter{Évaluations (TOUS)}
