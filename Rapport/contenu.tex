@@ -69,13 +69,53 @@
 			\item Sauvegarde en local des modifications effectuées.
 		\end{itemize}
 		
-		Une fois le contexte d'utilisation cerné, il faut maintenant réaliser le prototype papier pour permettre
+		Une fois le contexte d'utilisation cerné, il nous faut maintenant réaliser le prototype papier pour poser les bases de l'interface et valider ou non son fonctionnement. 
 	
 	\section{Prototype papier}
-	Une \href{https://www.youtube.com/watch?v=xbLaZvgkzjQ}{vidéo sur Youtube} est accessible pour montrer le fonctionnement de l'interface du prototype papier. Le rendu vidéo est en deça de ce à quoi nous nous attendions mais nous n'avons pas eu les conditions optimales (matérielles et logicielles) de production. De plus, nous avons eu très peu de temps pour le prototypage et sommes passés rapidement au développement dès lors que nous avions une interface qui faisait consensus.
+	Une \href{https://www.youtube.com/watch?v=xbLaZvgkzjQ}{vidéo sur Youtube} est accessible pour montrer le fonctionnement de l'interface du prototype papier. Le rendu vidéo est en deçà de ce à quoi nous nous attendions mais nous n'avons pas eu les conditions optimales (matérielles et logicielles) de production. De plus, nous avons eu très peu de temps pour le prototypage et sommes passés rapidement au développement dès lors que nous avions une interface qui faisait consensus.
 	
-	TODO
+		\begin{figure}[h!]
+			\centering
+		   \includegraphics[scale=1.5]{img/pp_ihm_1.png}
+		   \caption{Etat de l'interface lors du démarrage de l'application.}
+		\end{figure}
+		\FloatBarrier
 	
+		\begin{figure}[h!]
+			\centering
+		   \includegraphics[scale=1.5]{img/pp_ihm_2.png}
+		   \caption{Menus disponibles pour l'interface de démarrage.}
+		\end{figure}
+		\FloatBarrier
+	
+		\begin{figure}[h!]
+			\centering
+		   \includegraphics[scale=1.5]{img/pp_ihm_3.png}
+		   \caption{La sélection d'une liste ouvre un panneau à droite avec les tâches correspondantes.}
+		\end{figure}
+		\FloatBarrier
+
+		\begin{figure}[h!]
+			\centering
+		   \includegraphics[scale=1.5]{img/pp_ihm_4.png}
+		   \caption{Fenêtre de dialogue pour la création d'une liste.}
+		\end{figure}
+		\FloatBarrier
+	
+		\begin{figure}[h!]
+			\centering
+		   \includegraphics[scale=1.5]{img/pp_ihm_5.png}
+		   \caption{Fenêtre de dialogue pour la création d'une tâche avec une date absolue.}
+		\end{figure}
+		\FloatBarrier
+
+		\begin{figure}[h!]
+			\centering
+		   \includegraphics[scale=1.5]{img/pp_ihm_6.png}
+		   \caption{Fenêtre de dialogue pour la création d'une tâche avec une date relative.}
+		\end{figure}
+		\FloatBarrier
+
 
 	\section{Scénarios d'utilisation}
 		Plusieurs scénarios sont envisageables dans le cadre de notre application, en voici une liste non-exhaustive :
@@ -85,12 +125,17 @@
 			\item L'utilisateur a déjà créé un fichier précédemment : il va pouvoir charger le fichier correspondant et continuer son travail là où il en était rendu. Dans le cas où certaines tâches ou listes ne sont plus d'actualité, il est possible de les modifier ou supprimer. Lorsque l'utilisateur va vouloir quitter l'application, un message va lui demander s'il souhaite conserver les modifications ou les annuler. 
 		\end{itemize}
 	
-	
+	\newpage
 	\section{Évaluation du prototype}
-		Pour avoir un point de vue extérieur, nous avons demandé à un étudiant (qui a souhaité gardé l'anonymat) de nous donner son avis sur le prototype papier. TODO
-		On a demandé à Péneau ce qu'il pensait de notre paper-prototype, il a dit OK et on a modifié 2-3 trucs :)
+		Pour avoir un point de vue extérieur, nous avons demandé à un étudiant (qui a souhaité gardé l'anonymat) de nous donner son avis sur le prototype papier. Pendant l'entretien, voici les points qui ont été soulignés:
+		\begin{itemize}
+			\item Dans le cas où l'utilisateur entre un nom de liste ou de tâche un peu long, il serait intéressant de pouvoir redimentionner la fenêtre et les panneaux pour obtenir un affichage optimal; 
+			\item Il serait intéressant de colorer la date d'une tâche en fonction de la proximité de l'échéance. Pour cela on peut se servir des couleurs communément acceptées en occident pour ce genre de cas : vert = pas de problème, orange = date proche, rouge = date dépassée; 
+			\item Dans le cas d'une erreur, l'utilisateur apprécierait de pouvoir revenir en arrière pour annuler la ou les dernière(s) modification(s) effectué(s). \\
+		\end{itemize}
 		
-
+		Comme nous allons voir dans les parties suivantes, nous avons commencé à mettre en oeuvre ces modifications mais par soucis de temps, celles-ci ont été abandonnées. Elles pourront cependant être implémentées dans une versions suivante de l'application.
+		
 
 \chapter{IHM}
 	
@@ -143,11 +188,11 @@
 		
 		Pour rendre l'utilisation plus intuitive, nous avons aussi décidé d'intégrer des icônes colorées, explicites et facilement reconnaissables pour limiter la quantité de texte à l'écran. Pour cela, nous avons utilisé des images tirées de la bibliothèque du projet \emph{Gnome}\footnote{\href{https://commons.wikimedia.org/wiki/GNOME_Desktop_icons}{Icônes disponibles ici.}} et disponibles sous licence GNU General Public License version 2. Les avantages de ces icônes sont nombreux : gratuits, libres, ergonomiques et disponibles en de nombreuses tailles, \dots \newline
 		
-		Nous avons souhaité permettre à l'utilisateur de contrôler dans une certaine mesure la taille des panneaux, c'est pourquoi nous avons permis d'agrandir l'un ou l'autre des côtés de la vue avec un /emph{splitter} vertical pour une meilleure lisibilité.
+		Nous avons souhaité permettre à l'utilisateur de contrôler dans une certaine mesure la taille des panneaux, c'est pourquoi nous avons permis d'agrandir l'un ou l'autre des côtés de la vue avec un \emph{splitter} vertical pour une meilleure lisibilité.
 		
 		En plus de cela, nous affichons une petite aide lors du lancement du programme pour permettre une prise en main rapide et aisée. En effet, le panneau dédié aux liste de tâche est temporairement remplacé par un message de bienvenue qui informe l'utilisateur sur le fonctionnement du logiciel.
 		
-		
+	\newpage
 	\section{Structure des widgets}
 	
 		\begin{figure}[h!]
@@ -189,7 +234,7 @@
 			
 		
 		\subsection{Qualité visuelle}
-			Une des limites de l'application est la variation du rendu de l'interface graphique en fonction des systèmes d'exploitation ou/et des gestionnaires de fenêtres utilisés. Ce problème étant inhérent à Qt, il est cependant possible de diminuer son impact en ajoutant \og -style=cleanlooks \fg dans les options de lancement du programme. Cela permet plusieurs choses : sur certains système l'interface est plus agréable à l'{\oe}il, les fenêtres de dialogues peuvent proposer des icônes claires pour les boutons \emph{Ok} et \emph{Annuler} et cela permet d'uniformiser un peu plus les rendus. De plus, certains éléments comme le splitter, qui permet de modifier la taille des panneaux, sont plus visibles et un peu plus gros. Cela rend l'interface de l'application plus intuitive et plus explicite.
+			Une des limites de l'application est la variation du rendu de l'interface graphique en fonction des systèmes d'exploitation ou/et des gestionnaires de fenêtres utilisés. Ce problème étant inhérent à Qt, il est cependant possible de diminuer son impact en ajoutant \og -style=cleanlooks \fg dans les options de lancement du programme. Cela permet plusieurs choses : sur certains systèmes l'interface est plus agréable à l'{\oe}il, les fenêtres de dialogues peuvent proposer des icônes claires pour les boutons \emph{Ok} et \emph{Annuler} et cela permet d'uniformiser un peu plus les rendus. De plus, certains éléments comme le splitter, qui permet de modifier la taille des panneaux, sont plus visibles et un peu plus gros. Cela rend l'interface de l'application plus intuitive et plus explicite.
 	
 			Cependant, nous n'avons pas essayé notre application sur d'autres systèmes d'exploitation, nous ne garantissons pas ni son bon fonctionnement, ni l'intégrité de l'interface graphique. En revanche, les tests sur les machines du CIE ont été concluants, comme il était demandé dans le sujet du TP.\\
 			
